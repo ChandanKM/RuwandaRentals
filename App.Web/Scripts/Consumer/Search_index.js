@@ -158,7 +158,7 @@ function SearchHotelViewModel() {
 
     self.SearchSubmit = function () {
 
-        if ($('#formSearch').valid()) {
+        //if ($('#formSearch').valid()) {
 
             //$.localStorage("City_Id", $("#hdnLocationId").val());
             //$.localStorage("Location", $("#txtLocation").val());
@@ -171,11 +171,11 @@ function SearchHotelViewModel() {
 
             // For
 
-            if($("#hdnLocationId").val() == "")
-            {
-                Failed(JSON.parse('{"Errors":[{"AlertType":"error","ControlName":"CityMasterId","Message":"Please select location from the list"}],"ErrorType":"error"}'));
-                return false;
-            }
+            //if($("#hdnLocationId").val() == "")
+            //{
+            //    Failed(JSON.parse('{"Errors":[{"AlertType":"error","ControlName":"CityMasterId","Message":"Please select location from the list"}],"ErrorType":"error"}'));
+            //    return false;
+            //}
             searchVM.CityMasterId = $("#hdnLocationId").val();
             var din = $("#txtCheckIn").val();
             var dout = $("#txtCheckOut").val();
@@ -197,7 +197,7 @@ function SearchHotelViewModel() {
             searchVM.Facilities = '';
             searchVM.SortBy = 'rating';
             self.GetResults(searchVM);
-        }
+        //}
     }
 
 

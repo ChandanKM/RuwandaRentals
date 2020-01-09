@@ -1381,14 +1381,14 @@ namespace App.Web.Controllers
         {
             var results = new SearchHotelsValidation().Validate(propViewModel);
 
-            if (!results.IsValid)
-            {
-                propViewModel.Errors = GenerateErrorMessage.Built(results.Errors);
-                propViewModel.ErrorType = ErrorTypeEnum.Error.ToString().ToLower();
-                propViewModel.Status = false;
-                var badResponse = Request.CreateResponse(HttpStatusCode.BadRequest, propViewModel);
-                return badResponse;
-            }
+            //if (!results.IsValid)
+            //{
+            //    propViewModel.Errors = GenerateErrorMessage.Built(results.Errors);
+            //    propViewModel.ErrorType = ErrorTypeEnum.Error.ToString().ToLower();
+            //    propViewModel.Status = false;
+            //    var badResponse = Request.CreateResponse(HttpStatusCode.BadRequest, propViewModel);
+            //    return badResponse;
+            //}
             try
             {
                 var consBo = BuiltPropBo(propViewModel);

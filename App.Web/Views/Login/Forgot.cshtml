@@ -1,0 +1,64 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
+    <link href="~/Content/error-notifier.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/Scripts/jquery-1.8.2.min.js")
+
+
+    @Scripts.Render("~/Scripts/jquery-ui-1.10.3.js")
+    @Scripts.Render("~/Scripts/knockout-2.3.0.js")
+
+    <script src="~/Scripts/User/knockout.mapping-latest.debug.js"></script>
+    @Scripts.Render("~/Scripts/jqueryNotification.js")
+    @Scripts.Render("~/Scripts/jquery.blockUI.js")
+    @Scripts.Render("~/Scripts/AppCommonScript.js")
+    <meta name="viewport" content="width=device-width" />
+    <title>Forgot</title>
+    <style type="text/css">
+        body {
+            background-image: url('../../img/Login/back_forgot.png');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        div {
+            height: 365px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 192px;
+            width: 465px;
+        }
+
+        #submit {
+            margin-top: 40px;
+            margin-left: 55px;
+            width: 350px;
+            height: 50px;
+        }
+
+        #id_text {
+            margin-left: 55px;
+            margin-top: 100px;
+            width: 350px;
+            height: 50px;
+            font-size: medium;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <input id="id_text" placeholder="Enter Email Id Here" data-bind="value:Email" type="text" />
+        <a href="#" style="cursor:pointer" data-bind="click:Submit"><img src="~/img/Login/submit%20button.png" id="submit" /></a>
+    </div>
+    <script src="@Url.Content("~/Scripts/Login/forgot.js")" type="text/javascript"></script>
+</body>
+</html>

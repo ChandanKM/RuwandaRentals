@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+
+</head>
+<body>
+    <form id="nonseamless" method="post" name="redirect" action="https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction">
+
+        @*https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction*@
+        <!-- https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction  -->
+        <input type="text" hidden id="encRequest" name="encRequest" data-bind="value:PaymentCodes">
+        <input type="text" hidden name="access_code" id="Hidden1" value="AVMF04CA21BU64FMUB" />
+
+    </form>
+
+    <script src="~/Scripts/knockout-2.3.0.debug.js"></script>
+
+    <script src="~/Scripts/Consumer/Payment.js"></script>
+</body>
+</html>

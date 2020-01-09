@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+}
+
+<link href="~/Content/font-awesome.css" rel="stylesheet" />
+<link href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
+<link href="~/Content/error-notifier.css" rel="stylesheet" />
+
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/Scripts/jquery-1.8.2.min.js")
+@Scripts.Render("~/Scripts/jquery-ui-1.10.3.js")
+@Scripts.Render("~/Scripts/knockout-2.3.0.js")
+@Scripts.Render("~/Scripts/jqueryNotification.js")
+@Scripts.Render("~/Scripts/jquery.blockUI.js")
+@Scripts.Render("~/Scripts/AppCommonScript.js")
+<script src="~/Scripts/jquery.cookie.js"></script>
+<!--=== Page Header ===-->
+<div class="page-header">
+    <div class="page-title">
+        <h3>Edit System Profile</h3>
+    </div>
+</div>
+<!-- /Page Header -->
+
+
+
+<div class="row">
+    <div class="span5" data-bind="foreach:ProfileData">
+
+        <div class="control-group">
+            <input id="Company_Title" type="hidden" data-bind="value:Id" />
+            <span class="control-label" for="Company_Title" style="text-align:left">Company_Title <span class="required"></span></span>
+            <div class="controls">
+                <input id="Company_Title" class="form-control input-width-xlarge" type="text" data-bind="value:Company_Title" />
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="Owned_By" style="text-align:left">Owned_By <span class="required"></span></label>
+            <div class="controls">
+                <input id="Vndr_Cinno" class="form-control input-width-xlarge" type="text" data-bind="value:Owned_By" />
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="CIN_Number" style="text-align:left">CIN_Number<span class="required"></span></label>
+            <div class="controls">
+                <input id="Vndr_Addr1" class="form-control input-width-xlarge" type="text" data-bind="value:CIN_Number" />
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="Adr1" style="text-align:left">Adr1<span class="required"></span></label>
+            <div class="controls">
+                <input id="Cityvalue" class="form-control input-width-xlarge" type="text" data-bind="value:Adr1" />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="Adr2" style="text-align:left">Adr2<span class="required"></span></label>
+            <div class="controls">
+                <input id="Cityvalue" class="form-control input-width-xlarge" type="text" data-bind="value:Adr2" />
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="Location" style="text-align:left">Location , City<span class="required"></span></label>
+            <div class="controls">
+                <select id="LocationId" class="form-control input-width-xlarge" data-bind="options: AllLoc, value:Location,optionsText:'CityName' ,optionsValue:'Id' "></select>
+            </div>
+        </div>
+
+
+        <div class="control-group">
+            <label class="control-label" for="City" style="text-align:left">Tin_id<span class="required"></span></label>
+            <div class="controls">
+                <input id="pincodevalue" class="form-control input-width-xlarge" type="text" data-bind="value:Tin_id" />
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="Phone" style="text-align:left">Phone<span class="required"></span></label>
+            <div class="controls">
+                <input id="Phone" class="form-control input-width-xlarge" type="text" data-bind="value:Phone" />
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="Mobile" style="text-align:left">Mobile<span class="required"></span></label>
+            <div class="controls">
+                <input id="Mobile" class="form-control input-width-xlarge" type="text" data-bind="value:Mobile" />
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="Email" style="text-align:left">Email<span class="required"></span></label>
+            <div class="controls">
+                <input id="Email" class="form-control input-width-xlarge" type="text" data-bind="value:Email" />
+            </div>
+        </div>
+
+
+        <div class="control-group">
+            <label class="control-label" for="Sms_Url" style="text-align:left">Sms_Url<span class="required">*</span></label>
+            <div class="controls">
+                <input id="Sms_Url" class="form-control input-width-xlarge" type="text" data-bind="value:Sms_Url" />
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="User_Id" style="text-align:left">User_Id<span class="required">*</span></label>
+            <div class="controls">
+                <input id="User_Id" class="form-control input-width-xlarge" type="text" data-bind="value:User_Id" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span10">
+                <div class="form-actions">
+                    <input id="btnReset" type="button" value="Cancel" data-bind="click: Cancel" class="btn btn-lg btn-danger" />
+                    <input id="btnSave" type="button" value="Update" data-bind="click: Update" class="btn btn-lg btn-primary" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="@Url.Content("~/Scripts/SystemProfile/EditSysProfile.js")" type="text/javascript"></script>
+

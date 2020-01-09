@@ -1,0 +1,178 @@
+﻿@{
+    ViewBag.Title = "invoice";
+    Layout = "~/Views/Shared/_Consumer.cshtml";
+}
+
+<div class="breadcrumb-block">
+    <div class="wrap">
+        <ol class="breadcrumb">
+            <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+            <li class="active">Invoice Bill</li>
+        </ol>
+    </div>
+</div>
+<div id="Printdiv" class="inovoice-page">
+    <div class="wrap">
+        <div class="inovoice-header-top-right">
+            <ul>
+                <li class="new-tab"><a href="#" title="New tab"></a></li>
+                <li class="print"><a id="hrefPrint" href="#" title="Print"></a></li>
+                <li class="email"><a href="#" title="Email"></a></li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <div class="inovoice-header">
+            <h2>Invoice</h2>
+        </div>
+        <div class="booking-details-inner" id="Invoice">
+            <section id="Inv" data-bind="foreach: Trans" class="booking-inner-header inovice-inner-header">
+                <div class="hotel-name">
+                    <h4 data-bind="text:Prop_Name"></h4>
+                    <h5 data-bind="text:Prop_Address"></h5>
+                </div>
+                <div class="hotel-number">
+                    <p data-bind="text:Invce_Num"></p>
+                </div>
+                <div class="clear"></div>
+            </section>
+
+            <section class="inovice-details-block">
+                <h3>Booking Details</h3>
+                <div class="invoice_details">
+                    <div class="inovoice-img" id="inovoice-img" data-bind="foreach: ImageTrans">
+                        <img data-bind="attr:{src: Image_dir}" style="width:100px;height:100px" />
+
+                    </div>
+                    <div class="inovoice-room-details">
+                        <table id="Booking" data-bind="foreach: Trans">
+                            <tr>
+                                <td class="inovice-head">Room Type <span>:</span></td>
+                                <td class="inovice-desc" data-bind="text:Room_Name"></td>
+                            </tr>
+                            <tr>
+                                <td class="inovice-head">Booking ID <span>:</span></td>
+                                <td class="inovice-desc" data-bind="text:Invce_Num"></td>
+                            </tr>
+                            <tr>
+                            <tr>
+                                <td class="inovice-head">Check In <span>:</span></td>
+                                <td class="inovice-desc" data-bind="text:Checkin"></td>
+                            </tr>
+                            <tr>
+                                <td class="inovice-head">Check Out <span>:</span></td>
+                                <td class="inovice-desc" data-bind="text:Checkout"></td>
+                            </tr>
+                            @*<tr>
+                                    <td class="inovice-head" >Service tax ID <span>:</span></td>
+                                    <td class="inovice-desc" data-bind="text:S_TaxID">AAACW8725FSD001</td>
+                                </tr>*@
+                        </table>
+                        <table>
+                            <tr>
+                                <td class=" inovice-head">
+                                    Facilities
+                                    <span>:</span>
+                                </td>
+                                <td class="inovice-desc" id="tblFacility" data-bind="foreach:FacilityTrans"><label style="font-weight: 400;" data-bind="text:Facilities"></label></td>
+                            </tr>
+                        </table>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </section>
+
+
+            <section class="inovice-details-block">
+                <h3>Billing Info</h3>
+                <div class="invoice_details">
+                    <table id="Consumer" data-bind="foreach: Trans">
+                        <tr>
+                            <td class="inovice-head">Name <span>:</span></td>
+                            <td class="inovice-desc" data-bind="text:Name"></td>
+                        </tr>
+                        <tr>
+                            <td class="inovice-head">Email <span>:</span></td>
+                            <td class="inovice-desc" data-bind="text:Email"></td>
+                        </tr>
+                        <tr>
+                            <td class="inovice-head">Mobile No. <span>:</span></td>
+                            <td class="inovice-desc" data-bind="text:Mobile"></td>
+                        </tr>
+                    </table>
+
+                    <table id="Occupant" data-bind="foreach: Trans">
+                        <tr>
+                            <td class="inovice-head">Occupant Name <span>:</span></td>
+                            <td class="inovice-desc" data-bind="text:GuestName"></td>
+                        </tr>
+                    </table>
+                    <div class="clear"></div>
+                </div>
+            </section>
+
+            <section class="inovice-details-block">
+                <h3>Price Details</h3>
+                <div class="invoice_details inovice-price-details">
+                    <table>
+                        <tr id="Rate" data-bind="foreach: Trans">
+                            <td>Room Charges</td>
+                            <td class="inovice_price" data-bind="text:Camo_Rate">&#8377; </td>
+                        </tr>
+                    </table>
+                    <table id="trTax" data-bind="foreach: TaxTrans">
+                        <tr>
+                            <td data-bind="text:TaxType"></td>
+                            <td class="inovice_price" data-bind="text:TaxAmnt">&#8377; </td>
+                        </tr>
+                        @*<tr>
+                                <td data-bind="text:TaxType"></td>
+                                <td class="inovice_price" data-bind="text:TaxAmnt">&#8377; </td>
+                            </tr>*@
+                        @*<tr>
+                                <td>Discount</td>
+                                <td class="inovice_price">&#8377; 100.00 <span class="discount-icon"></span></td>
+                            </tr>*@
+
+                    </table>
+                    <table>
+                        <tr><td></td></tr>
+                        <tr class="grand-total" id="TotPrice" data-bind="foreach: Trans">
+                            <td style="font-size:20px;border-top:1px solid #242424;border-bottom:2px solid #242424;">Grand Total</td>
+                            <td data-bind="text:Total" class="inovice_price inovice_price_total" style="font-size:20px;border-top:1px solid #242424;border-bottom:2px solid #242424;">&#8377; </td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <section class="inovice-details-block">
+                <h3>Policies</h3>
+                <div class="invoice_details">
+                    <div data-bind="foreach: PolicyTrans" id="invoice_details" class="inovoice-policeis">
+                        <h2 style="font:20px;" data-bind="text:Policy_Name"></h2>
+                        <p data-bind="text:Policy_Descr"></p>
+                    </div>
+                </div>
+            </section>
+            <p id="FinePrint" data-bind="foreach:FinePrintTrans" class="inovoice-bottom-desc"><span data-bind="text:Invce_fineprint"></span></p>
+        </div>
+
+    </div>
+
+</div>
+
+@section scripts{
+    <script language="javascript" type="text/javascript">
+        $(function () {
+            $("#hrefPrint").click(function () {
+                // Print the DIV.
+                $("#Printdiv").print();
+                return (false);
+            });
+        });
+    </script>
+
+    <link href="~/Content/MyCss.css" rel="stylesheet" />
+    <script src="~/Scripts/Consumer/Invoice_Transaction.js"></script>
+    <script src="~/Scripts/Booking/Print.js"></script>
+}

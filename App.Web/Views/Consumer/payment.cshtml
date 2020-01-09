@@ -1,0 +1,104 @@
+﻿
+@{
+    ViewBag.Title = "payment";
+    Layout = "~/Views/Shared/_Consumer.cshtml";
+}
+
+<div class="booking-payment-method">
+    <div class="wrap">
+        <h2>“Safe & Secure” booking experience.</h2>
+
+        <div class="booking-details">
+            <div class="booking-header">
+                <h3>Choose Your Payment Method</h3>
+                <p>How would you like to pay?</p>
+                <div class="clear"></div>
+            </div>
+            <div class="booking-details-inner">
+                <div class="payment-type" data-toggle="buttons">
+                    <label class="btn payment-type-btn active"> <input type="radio" name="options" id="option1" checked> Credit Card</label>
+                    <label class="btn payment-type-btn"><input type="radio" name="options" id="option2"> Debit Card</label>
+                    <label class="btn payment-type-btn"><input type="radio" name="options" id="option3"> Net Banking </label>
+                    <label class="btn payment-type-btn"><input type="radio" name="options" id="option3"> On EMI</label>
+                </div>
+                <div class="payment-process">
+                    <div class="container-fluid">
+
+                        <div class="row row-fileds">
+                            <div class="col-md-2"> </div>
+                            <div class="col-md-10">
+                                <h4>Please provide your credit card details...</h4>
+                            </div>
+                        </div>
+
+                        <div class="row row-fileds">
+                            <div class="col-md-2"><span class="field-name">Credit Card No.</span></div>
+                            <div class="col-md-4"><span class="text_box"><input type="text" value="" class="text-field"></span></div>
+                            <div class="col-md-4">
+                                <ul class="payment-cards">
+                                    <li><img src="~/Content/Consumer/images/visa.png" title="Visa" alt="" /></li>
+                                    <li><img src="~/Content/Consumer/images/american-express.png" title="American Express" alt="" /></li>
+                                    <li><img src="~/Content/Consumer/images/mastercard.png" title="Master Card" alt="" /></li>
+                                    <li><img src="~/Content/Consumer/images/paypal.png" title="Paypal" alt="" /></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row row-fileds">
+                                    <div class="col-md-4"><span class="field-name">Expiry Date</span></div>
+                                    <div class="col-md-3">
+                                        <span class="text_box">
+                                            <select class="text-field">
+                                                <option>Month</option>
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <span class="text_box">
+                                            <select class="text-field">
+                                                <option>Year</option>
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row row-fileds">
+                                    <div class="col-md-4"><span class="field-name">Card Holder Name</span></div>
+                                    <div class="col-md-8"><span class="text_box"><input type="text" value="" class="text-field" placeholder="Name has on card"></span></div>
+                                </div>
+                                <div class="row row-fileds">
+                                    <div class="col-md-4"><span class="field-name">CVV</span></div>
+                                    <div class="col-md-3"><span class="text_box"><input type="text" value="" class="text-field"></span></div>
+                                    <div class="col-md-5"><p class="cvv-desc">The 3 digit number printed on the back of the card.</p></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-fileds">
+                            <div class="col-md-2"> </div>
+                            <div class="col-md-10">
+                                <p class="payment-desc-info">I understand and agree to the rules and restrictions of this fare, <a href="#">Booking policy</a> and the <a href="#">Terms & Conditions</a> of LMK    </p>
+                                <div class="payment-btn">
+                                    <a href="#">Make Payment</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+

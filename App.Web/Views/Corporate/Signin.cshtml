@@ -1,0 +1,103 @@
+﻿@model App.Web.ViewModels.CorporateLoginViewModel
+@{
+    ViewBag.Title = "Signin";
+    Layout = "~/Views/Shared/_CorporateLayout.cshtml";
+}
+
+
+
+
+<div class="signin-page">
+    <section>
+        <h2> Sign In </h2>
+        <div class="signin-fields">
+            @using (Html.BeginForm("Signin", "Corporate", new { ReturnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post))
+        {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <span>@Html.TextBoxFor(m => m.Corp_mailid, new { @class = "text-box", placeHolder = "Email" })</span>    @*<input type="text" placeholder="Email" class="text-box">*@
+                @Html.ValidationMessageFor(m => m.Corp_mailid, "", new { @class = "text-danger" })
+                <span>@Html.PasswordFor(m => m.Corp_Pswd, new { @class = "text-box", placeHolder = "Password" }) </span>    @*<input type="password" placeholder="password" class="text-box">*@
+                @Html.ValidationMessageFor(m => m.Corp_Pswd, "", new { @class = "text-danger" })
+                <span><a class="forgot-pass" href="@Url.Action("Forgot_Password", "Corporate")">Forgot Password ?</a></span>
+                <span><input type="submit" value="Sign in" class="signin-btn"> </span>
+        }
+        </div>
+    </section>
+    @*<div class="serperator">
+        <hr />
+        <span>OR</span>
+    </div>*@
+    @*<div class="signin-fb">
+        <div id="fb-root"></div>
+        <h3><a href="#" onclick="FbLogin()"><i class="fb-icon"></i> Sign in with facebook</a></h3>
+
+        <p>Don’t you have an account ? <span><a href="@Url.Action("SignUp", "Corporate", new { ReturnUrl = Request.QueryString["ReturnUrl"] })">Create now !</a></span></p>
+    </div>*@
+</div>
+
+
+
+@section scripts{
+
+
+
+    <script type="text/javascript">
+        $(window).load(function () { $('input[type=text]').each(function () { $(this).val(''); }); $('input[type=password]').val(''); });
+    </script>
+
+
+
+
+
+    @*<script type="text/javascript">
+            window.fbAsyncInit = function () {
+                FB.init({
+                    appId: '1087433841273430',
+                    status: true, // check login status
+                    cookie: true, // enable cookies to allow the server to access the session
+                    xfbml: true,
+                    version: 'v2.2',
+                    channelUrl: 'http://localhost:61458/Corporate/Signin'
+                });
+            };
+
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1087433841273430&version=v2.0";
+                fjs.parentNode.insertBefore(js, fjs);
+
+
+            }(document, 'script', 'facebook-jssdk'));
+
+            function FbLogin() {
+                //FB.login(function (response) {
+                //
+                //    console.log(response);
+                //}, {
+                //    scope: 'user_likes',
+                //    auth_type: 'rerequest'
+                //});
+            }
+            function login() {
+                FB.getLoginStatus(function (r) {
+                    if (r.status === 'connected') {
+                        window.location.href = 'fbconnect.php';
+                    } else {
+                        FB.login(function (response) {
+                            if (response.authResponse) {
+                                //if (response.perms)
+                                window.location.href = 'fbconnect.php';
+                            } else {
+                                // user is not logged in
+                            }
+                        }, { scope: 'email' }); // which data to access from user profile
+                    }
+                });
+            }
+
+        </script>*@
+
+}

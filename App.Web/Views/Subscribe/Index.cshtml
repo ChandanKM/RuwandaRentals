@@ -1,0 +1,130 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
+    <link href="~/Content/error-notifier.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/Scripts/jquery-1.8.2.min.js")
+
+
+    @Scripts.Render("~/Scripts/jquery-ui-1.10.3.js")
+    @Scripts.Render("~/Scripts/knockout-2.3.0.js")
+
+    <script src="~/Scripts/User/knockout.mapping-latest.debug.js"></script>
+    @Scripts.Render("~/Scripts/jqueryNotification.js")
+    @Scripts.Render("~/Scripts/jquery.blockUI.js")
+    @Scripts.Render("~/Scripts/AppCommonScript.js")
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto:500,100,300,400' rel='stylesheet' type='text/css'>
+    <title>Subscribe with LMK!!</title>
+    <link rel="shortcut icon" href="~/img/Splitted_Images/favicon.ico" type="image/x-icon" />
+    <meta name="keywords" content="Last Minute Keys" />
+    <meta name="description" content="Last Minute Keys" />
+
+    <style>
+        .coming-soon-page {
+            background: url("../../img/sub_Images/background.jpg") no-repeat center center fixed;
+          
+            background-size: cover;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+        }
+
+        .coming-soon-content {
+            text-align: center;
+        }
+
+        .coming-soon-desc {
+            margin-top: 6.5em;
+        }
+
+            .coming-soon-desc img.logo-img {
+                width: 150px;
+                height: 150px;
+            }
+
+        .coming-soon-field {
+            margin-top: 6.5em;
+        }
+
+            .coming-soon-field form {
+                display: inline-block;
+                border: 1px solid #84620d;
+                width: 335px;
+                border-radius: 2em;
+                -webkit-border-radius: 2em;
+                -moz-border-radius: 2em;
+                -o-border-radius: 2em;
+                position: relative;
+            }
+
+        .coming-soon-desc input[type="text"] {
+            width: 100%;
+            background: #FFF;
+            padding: 10px;
+            padding-right: 50px;
+            font-size: 15px;
+            font-weight: 100;
+            color: #000;
+            border: none;
+            outline: none;
+            font-family: 'Roboto', sans-serif;
+            float: left;
+            border-radius: 2em;
+            -webkit-border-radius: 2em;
+            -moz-border-radius: 2em;
+            -o-border-radius: 2em;
+            height: 44px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .coming-soon-desc input[type="submit"] {
+            float: right;
+            display: block;
+            width: 48px;
+            height: 48px;
+            background: url("../../img/sub_Images/submit-btn.png") no-repeat;
+            border: none;
+            outline: none;
+            position: absolute;
+            right: -1px;
+            top: -2px;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body class="coming-soon-page">
+    <div class="coming-soon-content">
+
+        <div class="coming-soon-desc">
+            <img src="~/img/sub_Images/Clock-Rotating.gif" width="150" height="150" />
+      
+
+            <div class="coming-soon-field">
+                <form>
+                    @*<input type="text" value="Your Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Your Email';}">
+                    <input type="submit" value="" />
+                    <div class="clear"></div>*@
+                    <input id="emailText" data-bind="value:Email" placeholder="Your Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Your Email';}" type="text" />
+
+                    <input type="submit" value="" data-bind="click:SubmitSub" />
+         
+                    </form>
+                    <div class="clear"></div>
+
+
+</div></div></div>
+        <script src="@Url.Content("~/Scripts/Subscribe/submit.js")" type="text/javascript"></script>
+</body>
+</html>

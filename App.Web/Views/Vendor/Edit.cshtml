@@ -1,0 +1,375 @@
+﻿@model App.Web.ViewModels.VendorViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+@*Scripts for create*@
+<script src="~/Scripts/jquery-ui.js"></script>
+<script>
+    $(window).load(function () {
+        $("#txtDemo").autocomplete({
+
+            source: function (request, response) {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/Property/GetAutoCompleteSearch",
+                    data: { terms: request.term },
+                    dataType: "json",
+                    cacheResults: true,
+                    contentType: "application/json; charset=utf-8",
+                    success: OnSuccess,
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        // alert(textStatus);
+                    }
+                });
+                function OnSuccess(r) {
+                    response($.map(r, function (item) {
+                        return {
+                            Locvalue: item.Location,
+                            label: item.Location,
+                            val: item.Id,
+                            city: item.City,
+                            state: item.State,
+                            pine: item.Pincode,
+                        }
+                    }))
+                }
+            },
+            select: function (e, i) {
+                $("#txtLocation").val(i.item.label);
+                $("#hdnLocationId").val(i.item.val);
+                $("#txtState").val(i.item.state);
+                $("#txtPincode").val(i.item.pine);
+                $("#txtCities").val(i.item.city);
+                $("#txtsearch").val(i.item.Locvalue + ',' + i.item.city);
+            },
+            minLength: 2
+        });
+
+    });
+
+</script>
+@*popup code*@
+<div class="modal fade" style="margin-left: 29%;" id="myModal1">
+    <div class="modal-dialog" style="width:50%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Modal title</h4>
+            </div>
+            <form id="ImgUpload" action="/Vendor/UploadEdit" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+
+
+                    <label for="photo">Profile Photo:</label>
+                    <input type="file" name="photo" id="photo" accept="image/*" />
+
+
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" value="Upload" class="btn btn-lg btn-info" />
+                    <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal">Close</button>
+
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+@*popup end*@
+
+<form class="form-horizontal">
+
+
+
+    <ul id="breadcrumbs" class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a href="#">Home</a>
+        </li>
+
+
+        <li>
+
+            <a href="~/Vendor/Bind">Vendor Group</a>
+        </li>
+        <li>
+
+            Edit Profile
+        </li>
+    </ul>
+    <div class="widget box">
+        <div class="widget-header">
+            <h4><i class="icon-reorder"></i>  Group Profile</h4>
+        </div>
+        <div class="widget-content">
+            <form class="form-horizontal row-border" style="margin-top: -20px;" action="#">
+                <div class="row" data-bind="foreach: Vendors" id="divVendorEditProfile">
+                    <div class="span5">
+                        <div class="control-group" style="display:none">
+                            <span class="control-label" for="Vndr_Name" style="text-align:left">Name <span class="required"></span></span>
+                            <div class="controls">
+                                <input id="Vendor_Id" type="text" data-bind='value: Vndr_Id' />
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="display: none">
+                            <label class="col-md-3 control-label">Profile Picture</label>
+                            <div class="col-md-9">
+
+
+                                <a data-toggle="modal" href="#myModal1"><img data-bind="attr : { src:Image_dir }" style="width:150px;height:150px;display:none" /><br />Click here to change</a>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">
+                                Group / Hotel Name<b style="color:red">*</b>
+                                <span class="qs">? <span class="hint above">Group Name!<b style="color:red">*</b></span></span>
+                            </label>
+                            <div class="col-md-9">
+
+                                @*<input type="text" name="regular" class="form-control" data-bind=" text: vndr_id">*@
+                                <input id="Vendor_Id" class="form-control input-width-xlarge" type="text" data-bind='value: Vndr_Name' />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">
+                                Cin No.<b style="color:red">*</b>
+                                <span class="qs">? <span class="hint above">Corporate Identification Number!<b style="color:red">*</b></span></span>
+                            </label>
+                            <div class="col-md-9">
+
+                                @*<input type="text" name="regular" class="form-control" data-bind=" text: vndr_id">*@
+                                <input id="Vendor_Id" class="form-control input-width-xlarge" type="text" data-bind='value: Vndr_Cinno' />
+                            </div>
+                        </div>
+                        @*<div class="form-group">
+                                <label class="col-md-3 control-label">City<b style="color:red">*</b></label>
+                                <div class="col-md-9">
+                                    <input type="text" placeholder="Please enter location followed by city" id="txtLocation" data-bind="value:City_Area" class="form-control input-width-xlarge" readonly>
+
+                                    <a data-toggle="modal" style="margin-left: 35%; margin-top: -7%;" href="#mySearchModel" class="btn btn-success">Pick Location</a>
+
+                                </div>
+                            </div>*@
+
+                        @*<div class="form-group">
+                                <label class="col-md-3 control-label">City</label>
+                                <div class="col-md-9">
+                                    <select id="CityId" class="form-control input-width-xlarge" data-bind="options: CityLookup, value: City_Id,optionsText: 'CityName' ,optionsValue:'City_Id' "></select>
+                                </div>
+                            </div>*@
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Street<b style="color:red">*</b></label>
+                            <div class="col-md-9">
+
+                                @*<input type="text" name="regular" class="form-control" data-bind=" text: vndr_id">*@
+                                <textarea id="Vendor_Id" class="form-control input-width-xlarge" data-bind='value: Vndr_Addr1'></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Location<b style="color:red">*</b></label>
+                            <div class="col-md-9">
+                                <input type="hidden" data-bind="value:City_Id" id="hdnLocationId" />
+                                <input type="text" readonly id="txtLocation" data-bind="value:City_Area" class="form-control input-width-xlarge">
+                                <a data-toggle="modal" style="margin-left: 35%; margin-top: -7%;" href="#mySearchModel" class="btn btn-success">Update Location</a>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">City<b style="color:red">*</b></label>
+                            <div class="col-md-9">
+                                <input type="text" readonly id="txtCities" data-bind="value:City_Name" class="form-control input-width-xlarge">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Pin Code<b style="color:red">*</b></label>
+                            <div class="col-md-9">
+                                <input type="text" readonly id="txtPincode" data-bind="value:Pincode" class="form-control input-width-xlarge">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">State<b style="color:red">*</b></label>
+                            <div class="col-md-9">
+                                <input type="text" readonly id="txtState" data-bind="value:State_Name" class="form-control input-width-xlarge">
+                            </div>
+                        </div>
+                        <div hidden class="form-group">
+                            <label class="col-md-3 control-label">Gps Info<b style="color:red">*</b></label>
+                            <div class="col-md-9">
+
+                                @*<input type="text" name="regular" class="form-control" data-bind=" text: vndr_id">*@
+                                <input id="Vendor_Id" style="height:66px" class="form-control input-width-xlarge" data-bind='value: Vndr_Gps_Pos' />
+                            </div>
+                        </div>
+
+
+                        <div hidden class="form-group">
+                            <label class="col-md-3 control-label">OverView</label>
+                            <div class="col-md-9">
+
+                                @*<input type="text" name="regular" class="form-control" data-bind=" text: vndr_id">*@
+                                <input id="Vendor_Id" class="form-control input-width-xlarge" type="text" data-bind='value: Vndr_Overview' />
+                            </div>
+                        </div>
+                        <div class="widget-header" style="width:99%;margin-left:0.5%;">
+                            <h4><i class="icon-reorder"></i> <b>Admin Contact Information</b></h4>
+                        </div>
+                        <br />
+                        @*<div><label><b> Contact Person Information</b></label></div>*@
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">
+                                Contact Person<b style="color:red">*</b>
+                            </label>
+                            <div class="col-md-9">
+
+                                @*<input type="text" name="regular" class="form-control" data-bind=" text: vndr_id">*@
+                                <input id="Vendor_Id" class="form-control input-width-xlarge" type="text" data-bind='value: Vndr_Contact_person' />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">
+                                Contact Number
+                                <b style="color:red">*</b>
+                            </label>
+                            <div class="col-md-9">
+
+                                @*<input type="text" name="regular" class="form-control" data-bind=" text: vndr_id">*@
+                                <input id="Vendor_Id" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" maxlength="10" class="form-control input-width-xlarge" type="text" data-bind='value: Vndr_Contact_Nos' />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">
+                                Mobile Number<b style="color:red">*</b>
+                            </label>
+                            <div class="col-md-9">
+                                <input id="Vndr_Contact_person" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" maxlength="10" class="form-control input-width-xlarge" type="text" data-bind="value:Vndr_Contact_Mobile" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Designation<b style="color:red">*</b></label>
+                            <div class="col-md-9">
+                                <input id="Vndr_Contact_person" class="form-control input-width-xlarge" type="text" data-bind="value:Vndr_Contact_Designation" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> Email<b style="color:red">*</b></label>
+                            <div class="col-md-9">
+
+                                @*<input type="text" name="regular" class="form-control" data-bind=" text: vndr_id">*@
+                                <input id="Vendor_Id" class="form-control input-width-xlarge" type="text" data-bind='value: Vndr_Contact_Email' />
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="widget-header" style="width:99%;margin-left:0.5%;">
+                        <h4><i class="icon-reorder"></i> <b> Alternate Contact Information</b></h4>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">
+                            Contact Person
+
+                        </label>
+                        <div class="col-md-9">
+
+                            @*<input type="text" name="regular" class="form-control" data-bind=" text: vndr_id">*@
+                            <input id="Vendor_Id" class="form-control input-width-xlarge" type="text" data-bind='value: Vndr_Alternate_person' />
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">
+                            Contact Number
+
+                        </label>
+                        <div class="col-md-9">
+
+                            @*<input type="text" name="regular" class="form-control" data-bind=" text: vndr_id">*@
+                            <input id="Vendor_Id" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" maxlength="10" class="form-control input-width-xlarge" type="text" data-bind='value: Vndr_Alternate_Nos' />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">
+                            Mobile Number
+
+                        </label>
+                        <div class="col-md-9">
+                            <input id="Vndr_Contact_person" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" maxlength="10" class="form-control input-width-xlarge" type="text" data-bind="value:Vndr_Alternate_Mobile" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Designation</label>
+                        <div class="col-md-9">
+                            <input id="Vndr_Contact_person" class="form-control input-width-xlarge" type="text" data-bind="value:Vndr_Alternate_Designation" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Email</label>
+                        <div class="col-md-9">
+
+                            @*<input type="text" name="regular" class="form-control" data-bind=" text: vndr_id">*@
+                            <input id="Vendor_Id" class="form-control input-width-xlarge" type="text" data-bind='value: Vndr_Alternate_Email' />
+                        </div>
+                    </div>
+
+
+                    <div style="width:99%;margin-left:0.5%;" class="modal-footer">
+
+
+
+
+                        <input id="btnCreate" class="btn btn-primary" type="button" value="Save" data-bind="click: Edit" />
+                        <a class="btn btn-primary" data-bind="attr:{href:'/vendor/Bind/'}">Back</a>
+                    </div>
+                </div>
+        </div>
+
+
+
+
+    </div>
+</form>
+
+
+
+
+<div class="modal fade" style="margin-left: 29%;" id="mySearchModel">
+    <div class="modal-dialog" style="width:50%;margin-left: 48px;margin-top: 145px; ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Location</h4><span>Ex:Hsr Layout,Bangalore</span>
+            </div>
+            <div class="modal-body">
+
+                <input type="text" id="txtDemo" placeholder="Please enter location followed by City" class="form-control input-width-xlarge">
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal">Submit</button>
+
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+<style>
+    #ui-id-1 {
+        z-index: 9999;
+    }
+</style>
+
+
+
+<script src="~/Scripts/Master.js"></script>
+
+<script src="@Url.Content("~/Scripts/Vendor/Edit.js")" type="text/javascript"></script>
+

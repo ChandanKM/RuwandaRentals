@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewBag.Title = "Upcomming_Bookings";
+    Layout = "~/Views/Shared/_SuperadminLayout.cshtml";
+}
+
+
+<form class="form-horizontal">
+
+    <div class="crumbs">
+        <ul id="breadcrumbs" class="breadcrumb">
+            <li>
+                <i class="icon-home"></i>
+                <a href="#">Home</a>
+            </li>
+
+            <li class="current">
+                Reserved Bookings
+            </li>
+
+
+        </ul>
+
+    </div><br /><br />
+
+    <br /><br />
+    <div class="row">
+        <div class="col-md-12" style="margin-top: -5%;">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4><i class="icon-reorder"></i> Reserved Booking</h4>
+                    <div class="toolbar no-padding">
+                        <div class="btn-group">
+                            <span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="widget-content no-padding">
+                    <table class="table table-striped table-bordered table-hover table-checkable BookingsDT">
+                        <thead>
+                            <tr>
+
+                                <th>
+                                    Booking ID
+                                </th>
+                                <th>
+                                    Property
+                                </th>
+                                <th>
+                                    Room Type
+                                </th>
+                                <th>
+                                    Check In
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Mobile
+                                </th>
+                                <th>
+                                    Options
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: Bookings" id="BookingsDT">
+                            <tr>
+
+
+                                <td data-bind="text: Invce_Num"></td>
+                                <td data-bind="text: Prop_Name"></td>
+                                <td data-bind="text: Room_Type"></td>
+                                <td data-bind="text: Checkin"></td>
+                                <td data-bind="text: Name"></td>
+                                <td data-bind="text: Mobile"></td>
+
+                                <td>
+                                    <a style="cursor:pointer;" data-bind="click:DT"> Details</a>
+                                    @*<a style="cursor:pointer" data-bind="click: deleteProperty"><img src="../../img/Splitted_Images/disable_button.png" /></a>*@
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script src="~/Scripts/SuperAdminBooking/UpcomingBookings.js"></script>
+
+<script src="~/Scripts/jquery.storage.js"></script>
+
+<script src="~/Scripts/SuperAdminMaster.js"></script>

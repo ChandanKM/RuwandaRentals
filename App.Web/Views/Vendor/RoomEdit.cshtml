@@ -1,0 +1,465 @@
+﻿@model App.Web.ViewModels.RoomViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<style>
+    #ui-id-1 {
+        z-index: 9999;
+    }
+
+    #ui-id-2 {
+        z-index: 9999;
+    }
+</style>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnCreate").click(function () {
+            $("#divCreateRoomType").show();
+            $("#btnCreate").hide();
+
+        });
+    });
+
+</script>
+
+<style>
+    .break {
+        display: block !important;
+    }
+
+    .editor-field textarea {
+        width: 400px;
+        height: 100px;
+    }
+
+    .editor-field TextBox {
+        width: 400px;
+    }
+</style>
+<script src="~/Scripts/jquery-ui.js"></script>
+
+<div class="modal fade" style="margin-left: 29%;" id="modelSelectImage">
+    <div class="modal-dialog" style="width:50%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Add Image</h4>
+            </div>
+
+            <div class="modal-body">
+                <label for="photo">Image :Please select Image of width:600px,Height:300px</label>
+                <input type="file" accept="image/*" data-bind="files: imageFile, fileObjectURL: imageObjectURL, fileBinaryData: imageBinary" required />
+                <div data-bind="if: imageObjectURL">
+                    <img id="imgAdd" data-bind="attr: { src: imageObjectURL }" style="height: 175px;margin-left: 140px;width: 260px" />
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <input type="submit" data-bind="click:SubmitImage" value="Upload" class="btn btn-lg btn-info" data-dismiss="modal" />
+                <button id="btnModelClose" data-bind="click:CancelUpload" type="button" class="btn btn-lg btn-primary" data-dismiss="modal">Close</button>
+
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+@* Image Upload popup code*@
+<div class="modal fade" style="margin-left: 29%;" id="myModal1">
+    <div class="modal-dialog" style="width:50%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Upload Room Image</h4>
+            </div>
+            <form id="ImgUpload" action="/Rooms/UploadEdit" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+
+
+
+                    <label for="photo">Room Image:</label>
+                    <input type="file" name="photo" id="photo" />
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" value="Upload" class="btn btn-lg btn-info" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+@*popup end*@
+
+
+@* Add Policies popup code*@
+
+@*popup end*@
+<ul id="breadcrumbs" class="breadcrumb">
+    <li>
+        <i class="icon-home"></i>
+        <a href="#">Home</a>
+    </li>
+
+
+    <li id="VendorLinkBlock" class="current">
+        <a id="Vgroup" href="/Vendor/Bind" title="">Vendor Group</a>
+    </li>
+    <li id="UName" data-bind="text:User_name">
+
+
+    </li>
+    @*<li>
+        <a href="~/Property/Bind">Property Details</a>
+
+    </li>*@
+    @*<li  id="PropertyNameLI">
+
+
+        </li>*@
+
+ <li>
+     Room Details
+        @*<a href="~/Rooms/Bind">Room Details</a>*@
+    </li>
+    <li id="RoomName">
+
+
+    </li>
+    <li>
+
+        Modify Room Details
+    </li>
+</ul>
+
+<form class="form-horizontal"></form>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="widget box">
+            <div class="widget-content">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="tabbable tabbable-custom">
+                            <ul class="nav nav-tabs">
+                                <li style="display:none" id="Tab1" @*class="active"*@><a href="#tab_1_1" data-toggle="tab">Edit Room</a></li>
+                                <li id="Tab2" class="active"><a href="#tab_1_2" data-toggle="tab">Facilities & Amenities</a></li>
+                                <li id="Tab3"><a href="#tab_1_3" data-toggle="tab">Terms & Policies</a></li>
+                            </ul>
+                            <div class="tab-content" id="tab_content">
+                                <div style="display:none" class="tab-pane " id="tab_1_1">
+                                    <div class="widget box">
+                                        <div class="widget-header">
+                                            <h4><i class="icon-reorder"></i> Edit Rooms</h4>
+                                        </div>
+                                        <div class="widget-content">
+                                            @*<form class="form-horizontal row-border" action="#">*@
+                                            <div class="form-horizontal row-border">
+                                                <div id="tab1">
+                                                    <div class="col-md-12">
+                                                        <div class="span5">
+
+                                                            <div class="row" data-bind="foreach:Rooms">
+                                                                <div class="form-group">
+                                                                    <label class="col-md-3 control-label">Room Image</label>
+
+                                                                    <div class="col-md-9">
+                                                                        <a data-toggle="modal" href="#modelSelectImage">
+                                                                            <img id="imgroom" style="margin-top: -1%;" width="200" height="200" data-bind="attr:{src:Image_dir}" />
+                                                                            <span style="margin-left: -24%;margin-top: 189px;position: absolute;">Click here to Change Image</span>
+                                                                        </a>
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label class="col-md-3 control-label">Room Type<b style="color:red">*</b></label>
+                                                                    <div class="col-md-9">
+                                                                        <input type="text" id="txtRType" data-bind="value:Room_Name" class="form-control input-width-xlarge" readonly>
+
+                                                                        <a data-toggle="modal" style="margin-left: 41%;margin-top: -8%;" href="#mySearchModel" class="btn btn-success">Select Room Type</a>
+
+                                                                    </div>
+                                                                </div>
+
+                                                                @*<div class="form-group">
+                                            <label class="col-md-3 control-label">Room's Offered to LMK</label>
+                                            <div class="col-md-9">
+
+
+                                                <input id='Room_Agreed_Availability' class="form-control input-width-xlarge" type="text" data-bind='value:Room_Agreed_Availability' />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">LMK Pricing</label>
+                                            <div class="col-md-9">
+                                                <input id="Room_Lmk_Rate" class="form-control input-width-xlarge" type="text" data-bind='value:Room_Lmk_Rate' />
+                                            </div>
+                                        </div>
+
+                                        <div hidden class="form-group">
+                                            <label class="col-md-3 control-label">LMK Camouflaged Pricing</label>
+                                            <div class="col-md-9">
+                                                <input id="Room_camflg" class="form-control input-width-xlarge" type="text" data-bind='value:Room_camflg' />
+                                            </div>
+                                        </div>*@
+                                                                <div class="form-group" id="GrossRate" style="display:none">
+                                                                    <label class="col-md-3 control-label">Pricing</label>
+                                                                    <div class="col-md-9">
+                                                                        <input id="Room_Lmk_Rate" class="form-control input-width-xlarge" type="text" data-bind='value:Room_Standard_rate' />
+                                                                    </div>
+                                                                </div>
+                                                                <div hidden class="form-group">
+                                                                    <label class="col-md-3 control-label">Room Checkin<b style="color:red">*</b><span class="qs">? <span class="hint above">Check in time of the hotel!</span></span></label>
+                                                                    <div class="col-md-9">
+                                                                        <input id='Room_Checkin' class="form-control input-width-xlarge" type="time" data-bind='value:Room_Checkin' />
+                                                                    </div>
+                                                                </div>
+
+                                                                <div hidden class="form-group">
+                                                                    <label class="col-md-3 control-label">Room Checkout<b style="color:red">*</b><span class="qs">? <span class="hint above">Check out time of the hotel!</span></span></label>
+                                                                    <div class="col-md-9">
+                                                                        <input id="Room_Checkout" class="form-control input-width-xlarge" type="time" data-bind='value:Room_Checkout' />
+                                                                    </div>
+                                                                </div>
+
+                                                                <div hidden class="form-group">
+
+                                                                    <label class="col-md-3 control-label">Checkout Grace time<span class="qs">? <span class="hint above">Grace check out time of the hotel room!</span></span></label>
+                                                                    <div class="col-md-9">
+                                                                        <input id="Room_Grace_time" class="form-control input-width-xlarge" type="time" data-bind='value:Room_Grace_time' />
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label class="col-md-3 control-label">Room Description<b style="color:red">*</b><span class="qs">? <span class="hint above">Description of the hotel room!</span></span></label>
+                                                                    <div class="col-md-9">
+                                                                        <textarea id="Room_Overview" class="form-control input-width-xlarge" rows="3" style="width:300px;" data-bind='value:Room_Overview'></textarea>
+                                                                    </div>
+                                                                </div>
+
+
+                                                                <div class="row">
+                                                                    <div class="span10">
+                                                                        <div class="form-actions" style="margin-bottom: -10px; margin-left: 0.99%; margin-right: 0.99%;">
+
+                                                                            <input id="btnCreate" style="margin-left: 728px;" type="button" value="Save" data-bind="click: Editroomsdetails" class="btn btn-lg btn-primary" />
+
+
+                                                                            @*<a href="~/rooms/bind" class="btn btn-lg btn-danger">Back</a>*@
+
+
+
+                                                                        </div>
+
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+
+
+
+                                                </div>
+                                            </div>
+                                            @*</form>*@
+                                        </div>
+
+                                    </div>
+                                    <div class="modal fade" style="margin-left: 29%;" id="mySearchModel">
+                                        <div class="modal-dialog" style="width:50%;margin-left: 48px;margin-top: 145px; ">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title">Room Type</h4>
+                                                </div>
+                                                <div class="modal-body">
+
+                                                    <input type="text" id="txtDemo" class="form-control input-width-xlarge">
+
+                                                </div>
+                                                <div class="modal-footer">
+
+                                                    <button type="button" onclick=" RoomType()" class="btn btn-lg btn-primary" data-dismiss="modal">Submit</button>
+
+                                                </div>
+
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane active" id="tab_1_2">
+                                    <div id="tab2">
+
+                                        <div id="bind" data-bind="foreach: Facilities">
+
+                                            <div data-bind="attr:{class:FTypecount}" style="display: inline-table; width:15%;text-align:center;">
+                                                <h3 data-bind="text:Facility_Type"></h3>
+
+                                                <div data-bind="attr:{class:IsHeader}">
+
+                                                    <ul style="padding-left:0;">
+                                                        <li style="list-style:none">
+
+                                                            <label id="Active" data-bind="text: Active_flag" style="background-color:green;position:absolute;margin:30px 0 0 -69px;color:lightgray;display:none"></label>
+                                                        </li>
+
+
+                                                        <li style="list-style:none;position:relative;" data-bind="click: ActivateFacility" title="Click Here">
+                                                            <img id="Imgid" data-bind="attr:{src: Facility_Image_dir, title: Facility_Name}" style="width:150px; height:150px;padding:5px" />
+                                                            <div data-bind="if: Active_flag" style="position:absolute;top:5px;left:10px;">
+                                                                <img src="~/img/active_facility.png">
+
+                                                            </div>
+                                                        </li>
+                                                        <li style="list-style:none">
+                                                            <span data-bind="text: Facility_Name"> </span>
+                                                        </li>
+                                                        <li style="list-style:none">
+
+                                                            <input type="checkbox" data-bind="checked: Active_flag,event:{change:ActivateFacility}">
+
+
+
+                                                        </li>
+
+                                                    </ul>
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="tab-pane" id="tab_1_3">
+                                    <form class="form-horizontal">
+
+                                        <div>
+
+
+                                            <a data-toggle="modal" href="#myModalPolicy" style="margin-left: 93%;margin-top: -3%;" class="btn btn-success">Create</a>
+                                        </div><br />
+
+                                        <br /><br />
+                                        <div class="row">
+                                            <div class="col-md-12" style="margin-top: -5%;">
+                                                <div class="widget box">
+                                                    <div class="widget-header">
+                                                        <h4><i class="icon-reorder"></i> Manage Policy</h4>
+                                                        <div class="toolbar no-padding">
+                                                            <div class="btn-group">
+                                                                <span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="widget-content no-padding">
+                                                        <table data-bind="foreach: Policies" class="table table-striped table-bordered table-hover table-checkable PropertiesDT">
+                                                            <thead style="background-color:#4275ab;color: white;">
+                                                                <tr>
+                                                                    <th style="display:none" data-bind=" text: Policy_Id"></th>
+                                                                    <th>
+                                                                        <span data-bind=" text: Policy_Name"></span>
+                                                                        <div style="float:right">
+                                                                            <a data-toggle="modal" data-bind="click: EditPolicy" href="#myModalPolicy"><img src="../../img/Splitted_Images/edit_button_policy.png" /></a>
+                                                                            <a style="cursor:pointer" data-bind="click: deletePolicy"><img src="../../img/Splitted_Images/disable_button_policy.png" /></a>
+                                                                        </div>
+                                                                    </th>
+
+
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+
+
+
+                                                                    <td data-bind="html: Policy_descrEdit"></td>
+
+                                                                </tr>
+
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="modal fade" style="margin-left: 29%;" id="myModalPolicy">
+                                        <div class="modal-dialog" style="width:80%;">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title">Add New Policy</h4>
+                                                </div><form id="ImgUpload">
+                                                    <div class="modal-body">
+
+                                                        <input id="Policy_Name" style="display:none" type="text" data-bind="value: Policy_Id" />
+
+                                                        <div class="form-group">
+                                                            <label class="col-md-3 control-label">Policy Name<span class="qs">? <span class="hint above">Heading of the room policies!</span></span></label>
+                                                            <div class="col-md-9">
+                                                                <input id="Policy_Name" type="text" style="width: 346PX; HEIGHT: 37PX;" data-bind="value: Policy_Name" />
+                                                            </div>
+                                                        </div>
+
+                                                        <br /><br />
+                                                        <div class="form-group">
+                                                            <label class="col-md-3 control-label">Policy Description<span class="qs">? <span class="hint above">Full description of the  room policies!</span></span></label>
+                                                            <div class="col-md-9">
+                                                                <textarea id="Policy_Name" style="width: 350px;height: 57px;" data-bind="value: Policy_descr"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <br /><br />
+                                                    </div>
+                                                    <div class="modal-footer">
+
+                                                        <input type="submit" data-dismiss="modal" data-bind="click:CreatePolicy" value="Submit" class="btn btn-lg btn-info" />
+                                                        <button id="btnModelClose" type="button" class="btn btn-lg btn-primary" data-dismiss="modal">Close</button>
+
+                                                    </div>
+                                                </form>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+@section scripts{
+<script src="~/Scripts/Master.js"></script>
+    <script src="@Url.Content("~/Scripts/Rooms/Edit.js")" type="text/javascript"></script>
+
+    <script src="@Url.Content("~/Scripts/Policies/Bind.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/Policies/Bind_Facility.js")" type="text/javascript"></script>
+
+}

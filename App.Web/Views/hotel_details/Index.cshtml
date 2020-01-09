@@ -1,0 +1,751 @@
+﻿@{
+    ViewBag.Title = "normal_hotel_details";
+    Layout = "~/Views/Shared/_DefaultConsumer.cshtml";
+}
+
+<div class="hotel-details-page">
+    <div class="breadcrumb-block breadcrumb-block2">
+        <div class="wrap">
+            <ol class="breadcrumb breadcrumb2">
+                <li><a href="@Url.Action("Index","Home")">Home</a></li>
+                <li class="active">Hotels in <strong id="strongCity"></strong></li>
+                <li class="active">Amazing hotel with luxury room service</li>
+            </ol>
+        </div>
+    </div>
+
+
+    <!-- Search Result Section -->
+    <div class="hotel-desc-page" id="divCompleteHotelDetails">
+        <div class="wrap">
+
+            <div class="top-filter-pannel">
+                <form id="formSearch">
+                    <div class="location-filter">
+                        <div class="input-group">
+                            <input hidden id="hdnLocationId" />
+                            <span class="input-group-addon calendar-btn calendar-btn2"><i class="location_icon"></i></span>
+                            <input type="text" id="txtLocation" name="Location" class="location-textbox required" placeholder="Area, City" />
+                        </div>
+                    </div>
+                    <div class="checkin-filter">
+                        <div class="input-group" id="divCheckIn">
+                            <span class="input-group-addon calendar-btn calendar-btn2">
+                                <i class="checkin-icon"></i>
+                            </span>
+                            <input type="text" id="txtCheckIn" name="dd" data-format="DD/MM/YYYY" placeholder="Check In" readonly />
+                        </div>
+                    </div>
+
+                    <div class="checkout-filter">
+                        <div class="input-group" id="divCheckOut">
+                            <span class="input-group-addon calendar-btn calendar-btn2">
+                                <i class="checkout-icon"></i>
+                            </span>
+                            <input type="text" id="txtCheckOut" name="dd" data-format="DD/MM/YYYY" placeholder="Check Out" readonly />
+                        </div>
+
+                    </div>
+
+                    <div class="days-filter">
+                        <div class="input-group">
+                            <span class="input-group-addon calendar-btn calendar-btn2"><i class="moon_icon"></i></span>
+                            <select id="country" data-bind="options: RoomSelectList, selectedOptions: RoomCount" class="frm-field required"></select>
+                            @*<input type="text" id="txtNoOfRoom" name="NoOfRoom" data-bind="value:No_Of_Rooms" maxlength="2" min="1" max="5" onkeypress='validate(event)' class="days-textbox" required />
+                                <input style="display:none" type="text" id="txtDayCount" value="1 Night" class="days-textbox" readonly hidden />
+                                <span class="input-group-addon calendar-btn calendar-btn2"><label>Room(s)</label></span>*@
+                        </div>
+                    </div>
+
+                    <div class="modify-search">
+                        <a href="#" onclick="ModifySearchSubmit()"><i class="search_icon"></i> Modify Search</a>
+                    </div>
+                    <div class="clear"></div>
+                </form>
+            </div>
+
+            <!-- Search result list -->
+            <section class="hotel-details">
+
+                <div class="hotel-details-content">
+                    <section class="detail-hotel-details" id="divHotelDetails" data-bind="foreach:HotelDetailsList">
+                        <div class="detail-hotel-img">
+
+                            <section class="slider">
+                                <div class="flexslider" id="hotel-details">
+                                    <ul class="slides">
+
+                                        <!--ko foreach:HotelImageList-->
+                                        <li><img data-bind="attr:{src:Image_dir}" /></li>
+                                        <!--/ko -->
+
+                                    </ul>
+                                </div>
+                                @*<div class="flexslider">
+                                        <div id="slider" class="flexslider">
+                                            <ul class="slides" >
+                                                <li><img data-bind="attr:{src:Prop_Image}" /></li>
+                                                <!--ko foreach:HotelImageList-->
+                                                <li><img data-bind="attr:{src:Image_dir}" /></li>
+                                                <!--/ko -->
+                                            </ul>
+                                        </div>
+
+
+                                    </div>
+                                    <div id="carousel" class="flexslider">
+                                        <ul class="slides" data-bind="foreach:HotelImageList">
+                                            <li><img data-bind="attr:{src:Image_dir}" /></li>
+
+                                        </ul>
+                                    </div>*@
+
+
+                            </section>
+                        </div>
+
+                        <div class="detail-hotel-desc">
+                            <h3 data-bind="text:Prop_Name"></h3>
+                            <h4 data-bind="text:Prop_Address"></h4>
+                            @*<h4 class="phone" data-bind="visible:IsHiddenGem,text:PhoneNumber">1800 999 1200</h4>*@
+                            <section style="margin-top:10px;">
+
+                                <span class="hotel-star-rate" data-bind="foreach:StarRatingList">
+                                    <label data-bind="css: MyStarClass"></label>
+                                </span>
+                                <div class="hotel-reviews similar-hotel-review hotel_reviews2 hotel_reviews3">
+                                    <div class="hotel-reviews2">
+                                        <span class="review-txt">TripAdvisor Traveller Rating</span>
+                                        <img id="imgTripadv" data-bind="attr:{src:Trip_Rating}" />
+
+                                        @*<a target="_blank" data-bind="attr:{href:Trip_Review_Url}"*@ @*data-bind="attr:{value:Trip_Review}"*@<a href="#" id="TripReview"><span data-bind="text:Trip_Review"></span></a>
+
+
+
+
+                                        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        @*<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="TripReviewModal">
+                                                <div class="modal-dialog modal-sm">
+                                                    <div class="modal-content">
+                                                        <ul data-bind="foreach:Trip_Review_Url">
+                                                            <li>
+                                                                <span data-bind="text:text"></span>
+                                                            </li>
+                                                            <li>
+                                                                <img id="imgTripadv" data-bind="attr:{src:rating_image_url}" />
+                                                            </li>
+                                                            <li>
+                                                                <span data-bind="text:published_date"></span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>*@
+
+
+                                    </div>
+                                    @*<div class="review-total review-total2 review-total3"><span class="review-count">600</span> Reviews</div>*@
+                                </div>
+                                <div class="clear"></div>
+
+                                <div class="modal fade" id="TripReviewModal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content room-policies-box">
+                                            <div class="modal-header popup-header">
+
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title">TripAdvisor Reviews</h4>
+                                                <h5 class="site-title">Showing the 3 most recent reviews.</h5>
+
+                                            </div>
+                                            <div class="modal-body room-policy-reviews">
+
+                                                <ul data-bind="foreach:Trip_Review_Url">
+                                                    <li>
+                                                        <span class="Bold">User:</span>
+                                                        <!--ko with :user -->
+
+                                                        <span data-bind="text:username"></span>
+                                                        <!--/ko-->
+                                                    </li>
+                                                    <li>
+                                                        <span class="Bold">Review:</span>   <span data-bind="text:text"></span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="Bold" style="vertical-align:super;">Rating:</span>   <img id="imgTripadv" data-bind="attr:{src:rating_image_url}" />
+                                                    </li>
+
+                                                    <li>
+                                                        <span class="Bold">Date:</span> <span data-bind="text:published_date"></span>
+                                                    </li>
+                                                    <hr style="margin:10px 0;">
+                                                </ul>
+
+
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    </div>
+                                </div>
+                            </section>
+
+                            <div class="hotel_facilities">
+                                <ul data-bind="foreach:HotelFacilityListtop">
+                                    <li><img data-bind="attr:{src:Facility_Image_dir,title:FacilityName}" style="width:30px;height:30px"></li>
+                                </ul>
+
+                                <a id="fa" onclick="showfaicility()" data-bind="visible:FacilShow_activeFlag" title="See all facilities" class="see-all-facilities"><i></i>More..</a>
+                                <div class="modal fade" id="modelfacility" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content room-policies-box">
+                                            <div class="modal-header popup-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title">Facilities</h4>
+                                            </div>
+                                            <div class="modal-body room-policy-list">
+                                                <div class="room_policies_details">
+                                                    <ul data-bind="foreach:HotelFacilityList">
+                                                        <li><img data-bind="attr:{src:Facility_Image_dir,title:FacilityName}"><a data-bind="text:FacilityName"></a></li>
+
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="room-price room-price2">
+                                <h5>
+                                    <em>Starting &#64;</em>
+                                    @*<span class="new-price" style="font-size:17px;color:gray">&#8377; </span>
+                                    <span class="new-price" data-bind="attr:{id:Prop_Id}, text:VendorRate"></span>                                    
+                                    <br />*@
+                                    <span class="new-price">₹ </span>
+                                    <span class="new-price" data-bind="text:Price"></span><em>Per Room, Per Night</em>
+                                </h5>
+                            </div>
+                            <div class="room-price checkin-checkout">
+                                <ul class="booking_details">
+                                    <li>
+                                        <div class="checkin-details">
+                                            <h4 class="checkin-h4">Check In</h4>
+                                            <div class="week-details">
+                                                <span class="checkin-date" data-bind="text:Room_Checkin"> </span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="checkin-details">
+                                            <h4>Check Out</h4>
+                                            <div class="week-details week-details2">
+                                                <span class="checkin-date" data-bind="text:Room_Checkout"> </span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <div class="clear"></div>
+                                </ul>
+
+                            </div>
+
+                            <div class="room-details-btn" style="display:none"><a title="View Room Details" href="#" data-bind="click:ViewRoomDetails"><i class="book-now-icon"></i> View Room Details</a></div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </section>
+
+                    <!--facilities-->
+                    <!-- End facilities-->
+                    <!-- Room Rates -->
+                    <div class="room-rates" id="divRoomDetailsList">
+                        <div class="room-rates-heading">
+                            <h2>Room Rates</h2>
+                           
+                        </div>
+                        <div data-bind="foreach:RoomDetailsList">
+                            <section class="room-rate-list">
+                                <div class="room-rate-img">
+                                    <img data-bind="attr:{src:Room_Image,title:RoomName}" alt="" />
+                                </div>
+                                <div class="room-rate-details">
+                                    <div class="room-rate-desc">
+                                        <h3 style="cursor:pointer" data-bind="text:RoomName,click:RoomDetails"></h3>
+                                        @*<p data-bind="html:Room_Overview"></p>*@
+
+                                        <div class="hotel_facilities room_facilities">
+                                            <ul @*data-bind="foreach:RoomFacilityListtop"*@>
+                                                <!--ko foreach:RoomFacilityListtop-->
+                                                <li><img data-bind="attr:{src:Facility_Image_dir,title:FacilityName}" style="width:30px;height:30px"></li>
+                                                <!--/ko-->
+                                                <li id="More">  <a data-bind="click:RoomDetails" title="See all facilities" style="cursor:pointer"><i></i>More..</a></li>
+                                            </ul>
+
+                                        </div>
+                                        @*<a id="fajhj" onclick="showroomfaicility()" data-bind="visible:RoomFacilShow_activeFlag" title="See all facilities" class="see-all-facilities room-all-facilities"><i></i>Show all</a>*@
+                                        <div class="modal fade" id="modelroomfacility" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content room-policies-box">
+                                                    <div class="modal-header popup-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                        <h4 class="modal-title">Room Amenities</h4>
+                                                    </div>
+                                                    <div class="modal-body room-policy-list">
+                                                        <div class="room_policies_details hotel_facilities">
+                                                            <ul data-bind="foreach:RoomFacilityList">
+                                                                <li><img data-bind="attr:{src:Facility_Image_dir,title:FacilityName}"><a data-bind="text:FacilityName"></a></li>
+
+                                                            </ul>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content for  -->
+
+                                    </div>
+                                    <div class="room_price">
+                                        <h5>
+                                            <em>Room Price</em>
+                                            <span class="new-price">₹ </span><span class="new-price" data-bind="text:RoomPrice"></span><em>Per Room, Per Night</em>
+                                        </h5>
+                                    </div>
+
+                                    <div class="clear"></div>
+                                    <input hidden data-bind="value:Prop_Id" /><input hidden data-bind="value:Room_Id" />
+
+
+                                    <div class="book_now_btn">
+                                        <div class="room-features">
+                                            <ul>
+                                                <li><span class="room-policies" data-bind="css:limitRoom,text:RoomsLeft"></span></li>
+                                                @*<li><a href="#" data-bind="visible:PolicyShow_activeFlag,click:RoomPolicies" title="See Room Policies" style="color:#545454;"><i class="room-policies"></i> Room Policies</a></li>*@
+                                                <li><i class="no-refund"></i><span>Non Refundable</span></li>
+                                            </ul>
+                                            <ul>
+                                                <li><i class="breakfast"></i><span data-bind="text:inclusion"></span></li>
+                                                <li><i class="airport-pickup"></i><span data-bind="text:others"></span></li>
+
+                                            </ul>
+                                        </div>
+                                        <a href="#" class="Book-now Book-now2" data-bind="click:BookNow"><i class="book_now_icon"></i> Book Now</a>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                </div>
+                                <div class="clear"></div>
+                            </section>
+                        </div>
+                        <!-- Room Policies -->
+                        <div class="modal fade" id="modelPolicy" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content room-policies-box">
+                                    <div class="modal-header popup-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title">Room Policies</h4>
+                                    </div>
+                                    <div class="modal-body room-policy-list">
+                                        <div class="room_policies_details" data-bind="foreach:RoomPolicyList">
+                                            <h4 data-bind="text:Policy_Name"></h4>
+                                            <p data-bind="html:Policy_Descr" style="text-align:justify"></p>
+                                        </div>
+
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div>
+                        </div>
+                        <!-- End Room Policies-->
+                        <div class="modal fade" id="roomdt" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content room-policies-box">
+                                    <div class="modal-header popup-header">
+
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title">Room Details</h4>
+
+                                    </div>
+                                    <div class="modal-body room-policy-list">
+                                        <div class="room_policies_details hotel_facilities hotel_room_facilities">
+                                            @*<h2 id="rmg" class="float-lt">Room Image</h2><br />*@
+                                            @*<ul data-bind="foreach:RoomDTListImage">
+                                                    <li><img data-bind="attr:{src:Image_dir}"></li>
+                                                </ul>*@
+                                            <h2 id="rmf">Room Amenities</h2>
+                                            <ul class="facilities_list">
+
+                                                <!--ko foreach:RoomDTList-->
+                                                <li>
+                                                    @*<img data-bind="attr:{src:Facility_Image_dir,title:Facility_Name}">*@
+                                                <a data-bind="text:Facility_Name"></a>
+                                            </li>
+                                            <!--/ko-->
+
+
+
+                                            <div class="clear"> </div>
+                                        </ul>
+                                        <h2 id="inc">Inclusions</h2>
+                                        <div class="book_now_btn">
+                                            <div>
+                                                <ul data-bind="foreach:RoomDTListother">
+
+
+                                                    <li><i class="breakfast"></i><span data-bind="text:inclusion"></span></li>
+                                                    <li><i class="airport-pickup"></i><span data-bind="text:others"></span></li>
+                                                    <li><i class="no-refund"></i><span>Non Refundable</span></li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="clear"></div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            @*<div class="similar-hotels">
+                    <h2>Similar Hotels</h2>
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <div class="similar-hotel-img">
+                                    <img src="~/Content/Consumer/images/similar-hotel-img.jpg" title="Hotel Name" alt="" />
+                                </div>
+                                <div class="similar-hotel-desc">
+                                    <h3>Hotel Empire Cenntral</h3>
+                                    <h4>Bangalore, Karnataka</h4>
+                                    <section>
+                                        <div class="left-block">
+                                            <span class="similar-hotel-star-rate">
+                                                <label class="s1"></label>
+                                                <label class="s1"></label>
+                                                <label class="s1"></label>
+                                                <label class="s0"></label>
+                                                <label class="s0"></label>
+                                            </span>
+                                            <div class="hotel-reviews similar-hotel-review">
+                                                <ul>
+                                                    <li class="review_icon"></li>
+                                                    <li></li>
+                                                    <li></li>
+                                                    <li></li>
+                                                    <li></li>
+                                                    <li></li>
+                                                </ul>
+                                                <div class="review-total review-total2"><span class="review-count">600</span> Reviews</div>
+                                            </div>
+                                        </div>
+                                        <div class="right-block">
+                                            <h5><em>Starting </em><span class="new-price">₹ 2100</span><em>1 Room, 1 Night</em></h5>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </section>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <div class="similar-hotel-img">
+                                    <img src="~/Content/Consumer/images/similar-hotel-img.jpg" title="Hotel Name" alt="" />
+                                </div>
+                                <div class="similar-hotel-desc">
+                                    <h3>Hotel Empire Cenntral</h3>
+                                    <h4>Bangalore, Karnataka</h4>
+                                    <section>
+                                        <div class="left-block">
+                                            <span class="similar-hotel-star-rate">
+                                                <label class="s1"></label>
+                                                <label class="s1"></label>
+                                                <label class="s1"></label>
+                                                <label class="s0"></label>
+                                                <label class="s0"></label>
+                                            </span>
+                                            <div class="hotel-reviews similar-hotel-review">
+                                                <ul>
+                                                    <li class="review_icon"></li>
+                                                    <li></li>
+                                                    <li></li>
+                                                    <li></li>
+                                                    <li></li>
+                                                    <li></li>
+                                                </ul>
+                                                <div class="review-total review-total2"><span class="review-count">600</span> Reviews</div>
+                                            </div>
+                                        </div>
+                                        <div class="right-block">
+                                            <h5><em>Starting </em><span class="new-price">₹ 2100</span><em>1 Room, 1 Night</em></h5>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </section>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <div class="similar-hotel-img">
+                                    <img src="~/Content/Consumer/images/similar-hotel-img.jpg" title="Hotel Name" alt="" />
+                                </div>
+                                <div class="similar-hotel-desc">
+                                    <h3>Hotel Empire Cenntral</h3>
+                                    <h4>Bangalore, Karnataka</h4>
+                                    <section>
+                                        <div class="left-block">
+                                            <span class="similar-hotel-star-rate">
+                                                <label class="s1"></label>
+                                                <label class="s1"></label>
+                                                <label class="s1"></label>
+                                                <label class="s0"></label>
+                                                <label class="s0"></label>
+                                            </span>
+                                            <div class="hotel-reviews similar-hotel-review">
+                                                <ul>
+                                                    <li class="review_icon"></li>
+                                                    <li></li>
+                                                    <li></li>
+                                                    <li></li>
+                                                    <li></li>
+                                                    <li></li>
+                                                </ul>
+                                                <div class="review-total review-total2"><span class="review-count">600</span> Reviews</div>
+                                            </div>
+                                        </div>
+                                        <div class="right-block">
+                                            <h5><em>Starting </em><span class="new-price">₹ 2100</span><em>1 Room, 1 Night</em></h5>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </section>
+                                </div>
+                            </a>
+                        </li>
+
+
+                        <li class="see-more"><a href="#">See More</a></li>
+                    </ul>
+                </div>*@
+            <div class="sidebar-right">
+                <div class="add-banner">
+                    <a href="#"><img src="/Content/Consumer/images/deal-of-the-day.jpg" title="Add Image" alt=""></a>
+                </div>
+                <div class="add-banner">
+                    <a href="#"><img src="/Content/Consumer/images/collection-add.jpg" title="Add Image" alt=""></a>
+                </div>
+
+            </div>
+
+            <div class="clear"></div>
+        </section>
+
+        <!-- Overview -->
+         
+        <div class="room-rates hotel-overview" id="divHotelOverView" data-bind="visible:!IsHidden()">
+            <div class="room-rates-heading">
+                <h3>Overview</h3>
+            </div>
+            <p data-bind="html:Hotel_Overview"></p>
+            @*<p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
+                <ul>
+                    <li>Get rooms for up to 35% less than anywhere else</li>
+                    <li>Choose from four and five star hotels in 250 locations</li>
+                    <li>Know everything about the hotel before you book, except the hotel name</li>
+                </ul>*@
+        </div>
+
+        <section class="hotel-policeis-reviews" data-bind="visible:!IsHidden()">
+
+
+            <div class="room-rates-heading">
+                <h3>Hotel Policies</h3>
+            </div>
+            <div class="invoice_details" id="divHotelPoliciesList" data-bind="foreach:HotelPoliciesList">
+                <div class="inovoice-policeis hotel-policeis">
+                    <h4 data-bind="text:Policy_Name"></h4>
+                    <p data-bind="html:Policy_Descr" style="text-align:justify"></p>
+                </div>
+            </div>
+
+            @*<div class="col-md-4">
+                    <div class="trip-advisor-reviews" style="display:none">
+                        <div class="adivisor-heading">
+                            <h3><i class="advisor-icon"></i> <span>Reviews By Tripadvisor</span></h3>
+                            <p><span>150</span> Reviews</p>
+                            <div class="clear"></div>
+                        </div>
+                        <ul>
+                            <li>
+                                <div class="hotel-reviews tripadvisior-review">
+                                    <ul class="hotel-reviews2">
+                                        <li class="review_icon"></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li class="inactive"></li>
+                                    </ul>
+                                    <div class="review-total" style="margin-bottom:1px;"><span class="review-count">4.0</span> /5</div>
+                                    <div class="more-btn"><a href="#">More...</a></div>
+                                </div>
+                                <h4>Satisfying experience</h4>
+                                <p>The location is a little isolated. The look and feel of the hotel is fantastic. Food from the hotel restaurant is below average. Rooms are clean and in good condition. Service is satisfying. Behavior ... </p>
+                                <div class="client-desc">
+                                    <p>By SaradinduNaskar on 17 October,2014</p>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="hotel-reviews tripadvisior-review">
+                                    <ul class="hotel-reviews2">
+                                        <li class="review_icon"></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li class="inactive"></li>
+                                    </ul>
+                                    <div class="review-total" style="margin-bottom:1px;"><span class="review-count">4.0</span> /5</div>
+                                    <div class="more-btn"><a href="#">More...</a></div>
+                                </div>
+                                <h4>Satisfying experience</h4>
+                                <p>The location is a little isolated. The look and feel of the hotel is fantastic. Food from the hotel restaurant is below average. Rooms are clean and in good condition. Service is satisfying. Behavior ... </p>
+                                <div class="client-desc">
+                                    <p>By SaradinduNaskar on 17 October,2014</p>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="more-btn"><a href="#">View All</a></div>
+                                <div class="clear"></div>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>*@
+            <div class="room-rates-heading">
+                <h3>Hotel Location</h3>
+            </div>
+            <div class="hotel-map" id="divIFrame">
+                <div @*data-bind="click:GetMapSrcclick" *@ id="map_canvas" class="hotel-location"></div>
+            </div>
+        </section>
+     
+    </div>
+</div>
+
+</div>
+
+
+@section scripts{
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6v5-2uaq_wusHDktM9ILcqIrlPtnZgEk&sensor=false"></script>
+    <script type="text/javascript">
+        $(window).load(function () {
+            $('#carousel').flexslider({
+                animation: "slide",
+                controlNav: false,
+                animationLoop: false,
+                slideshow: true,
+                itemWidth: 100,
+                itemMargin: 5,
+                asNavFor: '#slider'
+            });
+
+            $('#slider').flexslider({
+                animation: "slide",
+                controlNav: false,
+                animationLoop: false,
+                slideshow: true,
+                sync: "#carousel"
+            });
+        });
+    </script>
+    <link href="~/Content/Consumer/css/jquery.fancybox.css" rel="stylesheet" />
+    <script src="~/Content/Consumer/js/jquery.fancybox.pack.js"></script>
+    <script src="~/Content/Consumer/js/jquery.fancybox-thumbs.js"></script>
+    <script src="~/Content/Consumer/js/jquery.mousewheel.pack.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".fancybox-thumb").fancybox({
+                prevEffect: 'fade',
+                nextEffect: 'fade',
+                padding: 5,
+
+                helpers: {
+                    title: false,
+                    thumbs: {
+                        width: 50,
+                        height: 50
+                    }
+                }
+            });
+        });
+    </script>
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script>
+
+        $("#formSearch").validate({
+            messages: {
+                Location: "Please Select Location",
+                RoomCheckIn: "Check In Date Required",
+                RoomCheckOut: "Check Out Date Required",
+                NoOfRoom: "Should be Between 1 to 5",
+            }
+        });
+
+    </script>
+
+    <script src="~/Scripts/Consumer/Normal_HotelDetails.js"></script>
+
+    <script type="text/javascript">
+
+        //$(function () {
+        //    $('#divCheckIn').datetimepicker({
+        //        pickTime: false,
+
+
+        //    });
+        //    $('#divCheckOut').datetimepicker({
+        //        pickTime: false,
+
+
+        //    });
+        //});
+
+    </script>
+}
+<style>
+    .error {
+        font-size: 13px;
+        color: #e9452a;
+    }
+
+    #map_canvas {
+        height: 100%;
+    }
+</style>
+

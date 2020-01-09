@@ -1,0 +1,334 @@
+﻿@model App.Web.ViewModels.VendorViewModel
+
+@{
+    ViewBag.Title = "Bind";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .manage-property-btn {
+     padding:0;
+    }
+     .manage-property-btn li{
+      display: inline-block;
+    }
+    .manage-property-btn  li a{
+    font-size: 14px;
+    background:#888888;
+    color: #FFF;
+    padding:7px 15px;
+    display: block;
+    border-bottom:2px solid #767676;
+    text-decoration: none;
+    border-radius:2px;
+    transition:all 0.5s ease-in-out;
+    }
+    .manage-property-btn li a:hover {
+       background: #03639E;
+       border-bottom: 2px solid #035486;
+    }
+    .manage-property-btn li.active a {
+       background:#0E7EC3;
+       border-bottom:2px solid #0767A1;
+     
+    }
+        .manage-property-btn li a:active {
+          position:relative;
+          bottom:-2px;
+        }
+
+
+    .nav-wizard {
+     margin-bottom:15px;
+    }
+ .nav-pills.nav-wizard > li {
+  position: relative;
+  overflow: visible;
+  border-right: 15px solid #fff;
+  border-left: 15px solid #fff;
+}
+.nav-pills.nav-wizard > li:first-child {
+  border-left: 0;
+}
+.nav-pills.nav-wizard > li:first-child a {
+  border-radius: 5px 0 0 5px;
+}
+.nav-pills.nav-wizard > li:last-child {
+  border-right: 0;
+}
+.nav-pills.nav-wizard > li:last-child a {
+  border-radius: 0 5px 5px 0;
+}
+.nav-pills.nav-wizard > li a {
+  border-radius: 0;
+  background-color: #eee;
+  font-size:14px;
+}
+.nav-pills.nav-wizard > li .nav-arrow {
+  position: absolute;
+  top: 0px;
+  right: -20px;
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: 20px 0 20px 20px;
+  border-color: transparent transparent transparent #eee;
+  z-index: 150;
+}
+.nav-pills.nav-wizard > li .nav-wedge {
+  position: absolute;
+  top: 0px;
+  left: -20px;
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: 20px 0 20px 20px;
+  border-color: #eee #eee #eee transparent;
+  z-index: 150;
+}
+.nav-pills.nav-wizard > li:hover .nav-arrow {
+  border-color: transparent transparent transparent #aaa;
+}
+.nav-pills.nav-wizard > li:hover .nav-wedge {
+  border-color: #aaa #aaa #aaa transparent;
+}
+.nav-pills.nav-wizard > li:hover a {
+  background-color: #aaa;
+  color: #fff;
+}
+.nav-pills.nav-wizard > li.active .nav-arrow {
+  border-color: transparent transparent transparent #428bca;
+}
+.nav-pills.nav-wizard > li.active .nav-wedge {
+  border-color: #428bca #428bca #428bca transparent;
+}
+.nav-pills.nav-wizard > li.active a {
+  background-color: #428bca;
+}
+
+
+
+</style>
+
+
+<script src="~/Scripts/jquery.storage.js"></script>
+
+<form class="form-horizontal">
+
+    <ul class="nav nav-pills nav-wizard">
+        <li class="active"><a href="/Vendor/Bind" >Vendor Group</a><div class="nav-arrow"></div></li>
+        <li><div class="nav-wedge"></div><a href="/Vendor/PropertyPage" >Property Details</a><div class="nav-arrow"></div></li>
+        @*<li><div class="nav-wedge"></div><a href="/Vendor/PropertyRooms">Room Details</a></li>*@
+    </ul>
+
+    @*<ul class="manage-property-btn">
+        <li> <a href="#">Vendor Profile</a></li>
+        <li class="active"> <a href="#">Manage Properties</a></li>
+        <li> <a href="#">Manage Rooms</a></li>
+    </ul>*@
+    
+    <ul id="breadcrumbs" class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a href="#">Home</a>
+        </li>
+
+       
+        <li>
+
+           Vendor Group
+        </li>
+       
+    </ul>
+
+
+
+
+
+
+    <div class="widget box">
+        <div class="widget-header">
+            <h4><i class="icon-reorder"></i>Group Profile</h4>
+         
+        </div>
+        <div class="widget-content">
+            <form class="form-horizontal row-border" action="#">
+                <div id="divVendorProfile" class="row" data-bind="foreach: Vendors">
+                    <input id="btnCreate" type="button" value="Edit" style="float:right;margin: -43px 8px -38px;" data-bind="click:editProperty" class="btn btn-sm btn-primary" />
+                    <div class="span5">
+
+                        <div hidden class="form-group">
+                            <label class="col-md-3 control-label">Vendor Id</label>
+                            <div class="col-md-9">
+                                <input id="Vendor_Id" class="form-control input-width-xlarge" type="text" data-bind='value: Vndr_Id' />
+                            </div>
+                        </div>
+                        @*<div class="form-group">
+                            <label class="col-md-3 control-label">Profile Image</label>
+                            <div class="col-md-9">
+
+                                <img  style="width:150px;height:150px;display:none" data-bind="attr : { src:ProfilePic }" />
+                            </div>
+
+                        </div>*@
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Group / Hotel Name<span class="qs">? <span class="hint above">Group Name!</span></span></label>
+                            <div class="col-md-9">
+                                <input readonly="readonly" id="Vendor_Id" class="form-control input-width-xlarge" type="text" data-bind='value: Vndr_Name' />
+                            </div>
+                        </div>
+                        <div  class="form-group">
+                            <label class="col-md-3 control-label">Cin No.<span class="qs">? <span class="hint above">Company Identification Number!</span></span></label>
+                            <div class="col-md-9">
+                                <input readonly="readonly" id="Vendor_Id" class="form-control input-width-xlarge" type="text" data-bind='value: Vndr_Cinno' />
+                            </div>
+                        </div>
+                 
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Street</label>
+                            <div class="col-md-9">
+                                <textarea readonly="readonly" id="Vendor_Id" class="form-control input-width-xlarge" data-bind='value: Vndr_Addr1'></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Location<b style="color:red">*</b></label>
+                            <div class="col-md-9">
+                                <input type="hidden" data-bind="value:City_Id" id="hdnLocationId" />
+                                <input type="text" readonly id="txtLocation" data-bind="value:City_Area" class="form-control input-width-xlarge">
+                              
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">City<b style="color:red">*</b></label>
+                            <div class="col-md-9">
+                                <input type="text" readonly id="txtCities" data-bind="value:City_Name" class="form-control input-width-xlarge">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Pin Code<b style="color:red">*</b></label>
+                            <div class="col-md-9">
+                                <input type="text" readonly id="txtPincode" data-bind="value:Pincode" class="form-control input-width-xlarge">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">State<b style="color:red">*</b></label>
+                            <div class="col-md-9">
+                                <input type="text" readonly id="txtState" data-bind="value:State_Name" class="form-control input-width-xlarge">
+                            </div>
+                        </div>
+                        <div hidden class="form-group">
+                            <label class="col-md-3 control-label">GPS Position</label>
+                            <div class="col-md-9">
+                                <textarea readonly="readonly" id="Vendor_Id" class="form-control input-width-xlarge" data-bind='value: Vndr_Gps_Pos'></textarea>
+                            </div>
+                        </div>
+
+
+
+
+                        <div hidden class="form-group">
+                            <label class="col-md-3 control-label">OverView</label>
+                            <div class="col-md-9">
+                                <input readonly="readonly" id="Vendor_Id" class="form-control input-width-xlarge" type="text" data-bind='value: Vndr_Overview' />
+                            </div>
+                        </div>
+                        <div class="widget-header" style="width:99%;margin-left:0.5%;">
+                            <h4><i class="icon-reorder"></i> <b> Admin Contact  Information</b></h4>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Contact Person</label>
+                            <div class="col-md-9">
+
+                                <input readonly="readonly" id="Vendor_Id" class="form-control input-width-xlarge" type="text" data-bind='value: Vndr_Contact_person' />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Contact Number</label>
+                            <div class="col-md-9">
+
+                                <input id="Vendor_Id" readonly="readonly" class="form-control input-width-xlarge" type="text" data-bind='value: Vndr_Contact_Nos' />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Mobile Number</label>
+                            <div class="col-md-9">
+                                <input id="Vndr_Contact_person" readonly="readonly" class="form-control input-width-xlarge" type="text" data-bind="value:Vndr_Contact_Mobile" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Designation</label>
+                            <div class="col-md-9">
+                                <input id="Vndr_Contact_person" readonly="readonly" class="form-control input-width-xlarge" type="text" data-bind="value:Vndr_Contact_Designation" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Email</label>
+                            <div class="col-md-9">
+
+                                <input id="Vendor_Id" readonly="readonly" class="form-control input-width-xlarge" type="text" data-bind='value: Vndr_Contact_Email' />
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="widget-header" style="width:99%;margin-left:0.5%;">
+                        <h4><i class="icon-reorder"></i> <b> Alternate Contact Information</b></h4>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Contact Person</label>
+                        <div class="col-md-9">
+
+                            <input id="Vendor_Id" readonly="readonly" class="form-control input-width-xlarge" type="text" data-bind='value: Vndr_Alternate_person' />
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Contact Number</label>
+                        <div class="col-md-9">
+
+                            <input id="Vendor_Id" readonly="readonly" class="form-control input-width-xlarge" type="text" data-bind='value: Vndr_Alternate_Nos' />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Mobile Number</label>
+                        <div class="col-md-9">
+                            <input id="Vndr_Contact_person" readonly="readonly" class="form-control input-width-xlarge" type="text" data-bind="value:Vndr_Alternate_Mobile" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Designation</label>
+                        <div class="col-md-9">
+                            <input id="Vndr_Contact_person" readonly="readonly" class="form-control input-width-xlarge" type="text" data-bind="value:Vndr_Alternate_Designation" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Email</label>
+                        <div class="col-md-9">
+
+                            <input id="Vendor_Id" readonly="readonly" class="form-control input-width-xlarge" type="text" data-bind='value: Vndr_Alternate_Email' />
+                        </div>
+                    </div>
+
+
+                    <div style="width:99%;margin-left:0.5%;" class="modal-footer">
+                        <input id="btnCreate" type="button" value="Edit" data-bind="click:editProperty" class="btn btn-sm btn-primary" />
+                        @*<input id="btnReset" type="button" value="RESET" data-bind="click: ClearVendor" class="btn btn-lg btn-primary" />*@
+                        @*@Html.ActionLink("Back to List", "Bind", "User")*@
+
+                    </div>
+
+
+                </div>
+        </div>
+    </div>
+
+
+
+</form>
+<script src="~/Scripts/Master.js"></script>
+<script src="@Url.Content("~/Scripts/Vendor/Bind.js")" type="text/javascript"></script>
+
+

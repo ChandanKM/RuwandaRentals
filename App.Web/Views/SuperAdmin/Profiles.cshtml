@@ -1,0 +1,332 @@
+﻿@{
+    ViewBag.Title = "Profiles";
+    Layout = "~/Views/Shared/_SuperadminLayout.cshtml";
+}
+
+@model App.Web.ViewModels.PropertyViewModel
+
+@{
+    ViewBag.Title = "LMK Maintenance";
+}
+<script src="~/Scripts/jquery.storage.js"></script>
+<link href="~/Content/error-notifier.css" rel="stylesheet" />
+
+@Scripts.Render("~/Scripts/jqueryNotification.js")
+@Scripts.Render("~/Scripts/jquery.blockUI.js")
+@Scripts.Render("~/Scripts/AppCommonScript.js")
+
+<ul id="breadcrumbs" class="breadcrumb">
+    <li>
+        <i class="icon-home"></i>
+        <a href="#">Home</a>
+    </li>
+
+    <li id="VendorLinkBlock" class="current">
+        <a id="Vgroup" href="~/SuperAdmin/Profiles" title="">Super Admin</a>
+    </li>
+    <li id="UserName" data-bind="text:User_name">
+        
+    </li>
+    @*<li id="UsrType">
+
+    </li>*@
+
+</ul>
+<div class="row">
+    
+    <div class="col-md-12">
+        <div class="widget box">
+            <div class="widget-content">
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <div class="tabbable tabbable-custom">
+                            <ul class="nav nav-tabs">
+
+                                <li id="Tab1" onclick="HideCreate()" class="active"><a href="#tab_1_1" data-toggle="tab">Manage Admin's</a></li>
+
+                                @*<li id="Tab2"><a href="#tab_1_2" data-toggle="tab">Parameters</a></li>
+                                    <li id="Tab3"><a href="#tab_1_3" data-toggle="tab">Permission</a></li>*@
+
+                            </ul>
+                            <div class="tab-content" id="tab-content">
+                                <div class="tab-pane active" id="tab_1_1">
+
+                                    <div style="display:none" class="widget box" id="divCreateProfile">
+                                        <div class="widget-header">
+                                            <h4><i class="icon-reorder"></i> Create Admin Profile</h4>
+                                        </div>
+                                        <div class="widget-content">
+                                            <input type="hidden" data-bind="value:User_Id" />
+                                            <div class="form-group" id="divAdmin">
+                                                <label class="col-md-3 control-label">User Type<span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                                    <select id="userType" class="form-control input-width-xlarge" data-bind="options: TypesList, value: Selected_Type,optionsText: 'Code' ,optionsValue:'Authority_Id' "></select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" id="divProperty">
+                                                <label class="col-md-3 control-label">Select Property<span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                                    <select id="userType" class="form-control input-width-xlarge" data-bind="options: PropList, value: Selected_Prop,optionsText: 'PropName' ,optionsValue:'PropId' "></select>
+                                                </div>
+                                            </div>
+                                            <br /><br />
+
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">First Name <span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                                    <input id="UserType" class="form-control input-width-xlarge" type="text" data-bind="value: Firstname" />
+                                                </div>
+                                            </div><br /><br />
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Last Name <span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                                    <input id="UserType" class="form-control input-width-xlarge" type="text" data-bind="value: Lastname" />
+                                                </div>
+                                            </div><br /><br />
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Email Address<span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                                    <input id="EMAIL" class="form-control input-width-xlarge" type="text" data-bind="value: User_Name" />
+                                                </div>
+                                            </div><br /><br />
+                                            <div id="DivPwd" class="form-group">
+                                                <label class="col-md-3 control-label">Password<span class="required">*</span></label>
+                                                <div class="col-md-9">
+                                                    <input id="UserType" class="form-control input-width-xlarge" type="password" data-bind="value: Pswd" />
+                                                </div>
+                                            </div>
+                                            <br /><br />
+                                            <div class="modal-footer">
+                                                <div class="control-group">
+                                                    @*<input id="btnReset" type="button" value="Reset" data-bind="click: ResetForm" class="btn btn-lg btn-primary" />*@
+
+                                                    <input id="btnSave" type="button" value="Save" data-bind="click: SaveUserProfile" class="btn btn-lg btn-primary" />
+                                                    <input id="btnCancel" type="button" value="Cancel" data-bind="click: Cancel" class="btn btn-lg btn-primary" />
+                                                    <input id="btnUpdate" type="button" style="display:none" value="Update" data-bind="click: UpdateProfile" class="btn btn-lg btn-primary" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a id="btnCreate" style="margin-left: 93%;
+margin-top: -3%;" onclick="Create()" class="btn btn-success">Create</a>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="widget box">
+                                                <div class="widget-header">
+                                                    <h4><i class="icon-reorder"></i>Manage Admin</h4>
+                                                    <div class="toolbar no-padding">
+
+                                                    </div>
+                                                    <div class="widget-content no-padding">
+                                                        <table class="table table-striped table-bordered table-hover table-checkable ProfileGrid">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="display:none">
+                                                                        Id
+                                                                    </th>
+                                                                    <th style="display:none">
+                                                                    </th>
+
+                                                                    <th style="text-align:center">
+                                                                        Name
+                                                                    </th>
+                                                                    <th style="text-align:center">Email </th>
+                                                                    @*<th style="text-align:center">Property Name </th>*@
+                                                                    <th style="text-align:center">Options</th>
+                                                                    <th hidden></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody style="text-align:center" data-bind="foreach: UserProfileList" id="divUserProfileGrid">
+                                                                <tr>
+                                                                    <td style="display:none" data-bind="text: User_Id"></td>
+                                                                    <td style="display:none" data-bind="text: Authority_Id"></td>
+                                                                    <td style="display:none" data-bind="text: Usertype_Id"></td>
+                                                                    <td data-bind="text: FullName"></td>
+                                                                    <td data-bind="text: User_Name"></td>
+                                                                    @*<td data-bind="text: PropertyName"></td>*@
+                                                                    <td>
+                                                                        <a href="#" data-bind="click:Permission">
+                                                                            <img src="~/img/Splitted_Images/permission_icon.png" title="Permission" />
+                                                                        </a>
+                                                                        <a href="#" data-bind="click:Edit">
+                                                                            <img src="~/img/Splitted_Images/Edit%20Button.png" title="Edit" />
+                                                                        </a>
+
+                                                                        <a href="#" data-bind="click:Suspend">
+                                                                            <img src="~/img/Splitted_Images/disable_button.png" title="Suspend" />
+                                                                        </a>
+
+                                                                        <a href="#" data-bind="visible:Param_flag,click:Param">
+                                                                            <img src="~/img/Splitted_Images/parameter%20icon.png" title="Parameters" />
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab_1_2">
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="widget box">
+                                                <div class="widget-header">
+                                                    <h4><i class="icon-reorder"></i>System Parameter Settings</h4>
+                                                    <div class="toolbar no-padding">
+                                                        <div class="btn-group">
+                                                            <span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="widget-content no-padding">
+                                                    <table id="divParamGrid" class="table table-striped table-bordered table-hover table-checkable ParamGrid">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="display:none">
+                                                                    Id
+                                                                </th>
+                                                                <th>
+                                                                    Code
+                                                                </th>
+                                                                <th>
+                                                                    Description
+                                                                </th>
+                                                                <th> Type</th>
+
+                                                                <th>Value </th>
+                                                                <th style="display:none" id="param_col_permi">Permission </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody data-bind="foreach: ParamList">
+                                                            <tr>
+                                                                <td style="display:none" data-bind="text: Id"></td>
+                                                                <td data-bind="text: Vparam_Code"></td>
+                                                                <td>
+                                                                    <span data-bind="text: Vparam_Descr"></span>
+                                                                    <a id="btnView" data-bind="visible:ViewBtnFlag" data-toggle="modal" href="#myModalPolicy" style="margin-left: 79.2%;margin-top: -6%;" class="btn btn-success btn-xs">Description</a>
+                                                                </td>
+
+                                                                <td style="width:150px"><select data-bind="enable:Active_flag,options: PramType, value: Vparm_Type,event:{change:selectionChanged}"></select></td>
+                                                                <td style="width:150px">
+                                                                    <div data-bind="visible:Active_flag">
+                                                                        <span data-bind="enable:Value_ModifyFlag,visible: !change(), text: Vparam_Val, click: editParamValue"></span>
+                                                                        <input id="VpValues" style="width:75px;height:22px"   onkeypress="return isNumber(event)" data-bind="enable:Value_ModifyFlag,visible: change, value: Vparam_Val,  hasFocus: change,event:{change:SaveValue}" />
+                                                                    </div>
+                                                                    <div data-bind="visible:!Active_flag()"><span data-bind=" text: Vparam_Val"></span></div>
+                                                                </td>
+                                                                <td data-bind="visible:Param_permission_flag"><select onchange="" data-bind="options: Permissionselection,optionsText:'ShoweText', optionsValue:'ActualValue',value: Permission_flag,event:{change:permissionChanged}"></select></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="modal fade" style="margin-left: 29%;" id="myModalPolicy">
+                                        <div class="modal-dialog" style="width:80%;">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title">Update Hidden Gems description</h4>
+                                                </div><form id="ImgUpload" data-bind="foreach: ParamEdit">
+                                                    <div class="modal-body">
+
+
+
+                                                        <div class="form-group">
+                                                            <label class="col-md-3 control-label">Description</label>
+                                                            <div class="col-md-9">
+                                                                <input id="descr" class="form-control input-width-xlarge" type="text" data-bind="value:P_Descr" />
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+
+                                                        <input type="submit" data-dismiss="modal" data-bind="click:editParamHiddenGems" style="width: 71px;" value="Submit" class="btn btn-lg btn-info" />
+                                                        <button id="btnModelClose" type="button" class="btn btn-lg btn-primary" data-dismiss="modal">Close</button>
+
+                                                    </div>
+                                                </form>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab_1_3">
+                                    <label id="UserName"></label>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="widget box">
+                                                <div class="widget-header">
+                                                    <h4><i class="icon-reorder"></i>Manage Permission</h4>
+                                                    <div class="toolbar no-padding">
+                                                        <div class="btn-group">
+                                                            <span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="widget-content no-padding">
+                                                    <table class="table table-striped table-bordered table-hover table-checkable PermissionGrid">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="display:none">
+                                                                    Id
+                                                                </th>
+                                                                @*<th>
+                                                                    Url
+                                                                </th>*@
+                                                                <th>
+                                                                    Page
+                                                                </th>
+                                                                <th style="text-align:center">
+                                                                    Options
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody data-bind="foreach:PageList" id="divPermissionGrid">
+                                                            <tr>
+                                                                <td style="display:none"><span data-bind="text: Page_Id"></span><span data-bind="text: User_Id"></span></td>
+                                                                @*<td data-bind="text: Url"></td>*@
+                                                                <td data-bind="text: Page"></td>
+                                                                <td style="text-align:center">
+
+                                                                    <a href="#" data-bind="click:Update">
+                                                                        <img data-bind="attr:{src:StatusImage}" />
+                                                                    </a>
+
+                                                                </td>
+
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="@Url.Content("~/Scripts/SuperAdminUserProfiles/userprofileParamPermission.js")" type="text/javascript"></script>
+
+<script src="~/Scripts/SuperAdminMaster.js"></script>

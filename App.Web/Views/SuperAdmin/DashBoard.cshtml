@@ -1,0 +1,399 @@
+﻿
+@{
+    ViewBag.Title = "DashBoard";
+    Layout = "~/Views/Shared/_SuperadminLayout.cshtml";
+}
+
+<!-- Page specific plugins -->
+<!-- Charts -->
+<!--[if lt IE 9]>
+    <script type="text/javascript" src="plugins/flot/excanvas.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="~/plugins/sparkline/jquery.sparkline.min.js"></script>
+<script type="text/javascript" src="~/plugins/flot/jquery.flot.min.js"></script>
+<script type="text/javascript" src="~/plugins/flot/jquery.flot.tooltip.min.js"></script>
+<script type="text/javascript" src="~/plugins/flot/jquery.flot.resize.min.js"></script>
+<script type="text/javascript" src="~/plugins/flot/jquery.flot.time.min.js"></script>
+<script type="text/javascript" src="~/plugins/flot/jquery.flot.orderBars.min.js"></script>
+<script type="text/javascript" src="~/plugins/flot/jquery.flot.pie.min.js"></script>
+<script type="text/javascript" src="~/plugins/flot/jquery.flot.selection.min.js"></script>
+<script type="text/javascript" src="~/plugins/flot/jquery.flot.growraf.min.js"></script>
+<script type="text/javascript" src="~/plugins/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+@*<script type="text/javascript" src="~/plugins/daterangepicker/moment.min.js"></script>
+<script type="text/javascript" src="~/plugins/daterangepicker/daterangepicker.js"></script>*@
+@*<script type="text/javascript" src="~/plugins/blockui/jquery.blockUI.min.js"></script>*@
+
+<!-- App -->
+<script type="text/javascript" src="~/Content/assets/js/app.js"></script>
+<script type="text/javascript" src="~/Content/assets/js/plugins.js"></script>
+<script type="text/javascript" src="~/Content/assets/js/plugins.form-components.js"></script>
+
+
+<!-- Demo JS -->
+
+@*<script type="text/javascript" src="~/Content/assets/js/custom.js"></script>*@
+<script type="text/javascript" src="~/Content/assets/js/demo/charts.js"></script>
+@*<script type="text/javascript" src="~/Content/assets/js/demo/SuperAdminCharts/chart_bars_horizontal.js"></script>*@
+<script type="text/javascript" src="~/Content/assets/js/demo/SuperAdminCharts/chart_bars_vertical.js"></script>
+<script type="text/javascript" src="~/Content/assets/js/demo/SuperAdminCharts/chart_donut.js"></script>
+<script type="text/javascript" src="~/Content/assets/js/demo/SuperAdminCharts/chart_filled_blue.js"></script>
+<script type="text/javascript" src="~/Content/assets/js/demo/SuperAdminCharts/chart_filled_green.js"></script>
+<script type="text/javascript" src="~/Content/assets/js/demo/SuperAdminCharts/chart_filled_red.js"></script>
+<script type="text/javascript" src="~/Content/assets/js/demo/SuperAdminCharts/chart_pie.js"></script>
+@*<script type="text/javascript" src="~/Content/assets/js/demo/SuperAdminCharts/chart_multiple.js"></script>
+  
+    <script type="text/javascript" src="~/Content/assets/js/demo/SuperAdminCharts/chart_simple.js"></script>
+    <script type="text/javascript" src="~/Content/assets/js/demo/SuperAdminCharts/chart_updating.js"></script>
+    <script type="text/javascript" src="~/Content/assets/js/demo/SuperAdminCharts/chart_widget.js"></script>
+    <script type="text/javascript" src="~/Content/assets/js/demo/SuperAdminCharts/chart_selection_zooming.js"></script>*@
+
+
+    <!-- Breadcrumbs line -->
+    <div class="crumbs">
+        <ul id="breadcrumbs" class="breadcrumb">
+            <li>
+                <i class="icon-home"></i>
+                <a href="#">Dashboard</a>
+            </li>
+
+        </ul>
+
+
+    </div>
+    <!-- /Breadcrumbs line -->
+    <!--=== Page Header ===-->
+    <div class="page-header">
+
+
+        <!-- Page Stats -->
+        <!-- /Page Stats -->
+    </div>
+    <!-- /Page Header -->
+    <!--=== Page Content ===-->
+    <!--=== Widget Chart ===-->
+    <div class="row" style="display:none;">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-chart">
+                    <!-- Possible colors: widget-chart-blue, widget-chart-blueLight (standard), widget-chart-green, widget-chart-red, widget-chart-yellow, widget-chart-orange, widget-chart-purple, widget-chart-gray -->
+                    <div id="chart_widget" class="chart chart-medium"></div>
+                </div>
+                <div class="widget-content">
+                    <ul class="stats">
+                        <!-- .no-dividers -->
+                        <li>
+                            <strong>4,853</strong>
+                            <small>Total Views</small>
+                        </li>
+                        <li class="light">
+                            <strong>271</strong>
+                            <small>Last 24 Hours</small>
+                        </li>
+                        <li>
+                            <strong>1,025</strong>
+                            <small>Unique Users</small>
+                        </li>
+                        <li class="light">
+                            <strong>105</strong>
+                            <small>Last 24 Hours</small>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Widget Chart -->
+    <!--=== Multiple Statistics ===-->
+    <div class="row" style="display:none;">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4><i class="icon-reorder"></i> Multiple Statistics</h4>
+                    <div class="toolbar no-padding">
+                        <div class="btn-group">
+                            <span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-content">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div id="chart_multiple" class="chart"></div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="progress-stats">
+                                <span class="title"><i class="icon-puzzle-piece"></i> Puzzles Completed <span>30/50</span></span>
+                                <div class="progress progress-mini progress-striped">
+                                    <div class="progress-bar progress-bar-info" style="width: 65%;"></div>
+                                </div>
+                            </div>
+                            <div class="progress-stats">
+                                <span class="title"><i class="icon-cloud-download"></i> Downloads <span>42/128 MB</span></span>
+                                <div class="progress progress-mini progress-success progress-striped">
+                                    <div class="progress-bar progress-bar-success" style="width: 30%;"></div>
+                                </div>
+                            </div>
+                            <div class="progress-stats">
+                                <span class="title"><i class="icon-cloud"></i> Space <span>2961/4096 MB</span></span>
+                                <div class="progress progress-mini progress-warning progress-striped">
+                                    <div class="progress-bar progress-bar-warning" style="width: 80%;"></div>
+                                </div>
+                            </div>
+                            <div class="spacing-10px"></div>
+                            <button type="button" class="btn btn-block btn-primary">Generate Report</button>
+                            <button type="button" class="btn btn-block btn-danger">Cancel Account</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="widget-content">
+                    <ul class="stats no-dividers">
+                        <li class="circular-chart-inline">
+                            <div class="circular-chart" data-percent="27" data-size="90">27%</div>
+                            <span class="description">Server Load</span>
+                        </li>
+                        <li class="circular-chart-inline">
+                            <div class="circular-chart" data-percent="75" data-size="90" data-bar-color="#e25856">75%</div>
+                            <span class="description">Used RAM</span>
+                        </li>
+                        <li class="circular-chart-inline">
+                            <div class="circular-chart" data-percent="10" data-size="90" data-bar-color="#8fc556">281 MB</div>
+                            <span class="description">Space</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Multiple Statistics -->
+    <!--=== Selection and Zooming ===-->
+    <div class="row" style="display:none;">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4><i class="icon-reorder"></i> Selection and Zooming</h4>
+                    <div class="toolbar no-padding">
+                        <div class="btn-group">
+                            <span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-content">
+                    <div id="chart_selection_zooming" class="chart"></div>
+                </div>
+                <div class="divider"></div>
+                <div class="widget-content widget-deeper">
+                    <div id="chart_selection_zooming_overview" class="chart chart-small"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Selection and Zooming -->
+    <!--=== Simple Chart ===-->
+    <div class="row" style="display:none;">
+        <div class="col-md-6">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4><i class="icon-reorder"></i> Simple Chart</h4>
+                    <div class="toolbar no-padding">
+                        <div class="btn-group">
+                            <span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-content">
+                    <div id="chart_simple" class="chart"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4><i class="icon-reorder"></i> Auto Updating Chart</h4>
+                    <div class="toolbar no-padding">
+                        <div class="btn-group">
+                            <span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-content">
+                    <div id="chart_updating" class="chart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Simple Chart -->
+    <!--=== Filled Charts ===-->
+    <div class="row">
+        <div class="col-md-4">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4><i class="icon-reorder"></i>Successful Bookings</h4>
+                    <div class="toolbar no-padding">
+                        <div class="btn-group">
+                            <span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-content">
+                    <div id="chart_filled_green" class="chart"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4><i class="icon-reorder"></i>Aborted Bookings</h4>
+                    <div class="toolbar no-padding">
+                        <div class="btn-group">
+                            <span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-content">
+                    <div id="chart_filled_red" class="chart"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4><i class="icon-reorder"></i>Hold Bookings</h4>
+                    <div class="toolbar no-padding">
+                        <div class="btn-group">
+                            <span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-content">
+                    <div id="chart_filled_blue" class="chart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Filled Charts -->
+    <!--=== Bars ===-->
+    <div @*style="display:none"*@ class="row">
+        <div class="col-md-6">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4><i class="icon-reorder"></i>Room Inventory</h4>
+                    <div class="toolbar no-padding">
+                        <div class="btn-group">
+                            <span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-content">
+                    <div id="chart_bars_vertical" class="chart"></div>
+                </div>
+            </div>
+        </div>
+
+        <div style="display:none" class="col-md-6">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4><i class="icon-reorder"></i> Horizontal Bars</h4>
+                    <div class="toolbar no-padding">
+                        <div class="btn-group">
+                            <span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-content">
+                    <div id="chart_bars_horizontal" class="chart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Bars -->
+    <!--=== Donut/ Pie ===-->
+    <div class="row">
+        <div class="col-md-6" style="width:50%">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4><i class="icon-reorder"></i> Donut Chart</h4>
+                    <div class="toolbar no-padding">
+                        <div class="btn-group">
+                            <span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-content">
+                    <div id="chart_donut" class="chart"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6" style="width:50%">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4><i class="icon-reorder"></i> Pie Chart</h4>
+                    <div class="toolbar no-padding">
+                        <div class="btn-group">
+                            <span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-content">
+                    <div id="chart_pie" class="chart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Donut/ Pie -->
+    <!--=== Circular Charts ===-->
+    <div class="row" style="display:none;">
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4><i class="icon-reorder"></i> Circular Charts</h4>
+                    <div class="toolbar no-padding">
+                        <div class="btn-group">
+                            <span class="btn btn-xs circular-charts-reload"><i class="icon-refresh"></i> Reload</span>
+                            <span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-content">
+                    <ul class="stats">
+                        <li>
+                            <div class="circular-chart demo-reload" data-percent="62"><span>62</span>%</div>
+                            <a href="javascript:void(0);" class="title">Used RAM <i class="icon-angle-right"></i></a>
+                        </li>
+                        <li>
+                            <div class="circular-chart demo-reload" data-percent="80" data-bar-color="#e25856">-<span>80</span>%</div>
+                            <a href="javascript:void(0);" class="title">Bounce Rate <i class="icon-angle-right"></i></a>
+                        </li>
+                        <li>
+                            <div class="circular-chart demo-reload" data-percent="26" data-bar-color="#8fc556"><span>26</span>%</div>
+                            <a href="javascript:void(0);" class="title">New Visitors <i class="icon-angle-right"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="divider"></div>
+                <div class="widget-content">
+                    <ul class="stats">
+                        <li class="circular-chart-inline">
+                            <div class="circular-chart demo-reload" data-percent="62"><span>62</span>%</div>
+                            <a href="javascript:void(0);" class="description">Used RAM <i class="icon-angle-right"></i></a>
+                        </li>
+                        <li class="circular-chart-inline">
+                            <div class="circular-chart demo-reload" data-percent="80" data-bar-color="#e25856">-<span>80</span>%</div>
+                            <a href="javascript:void(0);" class="description">Bounce Rate <i class="icon-angle-right"></i></a>
+                        </li>
+                        <li class="circular-chart-inline">
+                            <div class="circular-chart demo-reload" data-percent="26" data-bar-color="#8fc556"><span>26</span>%</div>
+                            <a href="javascript:void(0);" class="description">New Visitors <i class="icon-angle-right"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Circular Charts -->
+    <!-- /Page Content -->
+
+<script src="~/Scripts/SuperAdminMaster.js"></script>

@@ -1,0 +1,87 @@
+﻿@model App.Web.ViewModels.LoginViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
+    <link href="~/Content/error-notifier.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/Scripts/jquery-1.8.2.min.js")
+    @Scripts.Render("~/Scripts/jqueryNotification.js")
+    @Scripts.Render("~/Scripts/jquery.blockUI.js")
+    @Scripts.Render("~/Scripts/AppCommonScript.js")
+    <meta name="viewport" content="width=device-width" />
+    <title>LogIn</title>
+    <style type="text/css">
+        body {
+            background-image: url('../../img/Login/back_Signin.png');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        .area {
+            /*background-color: red;*/
+            height: 365px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 192px;
+            width: 465px;
+        }
+
+
+        #fogotLink {
+            margin-left: 161px;
+            margin-top: 6px;
+        }
+
+        #signin {
+            margin-top: 50px;
+            margin-left: 55px;
+            width: 350px;
+            height: 50px;
+        }
+
+        #id_text {
+            margin-left: 55px;
+            margin-top: 90px;
+            width: 350px;
+            height: 50px;
+            font-size: medium;
+        }
+
+        #id_paswd {
+            margin-left: 55px;
+            margin-top: 25px;
+            width: 350px;
+            height: 50px;
+            font-size: medium;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="area">
+        @using (Html.BeginForm("SignIn", "Login"))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.TextBoxFor(model => model.UserId, new { id = "id_text", @placeholder = "User Id/Email" })
+            @Html.ValidationMessageFor(m => m.UserId)
+            @Html.PasswordFor(model => model.Pswd, new { id = "id_paswd", @placeholder = "Password" })
+            @Html.ValidationMessageFor(m => m.Pswd)
+            <button><img src="~/img/Login/sign%20in%20button.png" id="signin" /></button>
+            <a href="/Login/Forgot" style="cursor:pointer">
+                <img src="~/img/Login/forgot%20password.png" id="fogotLink" />
+            </a>
+        }
+        @ViewBag.Check
+    </div>
+</body>
+</html>

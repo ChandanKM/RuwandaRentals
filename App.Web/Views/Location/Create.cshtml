@@ -1,0 +1,53 @@
+﻿@model App.Web.ViewModels.LocationViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+
+
+<form class="form-horizontal">
+
+
+    <div class="row">
+        <div class="span10">
+            <div class="page-header">
+                <h2>Location Information <small><i class="icon-double-angle-right"></i>  Manage Location records</small></h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="span5">
+
+            <div class="control-group">
+                <span class="control-label" for="Location_desc">Location_desc <span class="required"></span></span>
+                <div class="controls">
+                    <input id="Location_desc" type="text" data-bind="value: Location_desc" />
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="Location_desc">Location <span class="required"></span></label>
+                <div class="controls">
+                    <select id="Location_Id" data-bind="options: LocationLookup, value: SelectedLocation, optionsText: 'Location_desc' ,optionsValue:'Location_Id' "></select>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="span10">
+            <div class="form-actions">
+                <input id="btnCreate" type="button" value="Save" data-bind="click: CreateLocation" class="btn btn-primary btn-medium" />
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+<script src="@Url.Content("~/Scripts/Location/CreateLocation.js")" type="text/javascript"></script>

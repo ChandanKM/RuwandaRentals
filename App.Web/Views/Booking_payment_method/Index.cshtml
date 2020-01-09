@@ -1,0 +1,408 @@
+﻿@{
+    ViewBag.Title = "Booking_payment_method";
+    Layout = "~/Views/Shared/_Consumer.cshtml";
+}
+<div class="breadcrumb-block">
+    <div class="wrap">
+        <ol class="breadcrumb">
+            <li><a href="http://www.lastminutekeys.com/home">Home</a></li>
+            <li class="active">Make Payment</li>
+        </ol>
+    </div>
+</div>
+<div class="booking-payment-method">
+    <div class="wrap" id="divBookingdetails">
+        @*<h2>A faster & easier booking experience.</h2>*@
+
+        @*<div class="booking-details">
+            <div class="booking-header">
+                <h3>Itinerary</h3>
+                <p>Preview Of the Hotel Details.</p>
+                <div class="clear"></div>
+            </div>*@
+        <section>
+            <div class="booking-details-inner Content-left">
+                <section class="booking-inner-header">
+                    <input hidden data-bind="value:PropId">
+                    <div class="hotel-name">
+                        <h4 data-bind="text:Prop_Name"></h4>
+                        <h5 data-bind="text:Prop_Address,attr:{title:Prop_Address}"></h5>
+                    </div>
+                    <div class="hotel-number" style="margin-top:0;text-align:right;">
+                        <span class="hotel-star-rate" data-bind="foreach:StarRatingList">
+                            <label data-bind="css: MyStarClass"></label>
+                        </span>
+                                               
+                            <div class="hotel-reviews">
+                                <span class="review-txt">TripAdvisor Traveller Rating</span>
+                                <img id="imgTripadv" data-bind="attr:{src:Trip_Rating}" />
+                                @*<a target="_blank" data-bind="attr:{href:Trip_Review_Url}"*@ @*data-bind="attr:{value:Trip_Review}">*@
+                                <a href="#" id="TripReview"><span data-bind="text:Trip_Review"></span></a>
+                                @*</a>*@
+                            </div>
+                            @*<div class="review-total review-total2 review-total3"><span class="review-count">600</span> Reviews</div>*@
+                      
+                        @*<p><i class="phone-icon"></i> 1800 999 1200</p>*@
+                    </div>
+                    <div class="clear"></div>
+                </section>
+
+                <section>
+                    <div class="booking-hotel-img">
+                        <img data-bind="attr:{src:Prop_Image}" alt="" />
+                    </div>
+                    <div class="booking-hotel-details">
+                        <div class="booking-hotel-desc">
+                            <input hidden data-bind="value:RoomID"><div>
+                                <h3 data-bind="text:RoomName"></h3>
+                                @*<p class="policy-link"><a href="#">Booking Policies >></a></p>*@
+                            
+                                <div class="clear"></div>
+                            </div>
+
+                            @*<p data-bind="text:Room_Overview"></p>*@
+                            <section>
+
+                                <div class="booking_hotel_details">
+                                    <ul class="booking_details">
+                                        <li>
+                                            <div class="checkin-details">
+                                                <h4 class="checkin-h4">Check In</h4>
+                                                <div class="week-details">
+                                                    <span class="checkin-date" data-bind="text:Room_Checkin"></span>
+                                                    <span class="checkin-week-name" style="color:#2781cd;" data-bind="text:Room_Checkin_Time"></span>
+                                                    @*<div class="reseved-days">
+                                                            <span class="days"><strong data-bind="text:Day_Count"></strong> <em>Night(s)</em></span>
+                                                        </div>*@
+                                                </div>
+                                            </div>
+
+                                        </li>
+                                        <li>
+                                            <div class="checkin-details">
+                                                <h4>Check Out</h4>
+                                                <div class="week-details">
+                                                    <span class="checkin-date" data-bind="text:Room_Checkout"></span>
+                                                    <span class="checkin-week-name" style="color:#2781cd;" data-bind="text:Room_Checkout_Time"></span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <div class="clear"></div>
+                                    </ul>
+
+                                    <div class="modal fade" id="roomdt" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content room-policies-box">
+                                                <div class="modal-header popup-header">
+
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title">Room Details</h4>
+
+                                                </div>
+                                                <div class="modal-body room-policy-list">
+                                                    <div class="room_policies_details hotel_facilities hotel_room_facilities">
+                                                        @*<h2 id="rmg" class="float-lt">Room Image</h2><br />*@
+                                                        @*<ul data-bind="foreach:RoomDTListImage">
+                                                                <li><img data-bind="attr:{src:Image_dir}"></li>
+                                                            </ul>*@
+                                                        <h2 id="rmf">Room Amenities</h2>
+                                                        <ul class="facilities_list">
+
+                                                            <!--ko foreach:RoomDTList-->
+                                                            <li>
+                                                                @*<img data-bind="attr:{src:Facility_Image_dir,title:Facility_Name}">*@
+                                                                <a data-bind="text:Facility_Name"></a>
+                                                            </li>
+                                                            <!--/ko-->
+
+
+
+                                                            <div class="clear"> </div>
+                                                        </ul>
+                                                        <h2 id="inc">Inclusions</h2>
+                                                        <div class="book_now_btn">
+                                                            <div>
+                                                                <ul data-bind="foreach:RoomDTListother">
+
+
+                                                                    <li><i class="breakfast"></i><span data-bind="text:inclusion"></span></li>
+                                                                    <li><i class="airport-pickup"></i><span data-bind="text:others"></span></li>
+                                                                    <li><i class="no-refund"></i><span>Non Refundable</span></li>
+                                                                </ul>
+                                                            </div>
+
+                                                            <div class="clear"></div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div>
+                                    </div>
+                                    <div class="coupon-code-section" style="display:none">
+                                        <h4> Have a coupon code or gift card to redeem?</h4>
+                                        <form>
+                                            <input type="text" placeholder="Enter Coupon Code">
+                                            <input type="submit" value="Apply Code">
+                                        </form>
+                                        <div class="coupon-discount-msg">Congrats! You got <span>&#8377;100</span> off... </div>
+                                    </div>
+                                    <div class="payment-btn" hidden>
+                                        <a href="#" data-bind="click:ContinueToPayment">Continue to payment</a>
+                                    </div>
+                                </div>
+
+                                <div class="clear"></div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </section>
+            </div>
+            <div class="hotel_booking_price">
+                <h4>Summary Of Charges</h4>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Room Cost</td>
+                            <td class="inovice_price">₹ <span data-bind="text:camo_room_rate"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Number of Room</td>
+                            <td class="inovice_price"><span data-bind="text:Room_Count"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Nights</td>
+                            <td class="inovice_price"><span data-bind="text:Day_Count"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Total</td>
+                            <td class="inovice_price">₹ <span data-bind="text:total_room_rate"></span></td>
+                        </tr>
+                        <tr>
+                            <td> Taxes</td>
+                            <td class="inovice_price">₹ <span data-bind="text:tax_amnt"></span></td>
+                        </tr>
+                        @*<tr>
+                                <td>VAT 4%</td>
+                                <td class="inovice_price">₹ 84.00</td>
+                            </tr>
+                            <tr>
+                                <td>Discount</td>
+                                <td class="inovice_price">₹ 100.00 <span class="discount-icon"></span></td>
+                            </tr>*@
+                        <tr><td></td></tr>
+                        <tr class="grand-total">
+                            <td style="font-size:18px;">Price Payable</td>
+                            <td class="inovice_price inovice_price_total">₹ <span data-bind="text:net_amt"></span> </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="clear"></div>
+
+            <div class="modal fade" id="TripReviewModal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content room-policies-box">
+                        <div class="modal-header popup-header">
+
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">TripAdvisor Reviews</h4>
+                            <h5 class="site-title">Showing the 3 most recent reviews.</h5>
+
+                        </div>
+                        <div class="modal-body room-policy-reviews">
+
+                            <ul data-bind="foreach:Trip_Review_Url">
+                                <li>
+                                    <span class="Bold">User:</span>
+                                    <!--ko with :user -->
+
+                                    <span data-bind="text:username"></span>
+                                    <!--/ko-->
+                                </li>
+                                <li>
+                                    <span class="Bold">Review:</span>   <span data-bind="text:text"></span>
+                                </li>
+                                <li>
+                                    <span class="Bold" style="vertical-align:super;">Rating:</span>   <img id="imgTripadv" data-bind="attr:{src:rating_image_url}" />
+                                </li>
+
+                                <li>
+                                    <span class="Bold">Date:</span> <span data-bind="text:published_date"></span>
+                                </li>
+                                <hr style="margin:10px 0;">
+                            </ul>
+
+
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div>
+            </div>
+        </section>
+
+
+
+        <div class="billing-info">
+            <div class="booking-header" style="background:#2781cd;">
+                <h3>Occupant Details</h3>
+                <div class="clear"></div>
+            </div>
+            <div class="booking-details-inner">
+
+                <div id="Guest1" class="row">
+                    <div class="col-md-6">
+                        <div class="row row-fileds">
+                            <div class="col-md-4"><span class="field-name">Room 1</span></div>
+                            <div class="col-md-8"><span class="text_box"><input id="fn1" type="text" data-bind="value:Occupant_firstname" class="text-field" placeholder="First Name"></span></div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="row row-fileds">
+
+                            <div class="col-md-8"><span class="text_box"><input id="ln1" type="text" data-bind="value:Occupant_lastname" class="text-field" placeholder="Last Name"></span></div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div style="display:none" id="Guest2" class="row">
+                    <div></div>
+                    <div class="col-md-6">
+                        <div class="row row-fileds">
+                            <div class="col-md-4"><span class="field-name">Room 2</span></div>
+                            <div class="col-md-8"><span class="text_box"><input id="fn2" type="text" data-bind="value:Occupant_firstname1" class="text-field" placeholder="First Name"></span></div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="row row-fileds">
+                            <div class="col-md-8"><span class="text_box"><input id="ln2" type="text" data-bind="value:Occupant_lastname1" class="text-field" placeholder="Last Name"></span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display:none" id="Guest3" class="row">
+
+                    <div class="col-md-6">
+                        <div class="row row-fileds">
+                            <div class="col-md-4"><span class="field-name">Room 3</span></div>
+                            <div class="col-md-8"><span class="text_box"><input id="fn3" type="text" data-bind="value:Occupant_firstname2" class="text-field" placeholder="First Name"></span></div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="row row-fileds">
+                            <div class="col-md-8"><span class="text_box"><input id="ln3" type="text" data-bind="value:Occupant_lastname2" class="text-field" placeholder="Last Name"></span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display:none" id="Guest4" class="row">
+                    <div class="col-md-6">
+                        <div class="row row-fileds">
+                            <div class="col-md-4"><span class="field-name">Room 4</span></div>
+                            <div class="col-md-8"><span class="text_box"><input type="text" data-bind="value:Occupant_firstname3" class="text-field" placeholder="First Name"></span></div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="row row-fileds">
+                            <div class="col-md-8"><span class="text_box"><input type="text" data-bind="value:Occupant_lastname3" class="text-field" placeholder="Last Name"></span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display:none" id="Guest5" class="row">
+                    <div class="col-md-6">
+                        <div class="row row-fileds">
+                            <div class="col-md-4"><span class="field-name">Room 5</span></div>
+                            <div class="col-md-8"><span class="text_box"><input type="text" data-bind="value:Occupant_firstname4" class="text-field" placeholder="First Name"></span></div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="row row-fileds">
+                            <div class="col-md-8"><span class="text_box"><input type="text" data-bind="value:Occupant_lastname4" class="text-field" placeholder="Last Name"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="billing-info">
+            <div class="booking-header">
+                <h3>Billing Info</h3>
+                <div class="clear"></div>
+            </div>
+            <div class="booking-details-inner">
+                <form id="formUserDetails">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input hidden data-bind="value:Cons_Id" />
+                                @*<div class="row row-fileds">
+                                        <div class="col-md-4"><span class="field-name">Title</span></div>
+                                        <div class="col-md-8"><span class="text_box"><input type="text" value="" class="text-field"></span></div>
+                                    </div>*@
+
+                                <div class="row row-fileds">
+                                    <div class="col-md-4"><span class="field-name">First Name</span></div>
+                                    <div class="col-md-8"><span class="text_box"><input type="text" data-bind="value:Cons_First_Name" class="text-field" readonly></span></div>
+                                </div>
+
+                                <div class="row row-fileds">
+                                    <div class="col-md-4"><span class="field-name">Last Name</span></div>
+                                    <div class="col-md-8"><span class="text_box"><input type="text" data-bind="value:Cons_Last_Name" class="text-field" readonly></span></div>
+                                </div>
+                                <div class="row row-fileds">
+                                    <div class="col-md-4 request-field"><span class="field-name">Special Requests</span></div>
+                                    <div class="col-md-8"> <span class="text_box"><textarea class="text-field textarea-box" data-bind="value:Invce_note"> </textarea></span> </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="row row-fileds">
+                                    <div class="col-md-4"><span class="field-name">Mobile No.</span></div>
+                                    <div class="col-md-8"><span class="text_box"><input type="text" data-bind="value:Cons_Mobile" class="text-field" readonly></span></div>
+                                </div>
+
+                                <div class="row row-fileds">
+                                    <div class="col-md-4"><span class="field-name">Email Id</span></div>
+                                    <div class="col-md-8"> <span class="text_box"><input type="text" data-bind="value:Cons_mailid" class="text-field" readonly></span> </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-fileds">
+                        <div class="col-md-6">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-8">
+                                <div class="payment-btn">
+                                    <a href="#" data-bind="click:ContinueToPayment">Continue to payment</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+
+</div>
+@section scripts {
+    <script src="~/Scripts/Consumer/booking_payment_method.js"></script>
+}

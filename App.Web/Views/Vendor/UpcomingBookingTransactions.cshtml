@@ -1,0 +1,245 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Last Minute Keys :: Inovoice</title>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:500,100,300,400' rel='stylesheet' type='text/css'>
+
+
+    <script language="javascript" type="text/javascript">
+        $(function () {
+            $("#hrefPrint").click(function () {
+                // Print the DIV.
+                $("#Printdiv").print();
+                return (false);
+            });
+        });
+    </script>
+
+    <link href="~/Content/MyCss.css" rel="stylesheet" />
+
+
+    <style>
+        .inovoice-header-top-right {
+            float: right;
+            margin-right: 8%;
+        }
+
+            .inovoice-header-top-right li {
+                display: inline-block;
+            }
+
+                .inovoice-header-top-right li a {
+                    width: 24px;
+                    height: 24px;
+                    display: block;
+                    background: url(/img/Design/sprite-img.png) no-repeat;
+                }
+
+                .inovoice-header-top-right li.new-tab a {
+                    background-position: -57px -388px;
+                    cursor: pointer;
+                }
+
+                .inovoice-header-top-right li.print a {
+                    background-position: -56px -421px;
+                    cursor: pointer;
+                }
+
+                .inovoice-header-top-right li.email a {
+                    background-position: -56px -449px;
+                    cursor: pointer;
+                }
+    </style>
+
+</head>
+<body>
+
+    <div class="crumbs">
+        <ul id="breadcrumbs" class="breadcrumb">
+
+            <li>
+                <i class="icon-home"></i>
+                <a href="#">Home</a>
+            </li>
+
+            <li class="current">
+                <a href="Booking/Index">Bookings</a>
+            </li>
+
+            <li>
+                Invoice
+            </li>
+
+        </ul>
+        <ul class="inovoice-header-top-right">
+            <li class="new-tab"><a href="#" title="New tab"></a></li>
+            <li class="print"><a id="hrefPrint" title="Print"></a></li>
+            @*<li class="email"><a href="#" title="Email"></a></li>*@
+        </ul>
+        <div class="clear"></div>
+    </div>
+
+    <div id="Printdiv" style="margin-top :2%;" class="inovoice-page">
+
+
+        <link href="~/Content/MediaPrint.css" media="print" rel="stylesheet" />
+
+        <div class="inovoice-header">
+            <h2>Invoice</h2>
+        </div>
+        <div class="booking-details-inner" id="Invoice">
+            <section id="Inv" data-bind="foreach: Trans" class="booking-inner-header inovice-inner-header">
+                <div class="hotel-name">
+                    <h4 data-bind="text:Prop_Name"></h4>
+                    <h5 data-bind="text:Prop_Address"></h5>
+                </div>
+                <div class="hotel-number">
+                    <p data-bind="text:Invce_Num"></p>
+                </div>
+                <div class="clear"></div>
+            </section>
+
+            <section class="inovice-details-block">
+                <h3>Booking Details</h3>
+                <div class="invoice_details">
+                    <div class="inovoice-img" id="inovoice-img" data-bind="foreach: ImageTrans">
+                        <img data-bind="attr:{src: Image_dir}" style="width:100px;height:100px" />
+
+                    </div>
+                    <div class="inovoice-room-details">
+                        <table id="Booking" data-bind="foreach: Trans">
+                            <tr>
+                                <td class="inovice-head">Room Type <span>:</span></td>
+                                <td class="inovice-desc" data-bind="text:Room_Name"></td>
+                            </tr>
+                            <tr>
+                                <td class="inovice-head">Booking ID <span>:</span></td>
+                                <td class="inovice-desc" data-bind="text:Invce_Num"></td>
+                            </tr>
+                            <tr>
+                            <tr>
+                                <td class="inovice-head">Check In <span>:</span></td>
+                                <td class="inovice-desc" data-bind="text:Checkin"></td>
+                            </tr>
+                            <tr>
+                                <td class="inovice-head">Check Out <span>:</span></td>
+                                <td class="inovice-desc" data-bind="text:Checkout"></td>
+                            </tr>
+                            @*<tr>
+                                    <td class="inovice-head" >Service tax ID <span>:</span></td>
+                                    <td class="inovice-desc" data-bind="text:S_TaxID">AAACW8725FSD001</td>
+                                </tr>*@
+                        </table>
+                        <table>
+                            <tr>
+                                <td class=" inovice-head">
+                                    Facilities
+                                    <span>:</span>
+                                </td>
+                                <td class="inovice-desc" id="tblFacility" data-bind="foreach:FacilityTrans"><label style="font-weight: 400;" data-bind="text:Facilities"></label></td>
+                            </tr>
+                        </table>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </section>
+
+
+            <section class="inovice-details-block">
+                <h3>Consumer Info</h3>
+                <div class="invoice_details">
+                    <table id="Consumer" data-bind="foreach: Trans">
+                        <tr>
+                            <td class="inovice-head">Name <span>:</span></td>
+                            <td class="inovice-desc" data-bind="text:Name"></td>
+                        </tr>
+                        <tr>
+                            <td class="inovice-head">Email <span>:</span></td>
+                            <td class="inovice-desc" data-bind="text:Email"></td>
+                        </tr>
+                        <tr>
+                            <td class="inovice-head">Mobile No. <span>:</span></td>
+                            <td class="inovice-desc" data-bind="text:Mobile"></td>
+                        </tr>
+                    </table>
+
+                    <table id="Occupant" data-bind="foreach: Trans">
+                        <tr>
+                            <td class="inovice-head">Occupant Name <span>:</span></td>
+                            <td class="inovice-desc" data-bind="text:GuestName"></td>
+                        </tr>
+                    </table>
+                    <div class="clear"></div>
+                </div>
+            </section>
+
+            <section class="inovice-details-block">
+                <h3>Price Details</h3>
+                <div class="invoice_details inovice-price-details">
+                    <table>
+                        <tr id="Rate" data-bind="foreach: Trans">
+                            <td>Room Charges</td>
+                            <td class="inovice_price" data-bind="text:Camo_Rate">&#8377; </td>
+                        </tr>
+                    </table>
+                    <table id="trTax" data-bind="foreach: TaxTrans">
+                        <tr>
+                            <td data-bind="text:TaxType"></td>
+                            <td class="inovice_price" data-bind="text:TaxAmnt">&#8377; </td>
+                        </tr>
+                        @*<tr>
+                                <td data-bind="text:TaxType"></td>
+                                <td class="inovice_price" data-bind="text:TaxAmnt">&#8377; </td>
+                            </tr>*@
+                        @*<tr>
+                                <td>Discount</td>
+                                <td class="inovice_price">&#8377; 100.00 <span class="discount-icon"></span></td>
+                            </tr>*@
+
+                    </table>
+                    <table>
+                        <tr><td></td></tr>
+                        <tr class="grand-total" id="TotPrice" data-bind="foreach: Trans">
+                            <td style="font-size:20px;border-top:1px solid #242424;border-bottom:2px solid #242424;">Grand Total</td>
+                            <td data-bind="text:Total" class="inovice_price inovice_price_total" style="font-size:20px;border-top:1px solid #242424;border-bottom:2px solid #242424;">&#8377; </td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <section class="inovice-details-block">
+                <h3>Policies</h3>
+                <div class="invoice_details">
+                    <div data-bind="foreach: PolicyTrans" id="invoice_details" class="inovoice-policeis">
+                        <h2 style="font:20px;" data-bind="text:Policy_Name"></h2>
+                        <p data-bind="text:Policy_Descr"></p>
+                    </div>
+                    @*<div class="inovoice-policeis">
+                            <h4>Cancellation Policy:</h4>
+                            <p>Cancellation and prepayment policies vary according to room type. Please check the Fare policy associated with your room.</p>
+                        </div>
+                        <div class="inovoice-policeis">
+                            <h4>Payment Mode:</h4>
+                            <p>You can pay now or you can pay at the hotel when you check-in if your selected hotel or room type has this option.</p>
+                        </div>
+                        <div class="inovoice-policeis">
+                            <h4>Extra Bed:</h4>
+                            <p>The inclusion of 'extra bed' with a booking is facilitated with a folding cot or a mattress as an extra bed.</p>
+                        </div>*@
+                </div>
+            </section>
+            <p id="FinePrint" data-bind="foreach:FinePrintTrans" class="inovoice-bottom-desc"><span data-bind="text:Invce_fineprint"></span></p>
+        </div>
+
+    </div>
+</body>
+</html>
+<script src="~/Scripts/Master.js"></script>
+<script src="~/Scripts/jquery.storage.js"></script>
+<script src="~/Scripts/Booking/Transaction.js"></script>
+<script src="~/Scripts/Booking/Print.js"></script>

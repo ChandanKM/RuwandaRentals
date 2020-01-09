@@ -1,0 +1,127 @@
+﻿@model App.Web.ViewModels.LoyaltyViewModel
+@{
+    ViewBag.Title = "Create";
+}
+<link href="~/Content/font-awesome.css" rel="stylesheet" />
+<link href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
+<link href="~/Content/error-notifier.css" rel="stylesheet" />
+
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/Scripts/jquery-1.8.2.min.js")
+@Scripts.Render("~/Scripts/jquery-ui-1.10.3.js")
+@Scripts.Render("~/Scripts/knockout-2.3.0.js")
+@Scripts.Render("~/Scripts/jqueryNotification.js")
+@Scripts.Render("~/Scripts/jquery.blockUI.js")
+@Scripts.Render("~/Scripts/AppCommonScript.js")
+
+<div class="row">
+    <div class="span10">
+        <div class="page-header">
+            <h2>Loyalty Information <small><i class="icon-double-angle-right"></i>  Add  Loyalty records</small></h2>
+        </div>
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-lg-12" id="divCreateLoyalty">
+        <div class="span5">
+            <div class="form-horizontal">
+                @*<label style="display:none" data-bind="value:Loyal_Id"></label>
+                <label style="display:none" data-bind="value:Loyal_Active_flag"></label>*@
+                <div class="control-group">
+                    <label class="control-label" for="LastName">Description <span class="required"></span></label>
+                    <div class="controls">
+                        <textarea id="Room_Descr" rows="3" style="width:300px;" data-bind="value: Loyal_Desc"></textarea>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Name">Loyal_Max_Allowed  <span class="required"></span></label>
+                    <div class="controls">
+                        <input id="Room_Name" type="text" data-bind="value: Loyal_Max_Allowed" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Name">Loyal_Min_redmpt  <span class="required"></span></label>
+                    <div class="controls">
+                        <input id="Loyal_Min_redmpt" type="text" data-bind="value: Loyal_Min_redmpt" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Name">Loyal_Max_redmpt  <span class="required"></span></label>
+                    <div class="Loyal_Max_redmpt">
+                        <input id="Loyal_Max_redmpt" type="text" data-bind="value: Loyal_Max_redmpt" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="FirstName">Loyal_Start_On<span class="required"></span></label>
+                    <div class="controls">
+                        <input id="Loyal_Start_On" type="text" data-bind="value:Loyal_Start_On" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="FirstName">Loyal_End_On<span class="required"></span></label>
+                    <div class="controls">
+                        <input id="Loyal_End_On" type="text" data-bind="value:Loyal_End_On" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="FirstName">Loyal_Set_Up <span class="required"></span></label>
+                    <div class="controls">
+                        <input id="Loyal_Set_Up" type="text" data-bind="value:Loyal_Set_Up" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="FirstName">Loyal_Checked_By <span class="required"></span></label>
+                    <div class="controls">
+                        <input id="Loyal_Checked_By" type="text" data-bind="value:Loyal_Checked_By" />
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="FirstName">Loyal_Approved_By <span class="required"></span></label>
+                    <div class="controls">
+                        <input id="Loyal_Approved_By" type="text" data-bind="value:Loyal_Approved_By" />
+                    </div>
+                </div>
+
+
+                <div class="control-group float-right">
+                    <input id="btnSave" type="button" value="Save" data-bind="click: CreateLoyalty" class="btn btn-lg btn-primary" />
+                    @Html.ActionLink("Back to List", "Index", "Loyalty")
+                </div>
+                </div>
+            </div>
+            <div class="span5">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $("#Loyal_Start_On").datepicker({
+        //   showOn: "button",
+        buttonImage: '/img/icon-calendar.gif',
+        //   buttonImageOnly: true,
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '2015:2050'
+    });
+
+</script>
+
+<script type="text/javascript">
+    $("#Loyal_End_On").datepicker({
+        //  showOn: "button",
+        buttonImage: '/img/icon-calendar.gif',
+        //   buttonImageOnly: true,
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '2015:2050'
+
+    });
+
+</script>
+<script src="~/Scripts/jquery.cookie.js"></script>
+<script src="@Url.Content("~/Scripts/Loyalty/CreateLoyalty.js")" type="text/javascript"></script>

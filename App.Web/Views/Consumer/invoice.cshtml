@@ -1,0 +1,158 @@
+﻿@{
+    ViewBag.Title = "invoice";
+    Layout = "~/Views/Shared/_Consumer.cshtml";
+}
+
+
+
+<div class="breadcrumb-block">
+    <div class="wrap" style="position:relative;">
+        <ul class="breadcrumb" id="breadcrumb">
+            <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+            <li class="active">Invoice Bill</li>
+        </ul>
+        <ul class="inovoice-header-top-right" style="position:absolute;right:0;top:5px;">
+            @*<li class="new-tab"><a href="#" title="Save"></a></li>*@
+            <li class="print"><a id="hrefPrint" title="Print"></a></li>
+            @*<li class="email"><a href="#" title="Email"></a></li>*@
+        </ul>
+    </div>
+</div>
+<div style="width:65%;margin:10px auto;">
+<div id="Printdiv">
+    <link href="~/Content/MediaPrint.css" media="print" rel="stylesheet" />
+
+    <div data-bind=" foreach:Trans" style="font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;font-size:14px;color:#353535;">
+        <div style="background:url(http://www.lastminutekeys.com/img/Mailer/header-banner.png) repeat-x;padding:12px;background-size: cover;background-position: 100% 100%;">
+            <a href="#" style="display:inline-block;"><img src="http://www.lastminutekeys.com/img/Mailer/logo.png" title="Last Minute Keys" alt="" style="display:block;" /></a>
+        </div>
+
+        <div id="Invoice" style="width:100%;margin:15px auto;font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;font-size:14px;color:#353535;">
+            <p>Thanks, <strong style="font-size:18px;color:#42b760;"><span data-bind="text:Cons_First_Name"></span></strong>! Your reservation is now confirmed.</p>
+        </div>
+
+        <div>
+            <h2 style="font-size: 25px;color: #FFF;padding:10px;background:#2781cd;font-weight: 300;text-align: center;text-transform: uppercase;margin: 0;">Invoice</h2>
+        </div>
+
+        <div>
+            <strong>Hotel Name:</strong>&nbsp;&nbsp;&nbsp; <span style="color:#2781CD;font-weight: bold;font-style: italic;margin:0;font-size:15px;" data-bind="text:Prop_Name"></span>
+        </div>
+        <br>
+        <div>
+            <strong>Address:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <ul style="font-size:14px;line-height:1.8em;color:#565656;list-style-type:none;padding:0;margin-top:0;display:inline-block;vertical-align:top;">
+                <li><span data-bind="text:Prop_Addr1"></span></li>
+            </ul>
+        </div>
+        <div>
+            <strong> Phone:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>022 6668 1234</span>
+        </div>
+
+        <br />
+
+        <table width="100%">
+
+
+            <tr><td colspan="4" rowspan="1" align="center" bgcolor="#2781cd"><h2 style="font-size: 20px;color: #FFF;padding: 5px 0;font-weight: 600;">Reservation Confirmation</h2></td></tr>
+
+            <tr>
+                <td style="width:200px;border:1px solid #ccc;padding:5px;font-weight: bold;"> <span>Occupant Names</span></td>
+                <td style="border:1px solid #ccc;padding:5px;" colspan="3" rowspan="1"><span data-bind="text:GuestName"></span></td>
+            </tr>
+
+            <tr>
+                <td style="border:1px solid #ccc;padding:5px;font-weight: bold;"><strong>Booking ID</strong></td>
+                <td style="border:1px solid #ccc;padding:5px;" colspan="3" rowspan="1"><span data-bind="text:Invce_Num"></span></td>
+            </tr>
+
+            <tr>
+                <td style="border:1px solid #ccc;padding:5px;font-weight: bold;"><strong>Check-in Date</strong></td>
+                <td style="border:1px solid #ccc;padding:5px;"><span data-bind="text:Checkin"></span> (From 12 pm)<span></span></td>
+
+                <td style="border:1px solid #ccc;padding:5px;font-weight: bold;"><strong>Check-out Date</strong></td>
+                <td style="border:1px solid #ccc;padding:5px;"><span data-bind="text:Checkout"></span> (Upto 11:30 pm)<span></span></td>
+            </tr>
+
+            <tr>
+                <td style="border:1px solid #ccc;padding:5px;font-weight: bold;"><strong>Room Type </strong></td>
+                <td style="border:1px solid #ccc;padding:5px;"><span data-bind="text:Room_Name"></span></td>
+                <td style="border:1px solid #ccc;padding:5px;font-weight: bold;"><strong>No of Rooms</strong></td>
+                <td style="border:1px solid #ccc;padding:5px;"><span data-bind="text:Room_Count"></span></td>
+            </tr>
+
+            <tr>
+                <td style="border:1px solid #ccc;padding:5px;font-weight: bold;"><strong>No of Nights</strong></td>
+                <td style="border:1px solid #ccc;padding:5px;"><span data-bind="text:Days_Count"></span></td>
+                <td style="border:1px solid #ccc;padding:5px;font-weight: bold;"><strong>Number of Guests</strong></td>
+                <td style="border:1px solid #ccc;padding:5px;" colspan="3" rowspan="1"><span data-bind="text:Room_Count"></span></td>
+            </tr>
+
+        </table>
+        <br />
+        <table width="100%" border="1" bordercolor="#eee" cellspacing="1" cellpadding="5">
+
+
+            <tr><td colspan="2" bgcolor="#eee" align="center" style="border:1px solid #ccc;"><h4 style="font-size:18px;padding:5px 0; color:#42b760;text-transform:uppercase;margin:0px;font-weight:600;">Summary Of Charges</h4></td></tr>
+
+            <tr>
+                <th align="left" style="border:1px solid #ccc;padding:5px;font-weight: bold;">Room Cost</th>
+                <td style="border:1px solid #ccc;padding:5px;">&#8377; <span data-bind="text:camo_room_rate"></span></td>
+            </tr>
+
+            <tr>
+                <th align="left" style="border:1px solid #ccc;padding:5px;font-weight: bold;">Number of Room</th>
+                <td style="border:1px solid #ccc;padding:5px;"><span data-bind="text:Room_Count"></span></td>
+            </tr>
+
+            <tr>
+                <th align="left" style="border:1px solid #ccc;padding:5px;font-weight: bold;">Nights</th>
+                <td style="border:1px solid #ccc;padding:5px;"><span data-bind="text:Days_Count"></span></td>
+            </tr>
+
+            <tr>
+                <th align="left" style="border:1px solid #ccc;padding:5px;font-weight: bold;">Total</th>
+                <td style="border:1px solid #ccc;padding:5px;">&#8377; <span data-bind="text:tot"></span></td>
+            </tr>
+
+            <tr>
+                <th align="left" style="border:1px solid #ccc;padding:5px;font-weight: bold;"> Taxes</th>
+                <td style="border:1px solid #ccc;padding:5px;">&#8377; <span data-bind="text:tax_amnt"></span></td>
+            </tr>
+
+            <tr>
+                <th align="left" style="border:1px solid #ccc;padding:5px;font-weight: bold;">Price Payable</th>
+                <td style="border:1px solid #ccc;padding:5px;color: #42b760;font-weight:bold;"><strong>&#8377; <span data-bind="text:Total"></span></strong> </td>
+            </tr>
+
+        </table>
+        <br />
+        <p><strong style="font-weight:bold;"><font color="red">IMP NOTE:</font></strong> - Please carry Photo ID proof along with a photocopy for the tour.</p>
+        <br />
+        <p style="font-weight:600;">Need help with your reservation?</p>
+        <ul style="font-size:14px;line-height:35px;color:#353535;list-style-type:none;padding:0;"><li>Contact LMK&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Phone: +912243438150</li><li> Contact the property &nbsp;&nbsp;&nbsp;&nbsp;Phone: +912223462244</li></ul>
+        <br /><br />
+        <div style="text-align:right;border-top:3px double #eee;padding-top:20px;"><strong style="font-weight:bold;">Thanks & Regards</strong>,<br><font size="3">Lastminutekeys.com</font></div>
+        <br />
+        <div style="background:#192b3e;padding:10px;"><h4 style="margin: 0;text-align: center;color: #FFFFFF;font-weight: 400;font-size: 15px;text-transform: uppercase;">Follow Us</h4><ul style="padding:0;list-style:none;border-bottom:1px solid #FFF;border-top:1px solid #FFF;margin:5px 0;padding:5px 0;"><li style="float:left;width:33.3%;text-align:left;margin-left:0;"><a href="#" style="display:block;color:#F5F5F5;font-size:12px;text-decoration:none;"><i style="width:15px;height:15px;background:url(img/Mailer/social-icons.png) no-repeat -2px -6px;display:inline-block;vertical-align: sub;"></i> Follow us on Twitter</a></li><li style="float:left;width:33.3%;text-align:center;margin-left:0;"><a href="#" style="display:block;color:#F5F5F5;font-size:12px;text-decoration:none;"><i style="width:15px;height:15px;background:url(img/Mailer/social-icons.png) no-repeat -24px -5px;display:inline-block;vertical-align: sub;"></i> Follow us on Facebook</a></li><li style="float:left;width:33.3%;text-align:right;margin-left:0;"><a href="#" style="display:block;color:#F5F5F5;font-size:12px;text-decoration:none;"><i style="width:15px;height:15px;background:url(img/Mailer/social-icons.png) no-repeat -53px -5px;display:inline-block;vertical-align: sub;"></i> Follow us on Instagram</a></li><div style="clear:both;"></div></ul><h4 style="margin: 0;text-align: center;color: #FFFFFF;font-weight: 400;font-size: 15px;">Contact OurCustomer Care</h4><p style="color:#fefefe;text-align:center;font-size: 12px;margin:0;font-style:italic;padding:4px 0;"><a href="www.lastminutekeys.com/Home/Contact_Us" style="color:#FFF;font-size:14px;font-weight:400;">Click here</a></p><p style="color:#F4F4F4;text-align:center;font-size: 12px;line-height: 1.6em;margin:10px 0;"></p></div>
+    </div>
+</div>
+</div>
+
+
+@section scripts{
+    <script language="javascript" type="text/javascript">
+        $(function () {
+            $("#hrefPrint").click(function () {
+                // Print the DIV.
+                $("#Printdiv").print();
+                return (false);
+            });
+        });
+    </script>
+
+    <link href="~/Content/MyCss.css" rel="stylesheet" />
+    <script src="~/Scripts/Consumer/Invoice_Transaction.js"></script>
+    <script src="~/Scripts/Booking/Print.js"></script>
+}
+
+

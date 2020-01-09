@@ -1,0 +1,902 @@
+﻿@model App.Web.ViewModels.PropertyViewModel
+
+@{
+    ViewBag.Title = "LMK Maintenance";
+}
+<meta charset="utf-8">
+<title>LMK :: Update Property</title>
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<link href="~/Content/Mapcss/jquery-gmaps-latlon-picker.css" rel="stylesheet" />
+<script src="~/Content/Mapsjs/jquery-gmaps-latlon-picker.js"></script>
+
+<script>
+    $(window).load(function () {
+
+        $('#Room_Checkin').timepicker();
+
+        $('#Room_Checkout').timepicker();
+
+        $("#txtPincode").autocomplete({
+
+            source: function (request, response) {
+                
+                $.ajax({
+                    type: "GET",
+                    url: "/api/Property/GetAutoCompleteSearch",
+                    data: { terms: request.term },
+                    dataType: "json",
+                    cacheResults: true,
+                    contentType: "application/json; charset=utf-8",
+                    success: OnSuccess,
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        // alert(textStatus);
+                    }
+                });
+                function OnSuccess(r) {
+                    response($.map(r, function (item) {
+                        return {
+                            Locvalue: item.Location,
+                            label: item.Pincode,
+                            val: item.Id,
+                            city: item.City,
+                            state: item.State,
+                            pine: item.Pincode,
+                        }
+                    }))
+                }
+            },
+            select: function (e, i) {
+                $("#txtLocation").val(i.item.Locvalue);
+                $("#hdnLocationId").val(i.item.val);
+                $("#txtState").val(i.item.state);
+                $("#txtPincode").val(i.item.pine);
+                $("#txtCities").val(i.item.city);
+                $("#txtsearch").val(i.item.Locvalue + ',' + i.item.city);
+                $('#btnGMap').trigger('click');
+            },
+            minLength: 2
+        });
+
+        $("#txtLocation1").autocomplete({
+
+            source: function (request, response) {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/Property/GetAutoCompleteSearch",
+                    data: { terms: request.term },
+                    dataType: "json",
+                    cacheResults: true,
+                    contentType: "application/json; charset=utf-8",
+                    success: OnSuccess,
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        // alert(textStatus);
+                    }
+                });
+                function OnSuccess(r) {
+                    response($.map(r, function (item) {
+                        return {
+                            Locvalue: item.Location,
+                            label: item.Location,
+                            val: item.Id,
+                            city: item.City,
+                            state: item.State,
+                            pine: item.Pincode,
+                        }
+                    }))
+                }
+            },
+            select: function (e, i) {
+                $("#txtLocation1").val(i.item.label);
+                $("#hdnLocationId1").val(i.item.val);
+                $("#txtState1").val(i.item.state);
+                $("#txtPincode1").val(i.item.pine);
+                $("#txtCities1").val(i.item.city);
+                //$("#txtsearch1").val(i.item.Locvalue + ',' + i.item.city);
+            },
+            minLength: 2
+        });
+    });
+
+</script>
+@* Css For Property Star Rating *@
+<link href="~/Content/css/Rating.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-ui.js"></script>
+<style>
+    .property-image-gallery {
+        position: relative;
+    }
+
+    .active-checkbox {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        display: none;
+    }
+
+    .property-image-gallery:hover .active-checkbox {
+        display: block;
+    }
+
+    #ui-id-1 {
+        z-index: 9999;
+    }
+
+    #ui-id-2 {
+        z-index: 9999;
+    }
+
+    .pac-container {
+        z-index: 9999;
+    }
+
+    .box .form-actions2 {
+        margin-left: -1px;
+        margin-right: -1px;
+        text-align: right;
+    }
+</style>
+
+
+
+
+@*Update Image popup*@
+<div class="modal fade" style="margin-left: 29%;" id="myModal2">
+    <div class="modal-dialog" style="width:50%;margin-left: 48px;margin-top: 145px; ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Update Property Image</h4>
+            </div><form id="ImgUpload" action="/Property/UploadEdit" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <label for="photo">Profile Photo:</label>
+                    <input type="file" name="photo" id="photo" />
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" value="Upload" class="btn btn-lg btn-info" />
+                    <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal">Close</button>
+
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+@*Policy Modal*@
+<div class="modal fade" style="margin-left: 29%;" id="ModelMyMap">
+    <div class="modal-dialog" style="width:50%;margin-left: 48px;margin-top: 145px; ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Search the hotel location</h4>
+            </div>
+            <div class="modal-body">
+
+                <!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+    </div>
+</div>
+@*Policy Modal *@
+<form class="form-horizontal">
+    <div class="row">
+        <div class="col-md-12">
+                
+                    <div class="row">
+
+
+                        <div class="col-md-6">
+
+                            <ul id="breadcrumbs" class="breadcrumb">
+                                <li>
+                                    <i class="icon-home"></i>
+                                    <a href="#">Home</a>
+                                </li>
+
+                                <li id="VendorLinkBlock" class="current">
+                                    <a id="Vgroup" href="/Vendor/Bind" title="">Vendor Group</a>
+                                </li>
+                                <li id="UName" data-bind="text:User_name">
+
+
+                                </li>
+                                @*<li>
+
+                                        <a href="/Property/Bind">Property Details</a>
+                                    </li>*@
+                                <li id="PropertyNameLI">
+
+
+                                </li>
+                                <li>
+                                    Property Edit
+                                </li>
+
+                            </ul>
+
+                            <div class="tabbable tabbable-custom">
+                                <ul class="nav nav-tabs">
+
+                                    <li class="active"><a href="#tab_1_1" data-toggle="tab">Property Info</a></li>
+
+                                    <li><a href="#tab_1_2" data-toggle="tab">Bank Info</a></li>
+
+                                    <li><a href="#tab_1_3" data-toggle="tab">Terms & Policies</a></li>
+
+                                    <li><a href="#tab_1_4" data-toggle="tab">Facilities & Amenities</a></li>
+
+                                    <li><a href="#tab_1_5" data-toggle="tab">Property Images</a></li>
+
+
+                                </ul>
+                                <div class="tab-content" id="divPropertyKO">
+
+                                    @*Property details*@
+                                    <div class="tab-pane active" id="tab_1_1">
+                                        <div class="widget box">
+                                            <div class="widget-header">
+                                                <h4><i class="icon-reorder"></i> Edit Property</h4>
+                                            </div>
+                                            <div class="widget-content">
+                                                <form class="form-horizontal row-border" action="#">
+
+
+
+
+
+                                                    <div class="col-md-12">
+                                                        <div class="span5">
+                                                            @*<div class="form-group">
+                                                                    <label class="col-md-3 control-label">Property Image</label>
+                                                                    <div class="col-md-9">
+
+
+                                                                        <a data-toggle="modal" href="#myModal2"><img width="150px" height="150px" id="imgVendor" data-bind="attr:{src:Image_dir}" /><br />Click here to change</a>
+                                                                    </div>
+                                                                </div>*@
+                                                            <div data-bind="foreach: Properties">
+                                                                <div class="form-group" style="display:none">
+                                                                    <label class="col-md-3 control-label">Property id</label>
+                                                                    <div class="col-md-9">
+                                                                        <input data-bind='value: Prop_Id' />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-3 control-label">Property Name<b style="color:red">*</b></label>
+                                                                    <div class="col-md-9">
+                                                                        <input id="New_Prop_Name" class="form-control input-width-xlarge" data-bind='value: Prop_Name' />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="widget-header">
+                                                                <h4><i class="icon-reorder"></i>Hotel Location</h4>
+                                                            </div>
+                                                            <br />
+                                                            <label class="col-md-3 control-label">Hotel Location(Google Map)<span class="qs">? <span class="hint above">GPS information of the hotel!</span></span></label>
+                                                            <fieldset class="gllpLatlonPicker col-md-9" style="padding-bottom:15px;">
+                                                                <input type="text" value="" id="txtsearch" class="gllpSearchField form-control input-width-xlarge" style="display:inline-block;">
+                                                                <input type="button" id="btnGMap" class="gllpSearchButton btn btn-md btn-success" value="search" style="display:inline-block;">
+                                                                  <input type="button" id="btnTrip" onclick="TripAdviser()" class="btn btn-md btn-success" value="Get Trip Advisor data" style="display:inline-block;">
+                                                                <div class="gllpMap" style="margin:15px 0;">Google Maps</div>
+
+
+                                                                <input id="lat" type="text" class="form-control gllpLatitude input-width-medium" value="56565" style="display:inline-block;" />
+
+                                                                <input id="lon" type="text" class="form-control gllpLongitude input-width-medium" value=" -3445" style="display:inline-block;" />
+                                                                <input hidden type="text" class="gllpZoom" value="15" />
+                                                                <input hidden type="button" id="map_Updates" class="gllpUpdateButton" value="update map">
+                                                            </fieldset>
+                                                            <div class="clear"></div>
+                                                            <div data-bind="foreach: Properties">
+
+                                                                <div class="form-group">
+                                                                    <label class="col-md-3 control-label">
+                                                                        Trip Advisor Url<span class="qs">? <span class="hint above">Trip advisor id is for displaying Hotel ratings and reviews</span></span>
+                                                                    </label>
+                                                                    <div class="col-md-9">
+                                                                        <input id="txttripadv" readonly class="form-control input-width-xlarge" type="text" data-bind="value: TripAdv" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-3 control-label">
+                                                                        Property Cin No<b style="color:red">*</b>
+                                                                        <span class="qs">? <span class="hint above">Corporate identification number!</span></span>
+                                                                    </label>
+                                                                    <div class="col-md-9">
+                                                                        <input class="form-control input-width-xlarge" data-bind='value: Prop_Cin_No' />
+                                                                    </div>
+                                                                </div>
+                                                                @*<div class="form-group">
+                                                                        <label class="col-md-3 control-label">City<b style="color:red">*</b></label>
+                                                                        <div class="col-md-9">
+                                                                            <select id="ctyCity" class="form-control input-width-xlarge" data-bind="options: CityLookup,  value: City_Id,optionsText: 'CityName' ,optionsValue:'City_Id' "></select>
+                                                                        </div>
+                                                                    </div>*@
+                                                                <div class="form-group">
+                                                                    <label class="col-md-3 control-label">Street<b style="color:red">*</b></label>
+                                                                    <div class="col-md-9">
+                                                                        <textarea id="Prop_Addr1" class="form-control input-width-xlarge" type="text" data-bind="value:Prop_Addr1"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-3 control-label">Pin Code<b style="color:red">*</b></label>
+                                                                    <div class="col-md-9">
+                                                                        <input type="text" id="txtPincode" data-bind="value:Pin_Code" class="form-control input-width-xlarge">
+                                                                    </div>
+                                                                </div>
+
+
+
+                                                                <div class="form-group">
+                                                                    <label class="col-md-3 control-label">State<b style="color:red">*</b></label>
+                                                                    <div class="col-md-9">
+                                                                        <input type="text" id="txtState" data-bind="value:State_Name" class="form-control input-width-xlarge">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-3 control-label">City<b style="color:red">*</b></label>
+                                                                    <div class="col-md-9">
+                                                                        <input type="text" id="txtCities" data-bind="value:City_Name" class="form-control input-width-xlarge">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-3 control-label">Location<b style="color:red">*</b></label>
+                                                                    <div class="col-md-9">
+                                                                        <input type="hidden" id="hdnLocationId" />
+                                                                        <input type="text" id="txtLocation" data-bind="value:Location_Name" class="form-control input-width-xlarge">
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label class="col-md-3 control-label">Hotel Overview</label>
+                                                                    <div class="col-md-9">
+                                                                        <textarea style="height:100px" id="Prop_overview" class="form-control input-width-xlarge" data-bind="value:Prop_Overview"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-3 control-label">Front Desk Phone Number   </label>
+
+                                                                    <div class="col-md-9">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">+91</span>
+                                                                            <input id="Prop_Addr1" onkeypress="return numbersOnly(this, event);" maxlength="11" class="form-control input-width-large" type="text" data-bind="    value: Prop_Addr2" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label class="col-md-3 control-label">Room Checkin<b style="color:red">*</b><span class="qs">? <span class="hint above">Check in time of the hotel!</span></span></label>
+                                                                    <div class="col-md-9">
+                                                                        <input id="Room_Checkin" class="form-control input-width-xlarge" type="text" data-bind="value:Room_Checkins" />
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label class="col-md-3 control-label">Room Checkout<b style="color:red">*</b><span class="qs">? <span class="hint above">Check out time of the hotel!</span></span></label>
+                                                                    <div class="col-md-9">
+                                                                        <input id="Room_Checkout" class="form-control input-width-xlarge" type="text" data-bind="value:Room_Checkouts" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-3 control-label">Hotel Start Rating<span class="qs">? <span class="hint above">Rating of the hotel!</span></span></label>
+                                                                    <div class="col-md-9">
+                                                                        <span class="star-rating star-5" id="abc">
+                                                                            <input type="radio" name="rating" value="1"><i></i>
+                                                                            <input type="radio" name="rating" value="2"><i></i>
+                                                                            <input type="radio" name="rating" value="3"><i></i>
+                                                                            <input type="radio" name="rating" value="4"><i></i>
+                                                                            <input type="radio" name="rating" value="5"><i></i>
+                                                                        </span>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div data-bind="foreach: Properties">
+
+
+                                                                <div hidden class="widget-header">
+                                                                    <h4><i class="icon-reorder"></i>Channel Management Preference<span class="qs">? <span class="hint above">Choose your channel manager tool !</span></span></h4>
+                                                                </div>
+                                                                <br />
+                                                                <div hidden class="form-group">
+                                                                    <label class="col-md-3 control-label"></label>
+                                                                    <div class="col-md-9">
+                                                                        <input type="radio" name="Channel" checked="checked" value="1"><b>Last Minute Keys</b><span class="qs">? <span class="hint above">Prefer to use Last Minute Keys for managing the room rates!</span></span><label style="width:20px">&nbsp;</label>
+                                                                        <input type="radio" name="Channel" value="2"><b> External</b><span class="qs">? <span class="hint above">Prefer to use external channel!</span></span>
+                                                                    </div>
+                                                                </div>
+
+
+                                                                <div hidden class="widget-header">
+                                                                    <h4><i class="icon-reorder"></i>Rate<span class="qs">? <span class="hint above">Room Pricing Structure!</span></span></h4>
+                                                                </div>
+                                                                <br />
+                                                                <div hidden class="form-group">
+                                                                    <label class="col-md-3 control-label"></label>
+                                                                    <div class="col-md-9">
+                                                                        <input type="radio" name="Rate" value="2"><b>&nbsp;Net Rate</b><label style="width:10px">&nbsp;</label>
+                                                                        <input type="radio" name="Rate" value="1"><b>&nbsp;Commissonable Rate</b>
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="widget-header">
+                                                                    <h4><i class="icon-reorder"></i>Booking In-charge</h4>
+                                                                </div><br />
+                                                                <div class="form-group">
+                                                                    <label class="col-md-3 control-label">Booking Email</label>
+                                                                    <div class="col-md-9">
+                                                                        <input class="form-control input-width-xlarge" data-bind="value: Prop_Booking_MailId" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-3 control-label">Booking Mobile Number<b style="color:red">*</b></label>
+                                                                    <div class="col-md-9">
+                                                                        <input onkeypress="return numbersOnly(this, event);" maxlength="10" class="form-control input-width-xlarge" data-bind="    value: Prop_Booking_Mob" />
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="widget-header">
+                                                                    <h4><i class="icon-reorder"></i>Pricing In-charge</h4><b style="color:red">*</b>
+                                                                </div><br />
+                                                                <div class="form-group">
+                                                                    <label class="col-md-3 control-label">Pricing Mail Id</label>
+                                                                    <div class="col-md-9">
+                                                                        <input class="form-control input-width-xlarge" data-bind="value: Prop_Pricing_MailId" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-3 control-label">Pricing Mobile Number<b style="color:red">*</b></label>
+                                                                    <div class="col-md-9">
+                                                                        <input onkeypress="return numbersOnly(this, event);" maxlength="10" class="form-control input-width-xlarge" data-bind="    value: Prop_Pricing_Mob" />
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="widget-header">
+                                                                    <h4><i class="icon-reorder"></i>Inventory In-charge</h4><b style="color:red">*</b>
+                                                                </div><br />
+                                                                <div class="form-group">
+                                                                    <label class="col-md-3 control-label">Inventory Mail Id</label>
+                                                                    <div class="col-md-9">
+                                                                        <input class="form-control input-width-xlarge" data-bind="value: Prop_Inventory_MailId" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-3 control-label">Inventory Mobile</label>
+                                                                    <div class="col-md-9">
+                                                                        <input onkeypress="return numbersOnly(this, event);" maxlength="10" class="form-control input-width-xlarge" data-bind="    value: Prop_Inventory_Mob" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div data-bind="foreach: Properties" class="row">
+                                                                <div class="span10">
+                                                                    <div class="form-actions form-actions2">
+                                                                        <input id="btnCreate" type="button" value="Save" data-bind="click: CreateProperty" class="btn btn-lg btn-primary" />
+                                                                        <input id="btnCancel" type="button" value="Back" data-bind="click: Cancel" class="btn btn-lg btn-danger" />
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                        <div class="modal fade" style="margin-left: 29%;" id="mySearchModel">
+                                            <div class="modal-dialog" style="width:50%;margin-left: 48px;margin-top: 145px; ">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                        <h4 class="modal-title">City</h4><span>Ex:Hsr Layout,Bangalore</span>
+                                                    </div>
+                                                    <div class="modal-body">
+
+                                                        <input type="text" id="txtDemo" placeholder="Please enter location followed by City" class="form-control input-width-xlarge">
+
+                                                    </div>
+                                                    <div class="modal-footer">
+
+                                                        <button onclick="PropCityType()" type="button" class="btn btn-lg btn-primary" data-dismiss="modal">Submit</button>
+
+                                                    </div>
+
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div>
+                                    </div>
+                                    @*Bank details*@
+                                    <div class="tab-pane" id="tab_1_2">
+                                        <div class="span5" data-bind="foreach: BankDetails">
+                                            <div class="form-group" style="display:none">
+                                                <label class="col-md-3 control-label"></label>
+                                                <div class="col-md-9">
+                                                    <input class="form-control input-width-xlarge" data-bind="value: Bank_Id" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Bank Name<b style="color:red">*</b></label>
+                                                <div class="col-md-9">
+                                                    <input class="form-control input-width-xlarge" data-bind="value: Bank_Name" />
+                                                </div>
+                                            </div>
+                                            <div hidden class="form-group">
+                                                <label class="col-md-3 control-label">Bank description</label>
+                                                <div class="col-md-9">
+                                                    <input class="form-control input-width-xlarge" data-bind="value: Bank_descr" />
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Bank IFSC Code<b style="color:red">*</b></label>
+                                                <div class="col-md-9">
+                                                    <input class="form-control input-width-xlarge" onkeypress="return checkSpcialChar(event);" id="txtifsc" data-bind="    value: Bank_IFC_code" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Bank Account Number<b style="color:red">*</b></label>
+                                                <div class="col-md-9">
+                                                    <input class="form-control input-width-xlarge" onkeypress="return numbersOnly(this, event);"  data-bind="value: Bank_Accnt_No" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Bank Account Name<b style="color:red">*</b></label>
+                                                <div class="col-md-9">
+                                                    <input class="form-control input-width-xlarge" data-bind="value: Bank_Accnt_Name" />
+                                                </div>
+                                            </div>
+                                            @*<div class="form-group">
+                                                    <label class="col-md-3 control-label">City</label>
+                                                    <div class="col-md-9">
+                                                        <input type="text" id="txtLocationBank" data-bind="value:City_Area" class="form-control input-width-xlarge" readonly>
+
+                                                        <a data-toggle="modal" style="margin-left: 41%;margin-top: -8%;" href="#mySearchModelBank" class="btn btn-success">Pick Location</a>
+
+                                                    </div>
+                                                </div>*@
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Location<b style="color:red">*</b></label>
+                                                <div class="col-md-9">
+                                                    <input type="hidden" data-bind="value:City_Id" id="hdnLocationId1" />
+                                                    <input type="text" data-bind="value:City_Area" id="txtLocation1" class="form-control input-width-xlarge">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">City<b style="color:red">*</b></label>
+                                                <div class="col-md-9">
+                                                    <input type="text" readonly id="txtCities1" data-bind="value:City_Name" class="form-control input-width-xlarge">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Pin Code<b style="color:red">*</b></label>
+                                                <div class="col-md-9">
+                                                    <input type="text" readonly id="txtPincode1" onkeypress="return numbersOnly(this, event);"  data-bind="value:Pincode" class="form-control input-width-xlarge">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">State<b style="color:red">*</b></label>
+                                                <div class="col-md-9">
+                                                    <input type="text" readonly id="txtState1" data-bind="value:State_Name" class="form-control input-width-xlarge">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Bank Branch<b style="color:red">*</b></label>
+                                                <div class="col-md-9">
+                                                    <input class="form-control input-width-xlarge" data-bind="value: Bank_Branch_Name" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Bank Branch Code<b style="color:red">*</b></label>
+                                                <div class="col-md-9">
+                                                    <input class="form-control input-width-xlarge" onkeypress="return numbersOnly(this, event);" data-bind="value: Bank_Branch_Code" />
+                                                </div>
+                                            </div>
+                                            @*<div class="form-group">
+                                                    <label class="col-md-3 control-label">Bank City<b style="color:red">*</b></label>
+                                                    <div class="col-md-9">
+                                                        <select id="BankCityId" class="form-control input-width-xlarge" data-bind="options: CityLookup, value: City_Id,optionsText: 'CityName' ,optionsValue:'City_Id' "></select>
+                                                    </div>
+                                                </div>*@
+
+                                            <div class="row">
+                                                <div class="span10">
+                                                    <div class="form-actions form-actions2">
+
+                                                        <input id="btnCreate" type="button" value="Save" data-bind="click: CreateBank" class="btn btn-lg btn-primary" />
+                                                        <input id="btnCancel" type="button" value="Back" data-bind="click: Cancel" class="btn btn-lg btn-danger" />
+                                                        @*<input id="btnCreateBank" type="button" value="Save" data-bind="click: CreateBank" class="btn btn-lg btn-primary" />
+
+                                                            <input id="btnCancel" type="button" value="Back" data-bind="click: Cancel" class="btn btn-lg btn-danger" />*@
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="modal fade" style="margin-left: 29%;" id="mySearchModelBank">
+                                            <div class="modal-dialog" style="width:50%;margin-left: 48px;margin-top: 145px; ">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                        <h4 class="modal-title">City</h4><span>Ex:Hsr Layout,Bangalore</span>
+                                                    </div>
+                                                    <div class="modal-body">
+
+                                                        <input type="text" placeholder="Please enter location followed by city" id="txtDemoBank" class="form-control input-width-xlarge">
+
+                                                    </div>
+                                                    <div class="modal-footer">
+
+                                                        <button onclick="BankCityType()" type="button" class="btn btn-lg btn-primary" data-dismiss="modal">Submit</button>
+
+                                                    </div>
+
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div>
+
+                                    </div>
+
+                                    @*Images details*@
+                                    <div class="tab-pane" id="tab_1_3">
+                                        <div class="modal fade" style="margin-left: 29%;" id="myModalPolicy">
+                                            <div class="modal-dialog" style="width:80%;">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                        <h4 class="modal-title">Add New Policy</h4>
+                                                    </div><form id="ImgUpload">
+                                                        <div class="modal-body">
+
+                                                            <input id="Policy_Name" style="display:none" type="text" data-bind="value: Policy_Id" />
+
+                                                            <div class="form-group">
+                                                                <label class="col-md-3 control-label">Policy Name</label>
+                                                                <div class="col-md-9">
+                                                                    <input id="Policy_Name" type="text" style="width: 346PX; HEIGHT: 37PX;" data-bind="value: Policy_Name" />
+                                                                </div>
+                                                            </div>
+
+                                                            <br /><br />
+                                                            <div class="form-group">
+                                                                <label class="col-md-3 control-label">Policy Description</label>
+                                                                <div class="col-md-9">
+                                                                    @*<textarea class="ckeditor"  id="aboutme" name="editor"></textarea>*@
+                                                                    <textarea id="Policy_Name" style="width: 350px;height: 57px;" data-bind="value:Policy_descr"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <br /><br />
+                                                        </div>
+                                                        <div class="modal-footer">
+
+                                                            <input data-dismiss="modal" type="submit" data-bind="click:CreatePolicy" value="Submit" class="btn btn-lg btn-info" />
+                                                            <button id="btnModelClose" type="button" class="btn btn-lg btn-primary" data-dismiss="modal">Close</button>
+
+                                                        </div>
+                                                    </form>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div>
+
+                                        <form class="form-horizontal">
+
+                                            <div style="margin:0 0" class="crumbs">
+
+
+                                                <a data-toggle="modal" href="#myModalPolicy" style="margin-left: 93%;margin-top: 0%;" class="btn btn-success">Create</a>
+                                            </div><br /><br />
+
+                                            <br /><br />
+                                            <div class="row">
+                                                <div class="col-md-12" style="margin-top: -5%;">
+                                                    <div class="widget box">
+                                                        <div class="widget-header">
+                                                            <h4><i class="icon-reorder"></i> Manage Policy</h4>
+                                                            <div class="toolbar no-padding">
+                                                                <div class="btn-group">
+                                                                    <span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="widget-content no-padding">
+                                                            <table data-bind="foreach: Policies" id="PolicyDT" class="table table-striped table-bordered table-hover table-checkable PropertiesDT">
+                                                                <thead style="background-color:#4275ab;color: white;">
+                                                                    <tr>
+                                                                        <th style="display:none" data-bind=" text: Policy_Id"></th>
+                                                                        <th>
+                                                                            <span data-bind=" text: Policy_Name"></span>
+                                                                            <div style="float:right">
+                                                                                <a data-toggle="modal" data-bind="click: EditPolicy" href="#myModalPolicy"><img src="../../img/Splitted_Images/edit_button_policy.png" /></a>
+                                                                                <a style="cursor:pointer" data-bind="click: deletePolicy"><img src="../../img/Splitted_Images/disable_button_policy.png" /></a>
+                                                                            </div>
+                                                                        </th>
+
+
+
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+
+
+
+                                                                        <td data-bind="html: Policy_descrEdit"></td>
+
+                                                                    </tr>
+
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    @*Facilities*@
+                                    <div class="tab-pane" id="tab_1_4">
+
+                                        <div id="tab4">
+
+                                            <div id="bind" data-bind="foreach: Facilities">
+
+                                                <div data-bind="attr:{class:FTypecount}" style="display: inline-table; width:15%;text-align:center;">
+                                                    <h3 data-bind="text:Facility_Type"></h3>
+                                                    @*<label data-bind="text:Facility_Type" style="font:bold;text-align:left"></label>*@
+
+
+                                                    <div data-bind="attr:{class:IsHeader}">
+
+                                                        <ul style="padding-left:0;">
+                                                            <li style="list-style:none">
+
+                                                                <label id="Active" data-bind="text: Active_flag" style="background-color:green;position:absolute;margin:30px 0 0 -69px;color:lightgray;display:none"></label>
+                                                            </li>
+
+
+                                                            <li style="list-style:none;position:relative;" data-bind="click: ActivateFacility" title="Click Here">
+                                                                <img id="Imgid" data-bind="attr:{src: Facility_Image_dir, title: Facility_Name}" style="width:150px; height:150px;padding:5px" />
+
+                                                                <div data-bind="if: Active_flag" style="position:absolute;top:5px;left:10px;">
+                                                                    <img src="~/img/active_facility.png">
+
+                                                                </div>
+                                                            </li>
+                                                            <li style="list-style:none">
+                                                                <span data-bind="text: Facility_Name"> </span>
+                                                            </li>
+                                                            <li style="list-style:none">
+
+                                                                <input type="checkbox" data-bind="checked: Active_flag,event:{change:ActivateFacility}">
+
+
+                                                            </li>
+
+                                                        </ul>
+
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+                                        </div>
+
+
+
+                                    </div>
+                                    @*Policies details*@
+                                    <div class="tab-pane" id="tab_1_5">
+                                        <div class="row" style="margin-top:-40px">
+                                            <div class="span10">
+                                                <div class="form-actions">
+                                                    <a data-toggle="modal" href="#modelSelectImage" class="btn btn-info" style="float:right">Add </a>
+                                                </div>
+
+                                            </div>
+
+
+
+
+                                            <div class="row">
+
+                                                <div class="modal fade" style="margin-left: 29%;" id="modelSelectImage">
+                                                    <div class="modal-dialog" style="width:50%;">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                                <h4 class="modal-title">Add Image</h4>
+                                                            </div>
+
+                                                            <div class="modal-body">
+
+                                                                <input id="imgUploadNew" type="file" accept="image/*" data-bind="files: imageFile, fileObjectURL: imageObjectURL, fileBinaryData: imageBinary" required />
+                                                                <label> Please select Image of width:600px,Height:300px</label>
+                                                                <div data-bind="if: imageObjectURL">
+                                                                    <img id="imgAdd" data-bind="attr: { src: imageObjectURL }" style="height: 175px;margin-left: 140px;width: 260px" />
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <input type="submit" data-bind="click:SubmitImage" value="Submit" class="btn btn-lg btn-info" data-dismiss="modal" />
+                                                                <button id="btnModelClose" data-bind="click:CancelUpload" type="button" class="btn btn-lg btn-primary" data-dismiss="modal">Close</button>
+
+                                                            </div>
+
+                                                        </div><!-- /.modal-content -->
+                                                    </div><!-- /.modal-dialog -->
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <br />
+                                        <div class="row" id="imageGallery">
+                                            <ul data-bind="foreach:ImagesList" style="padding-left:0;">
+                                                <li style="list-style:none;position:relative;display:inline-block;padding: 15px;">
+                                                    <span style="display:none" data-bind="text:Image_Id"></span>
+                                                    <div class="property-image-gallery">
+
+                                                        <span data-bind="visible:Set_Flag" style="position:absolute;top:5px;right:5px;"><img src="~/img/active_facility.png" title="Default Image" /></span>
+                                                        <img style="width:150px;height:150px;cursor:pointer" data-bind="attr:{src:Image_dir},click:SetDefault" />
+                                                        <span class="active-checkbox"><img src="~/img/active_facility.png" title="Default Image"></span>
+                                                    </div>
+                                                    <div>
+                                                        <input type="checkbox" style="margin-left:16px" data-bind="enable:!Set_Flag(),checked:Active_flag,event:{change:Select}" />
+                                                        <span data-bind="text: Status" style="position:absolute;left:56px;"> </span>
+
+                                                    </div>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+            
+        </div>
+    </div>
+
+</form>
+
+
+
+
+@section scripts{
+<script src="~/Scripts/Master.js"></script>
+    <script src="@Url.Content("~/Scripts/Property/EditPropertyById.js")" type="text/javascript"></script>
+    <script>
+        function numbersOnly(oToCheckField, oKeyEvent) {
+           // if (isNaN(String.fromCharCode(event.which || event.keyCode))) return false
+            // alert("You pressed a key inside the input field");
+            return oKeyEvent.charCode === 0 || /\d/.test(String.fromCharCode(oKeyEvent.charCode));
+
+        }
+        function checkSpcialChar(event){
+            if(!((event.keyCode >= 65) && (event.keyCode <= 90) || (event.keyCode >= 97) && (event.keyCode <= 122) || (event.keyCode >= 48) && (event.keyCode <= 57))){
+                event.returnValue = false;
+                return;
+            }
+            event.returnValue = true;
+        }
+
+     
+    </script>
+}
+
+

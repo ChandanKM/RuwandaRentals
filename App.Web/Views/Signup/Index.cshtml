@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "SignUp";
+    Layout = "~/Views/Shared/_DefaultConsumer.cshtml";
+}
+
+<div class="signin-page">
+    <div id="alert_placeholder"></div>
+    <section>
+        <h2>Please Sign Up for booking</h2>
+        <div class="signin-fields">
+            <form id="signupForm">
+                
+                <span><input type="text" data-bind="value:Cons_First_Name" placeholder="First Name" class="text-box"></span>
+                <span><input type="text" data-bind="value:Cons_Last_Name" placeholder="Last Name" class="text-box"></span>
+                <span><input type="text" placeholder="Email" id="txtemail" data-bind="value:Cons_mailid,event:{blur:checkemail}" class="text-box"> </span>
+                <span><input type="password" placeholder="Password" data-bind="value:Cons_Pswd" class="text-box"> </span>
+                <span><input type="password" placeholder="Confirm  password" data-bind="value:ConfirmPassword" class="text-box"> </span>
+                <span><input type="text" maxlength="10" placeholder="Mobile No." data-bind="value:Cons_Mobile" class="text-box"> </span>
+
+                <span class="checkbox-field"><label class="checkbox checkbox4"><input id="chkcorp" type="checkbox" data-bind="checked:emailCheck,event:{change:Change}"><i> </i></label><span>Corporate User </span></span>
+
+                <span class="checkbox-field"><label class="checkbox checkbox4"><input type="checkbox" data-bind="checked:Check,event:{change:Change}"><i> </i></label><a href="/Home/terms_conditions" style="font-size:14px; margin: 0px 0px 0px 30px">I agree to the Terms & Conditions </a></span>
+                <span><input type="submit" data-bind="enable:Check,click:Submit" value="Create Account" class="signin-btn"> </span>
+            </form>
+        </div>
+        @*<div class="verification-link-desc">
+            <p>You will receive an e-mail containing the account verification link.</p>
+        </div>*@
+    </section>
+</div>
+
+@section scripts{
+
+    <script src="~/Scripts/Consumer/SignUpForm.js"></script>
+}

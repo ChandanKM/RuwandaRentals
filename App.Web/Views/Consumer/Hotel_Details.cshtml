@@ -1,0 +1,337 @@
+﻿
+@{
+    ViewBag.Title = "Hotel_Details";
+    Layout = "~/Views/Shared/_DefaultConsumer.cshtml";
+}
+
+<div class="hotel-details-page">
+    <div class="breadcrumb-block breadcrumb-block2">
+        <div class="wrap">
+            <ol class="breadcrumb breadcrumb2">
+                <li><a href="@Url.Action("Index", "Home") ">Home</a></li>
+                <li><a href="#">Hotels in Bangalore</a></li>
+                <li class="active">Amazing hotel with luxury room service</li>
+            </ol>
+        </div>
+    </div>
+
+
+    <!-- Search Result Section -->
+    <div class="hotel-desc-page">
+        <div class="wrap">
+
+            <div class="top-filter-pannel">
+
+                <div class="location-filter">
+                    <i class="location_icon"></i>
+                    <span>Bangalore, KA, India</span>
+                </div>
+
+                <div class="checkin-filter">
+                    <i class="calendar_icon"></i>
+                    <span>Mon 19 Jan 2015</span>
+                </div>
+
+                <div class="checkout-filter">
+                    <i class="calendar_icon"></i>
+                    <span>Tue 20 Jan 2015</span>
+                </div>
+
+                <div class="days-filter">
+                    <i class="moon_icon"></i>
+                    <span>1 Night</span>
+                </div>
+
+                <div class="modify-search">
+                    <a href="#"><i class="search_icon"></i> Modify Search</a>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+            <!-- Search result list -->
+            <section class="hotel-details">
+
+                <div class="hotel-details-content">
+                    <section class="detail-hotel-details">
+                        <div class="detail-hotel-img">
+                            <img src="~/Content/Consumer/images/hotel-details-img.jpg" title="Hotel Name" alt="">
+                        </div>
+                        <div class="detail-hotel-desc">
+                            <h3>Amazing hotel with luxury room service</h3>
+                            <h4>Marthahalli, Bangalore, Karnataka</h4>
+                            <h4 class="phone">1800 999 1200</h4>
+                            <section>
+                                <span class="hotel-star-rate float-lt">
+                                    <label class="s1"></label>
+                                    <label class="s1"></label>
+                                    <label class="s1"></label>
+                                    <label class="s0"></label>
+                                    <label class="s0"></label>
+                                </span>
+
+                                <div class="hotel-reviews similar-hotel-review hotel_reviews2">
+                                    <ul class="hotel-reviews2">
+                                        <li class="review_icon"></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                    </ul>
+                                    <div class="review-total review-total2 review-total3"><span class="review-count">600</span> Reviews</div>
+                                </div>
+                                <div class="clear"></div>
+                            </section>
+                            <div class="hotel_facilities">
+                                <ul>
+                                    <li><img src="~/Content/Consumer/images/24x7-checkin.png" title="24x7 Checkin"></li>
+                                    <li><img src="~/Content/Consumer/images/meeting.png" title="Metting Space"></li>
+                                    <li><img src="~/Content/Consumer/images/wifi.png" title="Wifi"></li>
+                                    <li><img src="~/Content/Consumer/images/bar.png" title="Image"></li>
+                                    <li><img src="~/Content/Consumer/images/restaurant.png" title="Restaurant"></li>
+                                </ul>
+                            </div>
+                            <div class="room-price">
+                                <h5><em>Starting </em><span class="new-price">₹ 2100</span><em>1 Room, 1 Night</em></h5>
+                            </div>
+                            <div class="room-details-btn"><a title="View Room Details" href="#"><i class="book-now-icon"></i> View Room Details</a></div>
+                        </div>
+                        <div class="clear"></div>
+                    </section>
+
+                    <!-- Room Rates -->
+                    <div class="room-rates">
+                        <div class="room-rates-heading">
+                            <h2 class="float-lt">Room Rates</h2>
+                            <div class="heading-date"><p>Mon 19 Jan 2015</p></div>
+                            <div class="clear"></div>
+                        </div>
+                        <section class="room-rate-list">
+                            <div class="room-rate-img">
+                                <img src="~/Content/Consumer/images/roorm-rate-img.jpg" title="Image Name" alt="" />
+                            </div>
+                            <div class="room-rate-details">
+                                <div class="room-rate-desc">
+                                    <h3>Superior Queen Guest Room</h3>
+                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                                    <div class="hotel_facilities room_facilities">
+                                        <ul>
+                                            <li><img src="~/Content/Consumer/images/24x7-checkin.png" title="24x7 Checkin"></li>
+                                            <li><img src="~/Content/Consumer/images/wifi.png" title="Wifi"></li>
+                                            <li><img src="~/Content/Consumer/images/bar.png" title="Image"></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="room_price">
+                                    <h5><em>Room Price</em><span class="new-price">₹ 2100</span></h5>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="book_now_btn">
+                                    <p><a href="#"><i class="book_now_icon"></i> Book Now</a></p>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </section>
+
+                        <section class="room-rate-list">
+                            <div class="room-rate-img">
+                                <img src="~/Content/Consumer/images/roorm-rate-img.jpg" title="Image Name" alt="" />
+                            </div>
+                            <div class="room-rate-details">
+                                <div class="room-rate-desc">
+                                    <h3>King or Queen Deluxe Room</h3>
+                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                                    <div class="hotel_facilities room_facilities">
+                                        <ul>
+                                            <li><img src="~/Content/Consumer/images/24x7-checkin.png" title="24x7 Checkin"></li>
+                                            <li><img src="~/Content/Consumer/images/wifi.png" title="Wifi"></li>
+                                            <li><img src="~/Content/Consumer/images/bar.png" title="Image"></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="room_price">
+                                    <h5><em>Room Price</em><span class="new-price">₹ 3500</span></h5>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="book_now_btn">
+                                    <ul>
+                                        <li><span>2 Rooms Left</span></li>
+                                    </ul>
+                                    <p><a href="#"><i class="book_now_icon"></i> Book Now</a></p>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </section>
+
+                    </div>
+
+                </div>
+
+                <div class="similar-hotels">
+                    <h2>Similar Hotels</h2>
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <div class="similar-hotel-img">
+                                    <img src="~/Content/Consumer/images/similar-hotel-img.jpg" title="Hotel Name" alt="" />
+                                </div>
+                                <div class="similar-hotel-desc">
+                                    <h3>Hotel Empire Cenntral</h3>
+                                    <h4>Bangalore, Karnataka</h4>
+                                    <section>
+                                        <div class="left-block">
+                                            <span class="similar-hotel-star-rate">
+                                                <label class="s1"></label>
+                                                <label class="s1"></label>
+                                                <label class="s1"></label>
+                                                <label class="s0"></label>
+                                                <label class="s0"></label>
+                                            </span>
+                                            <div class="hotel-reviews similar-hotel-review">
+                                                <ul>
+                                                    <li class="review_icon"></li>
+                                                    <li></li>
+                                                    <li></li>
+                                                    <li></li>
+                                                    <li></li>
+                                                    <li></li>
+                                                </ul>
+                                                <div class="review-total review-total2"><span class="review-count">600</span> Reviews</div>
+                                            </div>
+                                        </div>
+                                        <div class="right-block">
+                                            <h5><em>Starting </em><span class="new-price">₹ 2100</span><em>1 Room, 1 Night</em></h5>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </section>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <div class="similar-hotel-img">
+                                    <img src="~/Content/Consumer/images/similar-hotel-img.jpg" title="Hotel Name" alt="" />
+                                </div>
+                                <div class="similar-hotel-desc">
+                                    <h3>Hotel Empire Cenntral</h3>
+                                    <h4>Bangalore, Karnataka</h4>
+                                    <section>
+                                        <div class="left-block">
+                                            <span class="similar-hotel-star-rate">
+                                                <label class="s1"></label>
+                                                <label class="s1"></label>
+                                                <label class="s1"></label>
+                                                <label class="s0"></label>
+                                                <label class="s0"></label>
+                                            </span>
+                                            <div class="hotel-reviews similar-hotel-review">
+                                                <ul>
+                                                    <li class="review_icon"></li>
+                                                    <li></li>
+                                                    <li></li>
+                                                    <li></li>
+                                                    <li></li>
+                                                    <li></li>
+                                                </ul>
+                                                <div class="review-total review-total2"><span class="review-count">600</span> Reviews</div>
+                                            </div>
+                                        </div>
+                                        <div class="right-block">
+                                            <h5><em>Starting </em><span class="new-price">₹ 2100</span><em>1 Room, 1 Night</em></h5>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </section>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <div class="similar-hotel-img">
+                                    <img src="~/Content/Consumer/images/similar-hotel-img.jpg" title="Hotel Name" alt="" />
+                                </div>
+                                <div class="similar-hotel-desc">
+                                    <h3>Hotel Empire Cenntral</h3>
+                                    <h4>Bangalore, Karnataka</h4>
+                                    <section>
+                                        <div class="left-block">
+                                            <span class="similar-hotel-star-rate">
+                                                <label class="s1"></label>
+                                                <label class="s1"></label>
+                                                <label class="s1"></label>
+                                                <label class="s0"></label>
+                                                <label class="s0"></label>
+                                            </span>
+                                            <div class="hotel-reviews similar-hotel-review">
+                                                <ul>
+                                                    <li class="review_icon"></li>
+                                                    <li></li>
+                                                    <li></li>
+                                                    <li></li>
+                                                    <li></li>
+                                                    <li></li>
+                                                </ul>
+                                                <div class="review-total review-total2"><span class="review-count">600</span> Reviews</div>
+                                            </div>
+                                        </div>
+                                        <div class="right-block">
+                                            <h5><em>Starting </em><span class="new-price">₹ 2100</span><em>1 Room, 1 Night</em></h5>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </section>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <div class="similar-hotel-img">
+                                    <img src="~/Content/Consumer/images/similar-hotel-img.jpg" title="Hotel Name" alt="" />
+                                </div>
+                                <div class="similar-hotel-desc">
+                                    <h3>Hotel Empire Cenntral</h3>
+                                    <h4>Bangalore, Karnataka</h4>
+                                    <section>
+                                        <div class="left-block">
+                                            <span class="similar-hotel-star-rate">
+                                                <label class="s1"></label>
+                                                <label class="s1"></label>
+                                                <label class="s1"></label>
+                                                <label class="s0"></label>
+                                                <label class="s0"></label>
+                                            </span>
+                                            <div class="hotel-reviews similar-hotel-review">
+                                                <ul>
+                                                    <li class="review_icon"></li>
+                                                    <li></li>
+                                                    <li></li>
+                                                    <li></li>
+                                                    <li></li>
+                                                    <li></li>
+                                                </ul>
+                                                <div class="review-total review-total2"><span class="review-count">600</span> Reviews</div>
+                                            </div>
+                                        </div>
+                                        <div class="right-block">
+                                            <h5><em>Starting </em><span class="new-price">₹ 2100</span><em>1 Room, 1 Night</em></h5>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </section>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="see-more"><a href="#">See More</a></li>
+                    </ul>
+                </div>
+
+                <div class="clear"></div>
+            </section>
+
+        </div>
+    </div>
+
+</div>
+

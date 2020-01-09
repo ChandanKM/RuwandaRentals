@@ -1,0 +1,318 @@
+﻿@model App.Web.ViewModels.ConsumerLoginViewModel
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Last Minute Keys </title>
+    <link rel="shortcut icon" href="~/img/Splitted_Images/LMK%20favicon.ico" type="image/x-icon" />
+    <meta name="keywords" content="Last Minute Keys" />
+    <meta name="description" content="Last Minute Keys" />
+
+    <link rel="stylesheet" type="text/css" href="~/Content/Consumer/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Consumer/css/custom-style.css">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:500,100,300,400' rel='stylesheet' type='text/css'>
+
+
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <div class="header">
+        <div class="wrap">
+            <div class="logo">
+                <a href="@Url.Action("Index","Home")"><img src="~/Content/Consumer/images/logo.png" title="LMK" alt="" /></a>
+
+            </div>
+
+            <div class="header-right">
+                <ul>
+                    @*<li class="help-desc"><a class="help" href="@Url.Action("terms_conditions", "Home")">Help</a></li>*@
+                    <li class="cont-info"><a href="@Url.Action("/Contact_Us", "Home")"><span class="cnt-desc">Help Line</span> <span class="cnt-number">+91 022 43438150</span> </a></li>
+                    <li id="liSignIn">
+                        <!-- Sign In -->
+                        <div class="dropdown signin-details">
+                            <a class="dropdown-toggle" href="#" data-toggle="dropdown" style="border-right:none;">Sign In</a>
+
+                            <div class="dropdown-menu login-dropdown">
+                                <h4 class="signin">Sign In</h4>
+                                <div class="signin-fb signin-fb2">
+                                    <div id="fb-root"></div>
+                                    <h3><a href="#" onclick="PopUpFbLogin()"><i class="fb-icon"></i> Sign in with facebook</a></h3>
+                                </div>
+                                <div class="serperator serperator2">
+                                    <hr />
+                                    <span>OR</span>
+                                </div>
+                                @*@using (Html.BeginForm("Signin", "Signin", new { ReturnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post))
+                                    {*@
+                                @*@Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+                                <form id="formSignIn">
+                                    <span><input name="username" type="text" data-bind="value:Cons_mailid" placeholder="Email"></span>
+                                    @*<span>@Html.TextBoxFor(m => m.Cons_mailid, new { placeHolder = "Email" })</span>
+                                        @Html.ValidationMessageFor(m => m.Cons_mailid, "", new { @class = "text-danger" })*@
+                                    <span><input name="password" type="password" data-bind="value:Cons_Pswd" placeholder="Password"></span>
+                                    @*<span>@Html.PasswordFor(m => m.Cons_Pswd, new { placeHolder = "Password" }) </span>
+                                        @Html.ValidationMessageFor(m => m.Cons_Pswd, "", new { @class = "text-danger" })*@
+                                    @*<span class="checkbox-field checkbox-field2"><label class="checkbox checkbox4">@Html.CheckBoxFor(m => m.IsCorporate, new { @class = "checkbox", @data_bind = "checked:Check,event:{change:Change}" })<i> </i></label><span>Corporate</span></span>
+                                    <span class="checkbox-field checkbox-field2"><label class="checkbox checkbox4"><input type="checkbox" data-bind="checked:Check,event:{change:Change}"><i> </i></label><span>I agree to the Terms & Conditions </span></span>*@
+                                    <span><a class="forgot-pass forgot-pass2" href="@Url.Action("Forgot_Password", "Signin")">Forgot Password ?</a></span>
+                                    <span> <input type="submit" data-bind="click:Signin" class="signin-btn signin-btn2" value="Sign In"></span>
+                                </form>
+                                @*}*@
+                                <p class="create-acct-desc">Don’t you have an account ? <span><a href="@Url.Action("Index", "Signup")">Create now !</a></span></p>
+                            </div>
+
+                            <div class="dropdown-menu login-dropdown" style="display:none;">
+                                <h4 class="forgot_pass">Forgot Password</h4>
+                                <p class="forgot-desc">Please enter your e-mail address & we will send you a confirmation mail to reset your password.</p>
+                                <form>
+                                    <span><input name="username" type="text" placeholder="Email"></span>
+                                    <span> <input type="submit" class="signin-btn signin-btn2" value="Submit"></span>
+                                </form>
+                            </div>
+
+                        </div>
+
+                        <!-- Sign Up -->
+                        <div class="dropdown signin-details signup-details" id="signupPopUpForm">
+                            @*<a class="dropdown-toggle" href="#" data-bind="click:Reset" data-toggle="dropdown">Sign Up</a>*@
+                            <div class="dropdown-menu login-dropdown">
+                                <h4>Sign Up</h4>
+                                <form>
+                                    <span><input name="firstname" type="text" data-bind="value:Cons_First_Name" placeholder="First Name"></span>
+                                    <span><input name="lastname" type="text" data-bind="value:Cons_Last_Name" placeholder="Last Name"></span>
+                                    <span><input name="username" type="text" data-bind="value:Cons_mailid" placeholder="Email"></span>
+                                    <span><input name="password" type="password" data-bind="value:Cons_Pswd" placeholder="Password"></span>
+                                    <span><input name="password" type="password" data-bind="value:ConfirmPassword" placeholder="Confirm Password"></span>
+                                    <span><input name="mobile" type="text" data-bind="value:Cons_Mobile" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" maxlength="10" placeholder="Mobile No."></span>                                    
+                                    @*<span class="checkbox-field "><label class="checkbox checkbox4">@Html.CheckBoxFor(m => m.IsCorporate, new { @class = "checkbox", @data_bind = "checked:Check,event:{change:Change}" })<i> </i></label><span>Corporate</span></span>
+                                    <span class="checkbox-field "><label class="checkbox checkbox4"><input type="checkbox" data-bind="checked:Check,event:{change:Change}"><i> </i></label><span>I agree to the Terms & Conditions </span></span>*@
+                                    <span> <input type="submit" data-bind="enable:Check,click:Submit" class="signin-btn signin-btn2" value="Create Account"></span>
+                                </form>
+                                <p class="verify-desc">You will receive an e-mail containing the account verification link.</p>
+                            </div>
+                        </div>
+
+                        <div class="clear"></div>
+                        <div class="overlay" id="overlay" style="display:none;"></div>
+                    </li>
+                    <li id="liUserName" style="display:none">
+                        <div class="dropdown user-dropdown">
+                            <button class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                                <span class="user-name" id="user_name"><i class="user-icon"></i> <strong data-bind="text:User_Name"></strong></span>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu user-profile-dropdown" role="menu" aria-labelledby="dropdownMenu1">
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Index","my_account")">Profile</a></li>
+                                @*<li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("Index", "my_account")">Book Room</a></li>*@
+                                <li role="presentation"><a id="aLogout" href="" role="menuitem" tabindex="-1" >Logout</a></li>                                
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="app-download"><a href="#"><i class="mobile-icon"></i><span class="app-desc">Book from every where,<br /> Download our Mobile App</span></a></li>
+                    <div class="clear"> </div>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <!-- End Header Section -->
+    <!-- Main Section -->
+    <div class="main">
+
+
+        @RenderBody()
+
+
+    </div>
+
+    </div>
+    <!-- End Main Section -->
+    <!-- Footer Section -->
+    <div class="footer">
+
+        <section>
+            <div class="wrap">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-3 footer-desc">
+                            <h3>About LMK</h3>
+                            <ul>
+                                <li><a href="@Url.Action("Contact_Us", "Home")">Contact Us</a></li>
+
+                                <li><a href="@Url.Action("AboutUs", "Home")">About Us</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-6 col-sm-3 footer-desc">
+                            <h3>Service & Support</h3>
+                            <ul>
+                                @*<li><a href="#">Manage Bookings</a></li>
+                                    <li><a href="@Url.Action("Cancelation", "Home")">Cancellation</a></li>
+                                    <li><a href="@Url.Action("Complaints", "Home")">Problems/Complaints</a></li>*@
+                                <li><a href="@Url.Action("Faq", "Home")">FAQs</a></li>
+                                <li><a href="@Url.Action("Feedback", "Home")">Feedback</a></li>
+                            </ul>
+                        </div>
+                        <div class="clearfix visible-xs-block"></div>
+                        <div class="col-xs-6 col-sm-3 footer-desc">
+                            <h3>Download Our App</h3>
+                            <ul class="app-icons">
+                                <li><a href="#"><img src="~/Content/Consumer/images/iphone-app.png" title="Iphone Application" alt="" /></a></li>
+                                <li><a href="#"><img src="~/Content/Consumer/images/android-app.png" title="Android Application" alt="" /></a></li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-6 col-sm-3 footer-desc">
+                            <h3>Follow Us On</h3>
+                            <ul class="socail-icons">
+                                <li class="google-plus" title="Google Plus"><a href="#"></a></li>
+                                <li class="linkedin" title="Linkedin"><a href="#"></a></li>
+                                <li class="pinterest" title="Pinterest"><a href="#"></a></li>
+                            </ul>
+                            <ul class="socail-icons">
+                                <li class="twitter" title="Twitter"><a href="#"></a></li>
+                                <li class="facebook" title="Facebook"><a href="#"></a></li>
+                                <li class="yahoo" title="Yahoo"><a href="#"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="copy-right">
+            <div class="wrap">
+                <p class="float-lt"> © Copyright 2015 Last Minute Keys. All rights reserved.</p>
+                <ul class="float-rt copy-right-nav">
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms of Use</a></li>
+                    <li class="trip-adv"><a target="_blank" href="http://www.tripadvisor.com/pages/terms.html">© TripAdvisor 2015</a></li>
+                    <li><a target="_blank" href="http://www.tripadvisor.com/pages/terms.html">Ratings &amp;  Reviews </a></li>
+                    <li>
+                        <a target="_blank" href="http://www.tripadvisor.com/pages/terms.html">
+                            <img src="~/img/tripadvisor_logo.png" />
+                        </a>
+                    </li>
+
+                </ul>
+                <div class="clear"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- End Footer Section -->
+    <!-- Scripts -->
+    <script src="~/Scripts/jquery-1.11.2.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/knockout-3.1.0.debug.js"></script>
+    <script src="~/Content/Consumer/js/jquery-ui.js"></script>
+
+    <script src="~/Scripts/jquery.storage.js"></script>
+    <script src="~/Scripts/plugins/jquery.cookie.min.js"></script>
+
+    @Scripts.Render("~/Scripts/jqueryNotification.js")
+    @Scripts.Render("~/Scripts/jquery.blockUI.js")
+    @Scripts.Render("~/Scripts/AppCommonScript.js")
+
+
+    <!-- Styles -->
+    <link href="~/Content/Consumer/css/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/error-notifier.css" rel="stylesheet" type="text/css" />
+
+    <!-- Date Picker -->
+    <script src="~/Content/Consumer/js/moment.min.js" type="text/javascript"></script>
+    <script src="~/Content/Consumer/js/bootstrap.min.js"></script>
+    <script src="~/Content/Consumer/js/bootstrap-datetimepicker.min.js"></script>
+
+    <script src="~/Content/Consumer/js/jquery.lightSlider.js"></script>
+    <link href="~/Content/Consumer/css/lightSlider.css" rel="stylesheet" />
+
+    <script>
+        $('.dropdown').on('show.bs.dropdown', function () {
+            $('#overlay').fadeIn('fast');
+        })
+        $('.dropdown').on('hide.bs.dropdown', function () {
+            $('#overlay').fadeOut('fast');
+        })
+    </script>
+
+    <!-- Slider -->
+    <script src="~/Content/Consumer/js/jquery.flexslider.js"></script>
+    <script>
+        $(window).load(function () {
+            $('#hotel-details').flexslider({
+                animation: "slide",
+                controlNav: false,
+                itemMargin: 0,
+                animationLoop: true
+            });
+
+            $('#hotdeals').flexslider({
+                animation: "slide",
+                animationLoop: false,
+                itemWidth: 350,
+                itemMargin: 15,
+                minItems: 2,
+                move: 1,
+                controlNav: false,
+                before: function () {
+                    $('.flexslider .slides').removeClass('end');
+                },
+                end: function () {
+                    $('.flexslider .slides').addClass('end');
+                }
+            });
+
+            $('#bestoffers').flexslider({
+                animation: "slide",
+                animationLoop: true,
+                reverse: false,
+                itemWidth: 375,
+                itemMargin: 15,
+                controlNav: false,
+                before: function () {
+                    $('.flexslider .slides').removeClass('end');
+                },
+                end: function () {
+                    $('.flexslider .slides').addClass('end');
+                }
+
+            });
+
+            //$('.flexslider').flexslider({
+            //    animation: "slide",
+            //    animationLoop: false,
+            //    itemWidth: 345,
+            //    itemMargin: 5,
+            //    controlNav: false
+            //});
+            $('#lightSlider').lightSlider({
+                gallery: true,
+                item: 1,
+                loop: true,
+                slideMargin: 0,
+                thumbItem: 0
+            });
+
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+
+        });
+    </script>
+
+    <!-- SignUp Form JS -->
+    <script src="~/Scripts/Consumer/my_accountMaster.js"></script>
+    <script src="~/Scripts/Consumer/SigninForm.js"></script>
+    <script src="~/Scripts/Consumer/SignUpPopUpForm.js"></script>
+    <script src="~/Scripts/Consumer/ExternalLogin.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,49 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>LMK :: Login page</title>
+    <link rel="stylesheet" type="text/css" href="../../Content/LoginContent/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../Content/LoginContent/css/custom-style.css">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+</head>
+
+<body class="login-page">
+    <!-- Login Page -->
+    <div class="login-page-overlay"></div>
+    <div class="login-content">
+        <div class="login-page-logo">
+            <a href="#"><img src="../../Content/LoginContent/images/logo.png" title="Last Minute Keys" alt="" /> </a>
+        </div>
+        <div class="login-fields">
+            <h2>Sign in</h2>
+
+            <form>
+                <div class="login-email-field">
+                    <img src="../../Content/LoginContent/images/user-icon.png" alt="" />
+                    <input type="text" value="User ID/ Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User ID/ Email';}">
+                </div>
+
+                <div class="login-password-field">
+                    <img src="../../Content/LoginContent/images/password-icon.png" alt="" />
+                    <input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+                </div>
+
+                <div class="login-submit-field">
+                    <input type="submit" value="Sign in">
+                </div>
+
+            </form>
+            <div class="forgot-password">
+                <h3><a href="forgot-password.html">Forgot password?</a></h3>
+            </div>
+        </div>
+
+    </div>
+    <!-- End Login Page -->
+    <div class="footer">
+        <p> © Copyright 2015 LMK. All rights reserved.</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+﻿@model App.Web.ViewModels.LoginViewModel
+@{
+    Layout = null;
+}
+<!doctype html>
+<html>
+<head>
+
+    <style>
+        .danger{
+            color:red;
+        }
+    </style>
+    <meta charset="utf-8">
+    <title>LMK :: Login page</title>
+    <link rel="shortcut icon" href="~/img/Splitted_Images/favicon.ico" type="image/x-icon" />
+    <meta name="keywords" content="Last Minute Keys" />
+    <meta name="description" content="Last Minute Keys" />
+    <link rel="stylesheet" type="text/css" href="../../Content/LoginContent/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../Content/LoginContent/css/custom-style.css">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+</head>
+
+<body class="login-page">
+    <!-- Login Page -->
+    <div class="login-page-overlay"></div>
+    <div class="login-content">
+        <div class="login-page-logo">
+            <a href="#"><img src="../../Content/LoginContent/images/logo.png" title="Last Minute Keys" alt="" /> </a>
+        </div>
+        <div class="login-fields">
+            <h2>Sign in</h2>
+            @using (Html.BeginForm("Login", "Vendor", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "danger" })
+                <div class="login-email-field">
+                    <img src="../../Content/LoginContent/images/user-icon.png" alt="" />
+                    @Html.TextBoxFor(m => m.UserId, new { placeHolder = "Email Id" })
+                </div>
+                @Html.ValidationMessageFor(m => m.UserId, "", new { @class = "danger" })
+                <div class="login-password-field">
+                    <img src="../../Content/LoginContent/images/password-icon.png" alt="" />
+                    @Html.PasswordFor(m => m.Pswd, new { placeHolder = "Password" })
+                </div>
+                @Html.ValidationMessageFor(m => m.Pswd, "", new { @class = "danger" })
+                <div class="login-submit-field">
+                    <input type="submit" value="Sign in">
+                </div>
+            }
+
+            <div class="forgot-password">
+                <h3><a href="@Url.Action("VendorForgotPassword","Vendor")">Forgot password?</a></h3>
+            </div>
+        </div>
+
+    </div>
+    <!-- End Login Page -->
+    <div class="footer">
+        <p> © Copyright 2015 LMK. All rights reserved.</p>
+    </div>
+</body>
+</html>

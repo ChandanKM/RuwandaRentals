@@ -1,0 +1,107 @@
+﻿@{
+    ViewBag.Title = "More_Results";
+    Layout = "~/Views/Shared/_DefaultConsumer.cshtml";
+}
+
+<div class="breadcrumb-block">
+    <div class="wrap">
+        <ol class="breadcrumb">
+            <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+            <li class="active"><strong id="strongCity"></strong></li>
+        </ol>
+    </div>
+</div>
+
+<!-- Search Result Section -->
+<div class="search-result-page" id="divMoreResult">
+    <div class="wrap">
+
+        <div class="search-result-page-heading">
+            <h2 class="float-lt"><strong id="lblViewType"></strong> <span id="lblCity"></span></h2>
+            <div class="search-count float-rt"><p><span id="lblHotelCount"></span> Hotels Available</p></div>
+            <div class="clear"></div>
+        </div>
+
+
+
+        <!-- Search result list -->
+        <section class="search_list">
+               <div class="hotel-details-content">
+
+                @*<div class="sorting-list">
+                    <ul id="ulSortingList">
+                        <li class="sort_by" style="display:none"><i class="sort_icon"></i> Sort By</li>
+                        <li class="active" style="display:none"><a href="#">Price <i class="desc-order" id="liSortPriceIcon"></i></a></li>
+                        <li><a href="#" style="display:none">Star Rating <i class="desc-order" id="liSortRateIcon"></i></a></li>
+                        <li><a href="#" style="display:none">Occupant Rating</a></li>
+                        <li><a href="#" style="display:none">Trip Advisor</a></li>
+                    </ul>
+                </div>
+                <br />*@
+                <div id="divHotelsList" data-bind="foreach:HotelsList">
+                    <section class="search-hotel">
+                        <input hidden data-bind="valur:Prop_Id" />
+                        <div class="search-hotel-img">
+                            <img data-bind="attr:{src:Image_Url}" alt="" style="width:263px;height:150px" />
+                        </div>
+                        <div class="search-hotel-desc">
+                            <h3 data-bind="text:Prop_Name"></h3>
+                            <h4 data-bind="text:Location"></h4>
+                            @*<p data-bind="text:Overview"></p>*@
+                            <span class="hotel-star-rate" data-bind="foreach:StarRatingList">
+                                <label data-bind="css: MyStarClass,value:Star_Id"></label>
+                            </span>
+                            <div class="hotel-reviews">
+                                <ul>
+                                    <li class="review_icon"></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="search-hotel-price">
+                            <ul>
+                                @*  <li><span class="room-type" data-bind="text:RoomType_Count"></span> Room Types</li>
+                                <li><span class="old-price">&#8377; 3200</span></li>
+                            <li><em>Starting </em><span class="new-price">&#8377; </span><span class="new-price" data-bind="text:RoomPrice"></span><em><strong data-bind="text:NoOfRoom"></strong> Room, <strong data-bind="text:NoOfNight"></strong> Night</em></li>*@
+                                <li class="book-now-btn"><a title="Book Now" href="#" data-bind="click:BookNow"><i class="book-now-icon"></i>  Book Now</a></li>
+                            </ul>
+                        </div>
+                        <div class="clear"></div>
+                    </section>
+
+                </div>
+
+                <div data-bind="visible:!IsFound()" class="no-result">
+                    No Result Found
+                </div>
+
+            </div>
+
+            <div class="similar-hotels">
+                <div class="add-banner">
+                    <a href="#"><img src="~/Content/Consumer/images/deal-of-the-day.jpg" title="Add Image" alt="" /></a>
+                </div>
+                <div class="add-banner">
+                    <a href="#"><img src="~/Content/Consumer/images/collection-add.jpg" title="Add Image" alt="" /></a>
+                </div>
+                <div class="add-banner">
+                    <a href="#"><img src="~/Content/Consumer/images/recommended.jpg" title="Add Image" alt="" /></a>
+                </div>
+                <div class="add-banner">
+                    <a href="#"><img src="~/Content/Consumer/images/resorts.jpg" title="Add Image" alt="" /></a>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </section>
+
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/Consumer/ViewMoreResults.js"></script>
+
+}

@@ -1,0 +1,64 @@
+﻿
+.dashboard-icon {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background: url(/img/Splitted_Images/Menu%20&%20Header/Dashboard%20inactive.png) no-repeat center;
+    margin-right: 5px;
+}
+.reports-icon {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background: url(/img/Splitted_Images/Menu%20&%20Header/Reports%20active.png) no-repeat center;
+    margin-right: 5px;
+}
+.booking-icon {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background: url(/img/Splitted_Images/Menu%20&%20Header/Bookings%20active.png) no-repeat center;
+    margin-right: 5px;
+}
+.ratecalendar-icon {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background: url(/img/Splitted_Images/Menu%20&%20Header/Rate%20Calendar%20active.png) no-repeat center;
+    margin-right: 5px;
+}
+.vendor-icon {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background: url(/img/Splitted_Images/Menu%20&%20Header/Profile%20active.png) no-repeat center;
+    margin-right: 5px;
+}
+.property-icon {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background: url(/img/Splitted_Images/Menu%20&%20Header/Property%20Details%20active.png) no-repeat center;
+    margin-right: 5px;
+}
+.rooms-icon {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background: url(/img/Splitted_Images/Menu%20&%20Header/Room%20Details%20active.png) no-repeat center;
+    margin-right: 5px;
+}
+.admin-icon {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background: url(/img/Splitted_Images/Menu%20&%20Header/Admin%20active.png) no-repeat center;
+    margin-right: 5px;
+}
+.user-icon {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background: url(/img/Splitted_Images/Menu%20&%20Header/User%20active.png) no-repeat center;
+    margin-right: 5px;
+}

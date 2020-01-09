@@ -1,0 +1,124 @@
+﻿@{
+    ViewBag.Title = "Add";
+}
+<link href="~/Content/font-awesome.css" rel="stylesheet" />
+<link href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
+<link href="~/Content/error-notifier.css" rel="stylesheet" />
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/Scripts/knockout-2.3.0.js")
+@Scripts.Render("~/Scripts/jqueryNotification.js")
+@Scripts.Render("~/Scripts/jquery.blockUI.js")
+@Scripts.Render("~/Scripts/AppCommonScript.js")
+<script src="~/Scripts/jquery.cookie.js"></script>
+<!--=== Page Header ===-->
+<div class="page-header">
+    <div class="page-title">
+        <h3>System Profile</h3>
+    </div>
+</div>
+<!-- /Page Header -->
+
+
+
+<div class="row">
+    <div class="span5">
+
+        <div class="control-group">
+            <label class="control-label" for="Company_Title" style="text-align:left">Company Title <span class="required">*</span></label>
+            <div class="controls">
+                <input class="form-control input-width-xlarge" id="Company_Title" type="text" data-bind="value:Company_Title" />
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="Owned_By" style="text-align:left">Owned By <span class="required">*</span></label>
+            <div class="controls">
+                <input class="form-control input-width-xlarge" id="Vndr_Cinno" type="text" data-bind="value:Owned_By" />
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="CIN_Number" style="text-align:left">CIN Number<span class="required"></span></label>
+            <div class="controls">
+                <input id="Vndr_Addr1" class="form-control input-width-xlarge" type="text" data-bind="value:CIN_Number" />
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="Adr1" style="text-align:left">Address 1<span class="required">*</span></label>
+            <div class="controls">
+                <input id="Cityvalue" class="form-control input-width-xlarge" type="text" data-bind="value:Adr1" />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="Adr2" style="text-align:left">Address 2<span class="required"></span></label>
+            <div class="controls">
+                <input id="Cityvalue" class="form-control input-width-xlarge" type="text" data-bind="value:Adr2" />
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="Location" style="text-align:left">Location , City<span class="required">*</span></label>
+            <div class="controls">
+                <select id="LocationId" class="form-control input-width-xlarge" data-bind="options: AllLoc, value: Location,optionsText: 'CityName' ,optionsValue:'Id' "></select>
+            </div>
+        </div>
+       
+        <div class="control-group">
+            <label class="control-label" for="City" style="text-align:left">Tin Id<span class="required">*</span></label>
+            <div class="controls">
+                <input id="pincodevalue" class="form-control input-width-xlarge" type="text" data-bind="value:Tin_id" />
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="Phone" style="text-align:left">Phone<span class="required">*</span></label>
+            <div class="controls">
+                <input id="Phone" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" maxlength="10" type="text" class="form-control input-width-xlarge" data-bind="value:Phone" />
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="Mobile" style="text-align:left">Mobile<span class="required">*</span></label>
+            <div class="controls">
+                <input id="Mobile" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" maxlength="10" class="form-control input-width-xlarge" type="text" data-bind="value:Mobile" />
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="Email" style="text-align:left">Email<span class="required">*</span></label>
+            <div class="controls">
+                <input id="Email" class="form-control input-width-xlarge" type="text" data-bind="value:Email" />
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="Sms_Url" style="text-align:left">Sms Url<span class="required">*</span></label>
+            <div class="controls">
+                <input id="Sms_Url" class="form-control input-width-xlarge" type="text" data-bind="value:Sms_Url" />
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="User_Id" style="text-align:left">User Name<span class="required">*</span></label>
+            <div class="controls">
+                <input id="User_Id" class="form-control input-width-xlarge" type="text" data-bind="value:User_Id" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span10">
+                <div class="form-actions">
+                    <input id="btnReset" type="button" value="RESET" data-bind="click: ResetForm" class="btn btn-lg btn-danger" />
+                    <input id="btnSave" type="button" value="SUBMIT" data-bind="click: SaveProfile" class="btn btn-lg btn-primary" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+<script src="@Url.Content("~/Scripts/SystemProfile/AddSysProfile.js")" type="text/javascript"></script>

@@ -1,0 +1,439 @@
+﻿@{
+    ViewBag.Title = "Search_Results";
+    Layout = "~/Views/Shared/_DefaultConsumer.cshtml";
+}
+
+<div class="breadcrumb-block">
+    <div class="wrap">
+        <ol class="breadcrumb breadcrumb-left">
+            <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+            <li class="active">Hotels in <strong id="strongCity"></strong></li>
+        </ol>
+        <div class="breadcrumb-right">
+            <h2 class="float-lt"> <span id="lblCity"></span></h2>
+            <div class="search-count float-rt"><p><span id="lblHotelCount"></span> Hotels Available</p></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<!-- Search Result Section -->
+<div class="search-result-page" id="divSearchResult">
+    <div class="wrap">
+
+        @*<div class="search-result-page-heading">
+                <h2 class="float-lt"> <span id="lblCity"></span></h2>
+                <div class="search-count float-rt"><p><span id="lblHotelCount"></span> Hotels Available</p></div>
+                <div class="clear"></div>
+            </div>*@
+
+        <div class="top-filter-pannel">
+            <form id="formSearch">
+                <div class="location-filter">
+                    <div class="input-group">
+                        <input hidden id="hdnLocationId" />
+                        <span class="input-group-addon calendar-btn calendar-btn2"><i class="location_icon"></i></span>
+                        <input type="text" id="txtLocation" name="Location" class="location-textbox required" placeholder="City" />
+                    </div>
+                </div>
+                <div class="checkin-filter">
+                    <div class="input-group" id="divCheckIn">
+                        <span class="input-group-addon calendar-btn calendar-btn2">
+                            <i class="checkin-icon"></i>
+                        </span>
+                        <input type="text" id="txtCheckIn" name="RoomCheckIn" data-format="DD/MM/YYYY" placeholder="Check In" readonly />
+                    </div>
+                </div>
+
+                <div class="checkout-filter">
+                    <div class="input-group" id="divCheckOut">
+                        <span class="input-group-addon calendar-btn calendar-btn2">
+                            <i class="checkout-icon"></i>
+                        </span>
+                        <input type="text" id="txtCheckOut" name="RoomCheckOut" data-format="DD/MM/YYYY" placeholder="Check Out" readonly />
+                    </div>
+
+                </div>
+
+                <div class="days-filter">
+                    <div class="input-group">
+                        <span class="input-group-addon calendar-btn calendar-btn2"><i class="moon_icon"></i></span>
+                        <select id="country" data-bind="options: RoomSelectList , value: RoomCount" class="frm-field required"></select>
+                        @*<input type="text" id="txtNoOfRoom" name="NoOfRoom" data-bind="value:No_Of_Rooms" maxlength="2" min="1" max="5" onkeypress='validate(event)' class="days-textbox" required />
+                            <input style="display:none" type="text" id="txtDayCount" value="1 Night" class="days-textbox" readonly hidden />
+                            <span class="input-group-addon calendar-btn calendar-btn2"><label>Room(s)</label></span>*@
+                    </div>
+                </div>
+
+                <div class="modify-search">
+                    <a href="#" data-bind="click:ModifySearch"><i class="search_icon"></i> Modify Search</a>
+                </div>
+                <div class="clear"></div>
+            </form>
+        </div>
+
+        <!-- Search result list -->
+        <section class="search_list">
+
+            <div class="sidebar-left">
+                <div class="sidebar-left-heading">
+                    <i class="filter_icon"></i><h3>Filter By</h3>
+                </div>
+                <div class="price-range">
+                    <h4>Price Range<a class="btnhideMoreFacility" style="cursor:pointer;float:right;font-size:13px;margin-top:2px;" onclick="resetSlider()">Reset</a></h4>
+                    <div class="filter-elements">
+                        <p>
+                            <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:500;margin-bottom:20px;text-align:center;width:100%;">
+                        </p>
+
+                        <div id="slider-range"></div>
+                    </div>
+                </div>
+                <div class="hotel-star-rating">
+                    <h4>Hotel Star Rating <a class="btnhideMoreFacility" style="cursor:pointer;float:right;font-size:13px;margin-top:2px;" onclick="StarRatingChangewithnorate()">Reset</a></h4>
+                    <div class="filter-elements">
+                        <span class="rating">
+                            <input type="radio" class="rating-input"
+                                   id="rating-input-1-5" name="rating-input-1" value="5" onclick="StarRatingChange()">
+                            <label for="rating-input-1-5" id="5" class="rating-star"></label>
+                            <input type="radio" class="rating-input"
+                                   id="rating-input-1-4" name="rating-input-1" value="4" onclick="StarRatingChange()">
+                            <label for="rating-input-1-4" id="4" class="rating-star"></label>
+                            <input type="radio" class="rating-input"
+                                   id="rating-input-1-3" name="rating-input-1" value="3" onclick="StarRatingChange()">
+                            <label for="rating-input-1-3" id="3" class="rating-star"></label>
+                            <input type="radio" class="rating-input"
+                                   id="rating-input-1-2" name="rating-input-1" value="2" onclick="StarRatingChange()">
+                            <label for="rating-input-1-2" id="2" class="rating-star"></label>
+                            <input type="radio" class="rating-input"
+                                   id="rating-input-1-1" name="rating-input-1" value="1" onclick="StarRatingChange()">
+                            <label for="rating-input-1-1" id="1" class="rating-star"></label>
+                        </span>
+
+                    </div>
+                </div>
+                <div class="hotel-facilities">
+                    <h4>Facilities <a class="btnhideMoreFacility" style="cursor:pointer;float:right;font-size:13px;margin-top:2px;" onclick="StarRatingChangeFacility()">Reset</a></h4>
+                    <div class="facilitie-elements" id="divFacilityList">
+                        <ul data-bind="foreach:TopFacilityList">
+                            @*<li>
+                                    <div>
+
+                                        <label class="checkbox checkbox3 checkbox5"><i></i></label>
+                                    </div>
+
+                                </li>*@
+                            <li>
+                                <label class="checkbox checkbox3 checkbox6">
+                                    <input type="checkbox" name="checkboxFacility" data-bind="checked:Active_flag(),value:Facility_Id,event:{change:Select}"><i></i>
+                                    <span><img data-bind="attr:{src:Image_dir,title:Facility_Name}" style="width:25px;height:25px;vertical-align:bottom;"><strong data-bind="text:Facility_Name" style="font-size:13px;margin-left:5px;"></strong> </span>
+                                </label>
+                            </li>
+
+                        </ul>
+                        <a style="cursor:pointer;text-align:right;font-size:13px;margin-top:2px;display:block;" id="btnMoreFacility">More..</a>
+                        <ul style="display:none" data-bind="foreach:FacilityList" id="moreFacilityList">
+                            <li>
+                                <label class="checkbox checkbox3 checkbox6">
+                                    <input type="checkbox" name="checkboxFacility" data-bind="checked:Active_flag(),value:Facility_Id,event:{change:Select}"><i></i>
+                                    <span><img data-bind="attr:{src:Image_dir,title:Facility_Name}" style="width:25px;height:25px;vertical-align:bottom;"><strong data-bind="text:Facility_Name" style="font-size:13px;margin-left:5px;"></strong> </span>
+                                </label>
+                            </li>
+                        </ul>
+                        <div style="display:block;text-align: right;"><a style="display:none;cursor:pointer;font-size:13px;text-align:right;" id="btnhideMoreFacility">Hide</a></div>
+                        @*<ul>data-bind="id:Facility_Id"
+                                <li><input type='checkbox' name='thing' value='valuable' id="wifi" /><label for="wifi" class="wifi"></label></li>
+                                <li><input type='checkbox' name='thing' value='valuable' id="gym" /><label for="gym" class="gym"></label></li>
+                                <li><input type='checkbox' name='thing' value='valuable' id="restaurant" /><label for="restaurant" class="restaurant"></label></li>
+                                <li><input type='checkbox' name='thing' value='valuable' id="airline" /><label for="airline" class="airline"></label></li>
+                                <li><input type='checkbox' name='thing' value='valuable' id="meeting" /><label for="meeting" class="meeting"></label></li>
+                                <li><input type='checkbox' name='thing' value='valuable' id="bar" /><label for="bar" class="bar"></label></li>
+                                <li><input type='checkbox' name='thing' value='valuable' id="pool" /><label for="pool" class="pool"></label></li>
+                                <li><input type='checkbox' name='thing' value='valuable' id="tea-coffee" /><label for="tea-coffee" class="tea-coffee"></label></li>
+                                <li><input type='checkbox' name='thing' value='valuable' id="massage" /><label for="massage" class="massage"></label></li>
+                                <li><input type='checkbox' name='thing' value='valuable' id="fridge" /><label for="fridge" class="fridge"></label></li>
+                                <li><input type='checkbox' name='thing' value='valuable' id="bathroom" /><label for="bathroom" class="bathroom"></label></li>
+                            </ul>*@
+                    </div>
+                </div>
+
+                <div id="locationsbyCity" class="location_filter">
+                    <h4>Location<a class="btnhideMoreFacility" style="cursor:pointer;float:right;font-size:13px;margin-top:2px;" onclick="ResetLocation()">Reset</a></h4>
+                    <div class="filter-locations">
+                        <ul data-bind="foreach:LocationsList">
+                            <li><label class="checkbox checkbox3"><input type="checkbox" data-bind="checked:Active_flag1,value:Locations,event:{change:Selectlocation}" name="Filterlocation"><i></i><span data-bind="text:Locations"></span></label></li>
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="search-result-list">
+
+                <div class="sorting-list">
+                    <ul id="ulSortingList">
+                        <li class="sort_by"><i class="sort_icon"></i> Sort By</li>
+                        <li class="active"><a href="#" data-bind="click:sortPrice">Price <i class="desc-order" id="liSortPriceIcon"></i></a></li>
+                        <li><a href="#" data-bind="click:sortRating">Star Rating <i class="desc-order" id="liSortRateIcon"></i></a></li>
+                        <li><a href="#" style="display:none">Occupant Rating</a></li>
+                        <li><a href="#" style="display:none">Trip Advisor</a></li>
+                    </ul>
+                </div>
+                <br />
+                <div id="divHotelsList" data-bind="foreach:HotelsList">
+                    @*<a title="Book Now" href="#" data-bind="click:BookNow">*@
+                    <section class="search-hotel cap-bot">
+                        <input hidden data-bind="value:Prop_Id" />
+                        <div class="search-hotel-img">
+                            <a title="Book Now" href="#" data-bind="click:BookNow"><img data-bind="attr:{src:Prop_Image}" alt="" /></a>
+                        </div>
+                        <div class="search-hotel-desc">
+                            <a title="Book Now" href="#" data-bind="click:BookNow">
+                                <h3 data-bind="attr:{title:Prop_Name},text:Prop_Name"><span></span></h3>
+                            </a>
+                            <h4 data-bind="text:Prop_Address"></h4>
+                            @*<p data-bind="text:Overview"></p>*@
+                            <span class="hotel-star-rate" data-bind="foreach:StarRatingList">
+                                <label data-bind="css: MyStarClass,value:Star_Id"></label>
+                            </span>
+                            <div class="hotel-reviews">
+                                <span class="review-txt">TripAdvisor Traveller Rating</span>
+                                <img id="imgTripadv" data-bind="attr:{src:Trip_Rating}" />
+                                <a href="#"><span data-bind="text:Trip_Review,click:GetTripAdvisorReviews"></span></a> 
+                                @*<a target="_blank" data-bind="attr:{href:Trip_Review_Url}" ><span data-bind="text:Trip_Review"></span></a>*@
+                                @*data-bind="attr:{value:Trip_Review}"*@
+                            </div>
+                        </div>
+                        <div class="search-hotel-price">
+                            <ul>
+                                <li><span class="room-type" data-bind="text:RoomType_Count"></span> Room Types</li>
+                                @*<li><span class="old-price">&#8377; 3200</span></li>*@
+                                <li></li>
+                                <li>
+                                    <!-- ko if:isShow()-->
+                                    <em>Starting </em>
+                                    <span style="padding:0 0 0 10px;"><span class="new-price" style="font-size:17px;color:gray">&#8377; </span><span class="old-price" data-bind="attr:{id:Prop_Id}, text:VendorRate"></span></span>
+                                    <!--/ko-->
+                                    <br /><span class="new-price">&#8377; </span><span class="new-price" data-bind="text:RoomPrice"></span><em><strong></strong>Per Room, <strong></strong>Per Night</em>
+                                </li>
+                                <li class="book-now-btn"><a title="Book Now" href="#" data-bind="click:BookNow"><i class="book-now-icon"></i>  Book Now</a></li>
+                            </ul>
+                        </div>
+                        <div class="clear"></div>
+                        <!-- Caption -->
+                        <div class="visted-count"> 3 more users watching this property...</div>
+                        <!-- End Caption-->
+                    </section>
+
+                    <div class="modal fade" data-bind="attr:{id:'TripReviewModal'+Prop_Id()}" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content room-policies-box">
+                                <div class="modal-header popup-header">
+
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">TripAdvisor Reviews</h4>
+                                    <h5 class="site-title">Showing the 3 most recent reviews.</h5>
+
+                                </div>
+                                <div class="modal-body room-policy-reviews">
+
+                                    <ul data-bind="foreach:Trip_Review_Url">
+                                        <li>
+                                            <span class="Bold">User:</span>
+                                            <!--ko with :user -->
+
+                                            <span data-bind="text:username"></span>
+                                            <!--/ko-->
+                                        </li>
+                                        <li>
+                                            <span class="Bold">Review:</span>   <span data-bind="text:text"></span>
+                                        </li>
+                                        <li>
+                                            <span class="Bold" style="vertical-align:super;">Rating:</span>   <img id="imgTripadv" data-bind="attr:{src:rating_image_url}" />
+                                        </li>
+
+                                        <li>
+                                            <span class="Bold">Date:</span> <span data-bind="text:published_date"></span>
+                                        </li>
+                                        <hr style="margin:10px 0;">
+                                    </ul>
+
+
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div>
+                    </div>
+                    @*</a>*@
+                </div>
+
+                <div data-bind="visible:!IsFound()" class="no-result">
+                    No Result Found
+                </div>
+                @*<section class="offer-section">
+                        <div class="offer_ribbon">
+                            <span class="offer-label">Offer</span>
+                            <p>2015 DEAL 20% OFF with WI-FI ...</p>
+                            <a href="#">View More</a>
+                        </div>
+                        <section class="search-hotel search-hotel2">
+                            <div class="search-hotel-img">
+                                <img src="~/Content/Consumer/images/hotel_img.jpg" title="Hotel" alt="" />
+                            </div>
+                            <div class="search-hotel-desc">
+                                <h3>Ramada - Bangalore</h3>
+                                <h4>Indian Express Circle </h4>
+                                <p>Situated at a 15 min drive from Ulsoor Lake and 10 min drive Brigade Road, Ramada offers a fitness centre, banquet halls, restaurant, bar and Wi-Fi.</p>
+                                <span class="hotel-star-rate">
+                                    <label class="s1"></label>
+                                    <label class="s1"></label>
+                                    <label class="s0"></label>
+                                    <label class="s0"></label>
+                                    <label class="s0"></label>
+                                </span>
+                                <div class="hotel-reviews">
+                                    <ul>
+                                        <li class="review_icon"></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li class="inactive"></li>
+                                        <div class="review-total"><span class="review-count">600</span> Reviews</div>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="search-hotel-price">
+                                <ul>
+                                    <li><span class="room-type">3</span> Room Types</li>
+                                    <li><span class="old-price">&#8377; 3200</span></li>
+                                    <li><em>Starting </em><span class="new-price">&#8377; 2100</span><em>1 Room, 1 Night</em></li>
+                                    <li class="book-now-btn"><a title="Book Now" href="#"><i class="book-now-icon"></i>  Book Now</a></li>
+                                </ul>
+                            </div>
+                            <div class="clear"></div>
+                        </section>
+                    </section>*@
+
+
+            </div>
+
+            <div class="sidebar-right">
+                <div class="add-banner">
+                    <a href="#"><img src="~/Content/Consumer/images/deal-of-the-day.jpg" title="Add Image" alt="" /></a>
+                </div>
+                <div class="add-banner">
+                    <a href="#"><img src="~/Content/Consumer/images/collection-add.jpg" title="Add Image" alt="" /></a>
+                </div>
+                <div class="add-banner">
+                    <a href="#"><img src="~/Content/Consumer/images/recommended.jpg" title="Add Image" alt="" /></a>
+                </div>
+                <div class="add-banner">
+                    <a href="#"><img src="~/Content/Consumer/images/resorts.jpg" title="Add Image" alt="" /></a>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </section>
+
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        //$("#divCheckIn").datepicker({
+        //    minDate: 0,
+        //    maxDate: '+1Y+6M',
+        //    onSelect: function (dateStr) {
+        //        var min = $(this).datepicker('getDate'); // Get selected date
+        //        $("#txtCheckOut").datepicker('option', 'minDate', min || '0'); // Set other min, default to today
+        //    }
+        //});
+
+        //$("#divCheckOut").datepicker({
+        //    minDate: '0',
+        //    maxDate: '+1Y+6M',
+        //    onSelect: function (dateStr) {
+        //        var max = $(this).datepicker('getDate'); // Get selected date
+        //        $('#datepicker').datepicker('option', 'maxDate', max || '+1Y+6M'); // Set other max, default to +18 months
+        //        var start = $("#txtCheckIn").datepicker("getDate");
+        //        var end = $("#txtCheckOut").datepicker("getDate");
+        //        var days = (end - start) / (1000 * 60 * 60 * 24);
+        //        $("#txtDayCount").val(days);
+        //    }
+        //});
+        //$(function () {
+        //    $('#divCheckIn').datetimepicker({
+        //        pickTime: false,
+        //        defaultDate: "+1w",
+        //        minDate: 0,
+        //        firstDay: 0,
+        //        dateFormat: 'yy-mm-dd',
+        //        changeMonth: true,
+        //        numberOfMonths: 1,
+        //        onClose: function (selectedDate) {
+        //            var minDate = $("#txtCheckOut").datepicker('getDate');
+        //            var newMin = new Date(minDate.setDate(minDate.getDate() + 1));
+        //            $("#txtCheckOut").datepicker("option", "minDate", newMin);
+        //        }
+
+        //    });
+        //    $('#divCheckOut').datetimepicker({
+        //        pickTime: false,
+        //        defaultDate: "+1w",
+        //        minDate: '+2d',
+        //        changeMonth: true,
+        //        firstDay: 0,
+        //        dateFormat: 'yy-mm-dd',
+        //        numberOfMonths: 1,
+        //        onClose: function (selectedDate) {
+        //            var maxDate = $("#txtCheckIn").datepicker('getDate');
+        //            var newMax = new Date(maxDate.setDate(maxDate.getDate() - 1));
+        //            $("#txtCheckIn").datepicker("option", "maxDate", newMax);
+
+        //        }
+        //    });
+        //});
+        //$("#txtCheckIn").datepicker('setDate', '+1');
+        //$("#txtCheckOut").datepicker('setDate', '+8');
+    </script>
+
+    @*<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js"></script>*@
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script>
+        $("#formSearch").validate({
+            messages: {
+                Location: "Please Select Location",
+                RoomCheckIn: "Check In Date Required",
+                RoomCheckOut: "Check Out Date Required",
+                NoOfRoom: "Should be Between 1 to 5",
+            }
+        });
+
+    </script>
+
+    <script src="~/Scripts/Consumer/Search_Results.js"></script>
+
+}
+
+<style>
+    .error {
+        font-size: 13px;
+        color: #e9452a;
+    }
+
+    .text-field.valid {
+        border: 1px solid green;
+    }
+
+    .text-field.error {
+        border: 1px solid red;
+    }
+
+    .form-control.valid {
+        border: 1px solid green;
+    }
+
+    .form-control.error {
+        border: 1px solid red;
+    }
+</style>

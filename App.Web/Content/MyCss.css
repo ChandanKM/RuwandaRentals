@@ -1,0 +1,299 @@
+  /** Inovice **/
+        .inovoice-page {
+            width: 88%;
+            margin: 0 auto;
+        }
+
+        .booking-details-inner {
+            padding: 1.5%;
+            border: 1px solid #ADADAD;
+            border-top: none;
+            border-radius: 0 0 2px 2px;
+            -webkit-border-radius: 0 0 2px 2px;
+            -moz-border-radius: 0 0 2px 2px;
+            -o-border-radius: 0 0 2px 2px;
+        }
+
+        .booking-inner-header {
+            padding-bottom: 5px;
+            border-bottom: 1px solid #f0f0f0;
+            margin-bottom: 20px;
+        }
+
+        .hotel-name {
+            /*float: left;*/
+        }
+
+            .hotel-name h4 {
+                font-size: 24px;
+                color: #1164aa;
+                margin: 0;
+                font-weight: normal;
+            }
+
+            .hotel-name h5 {
+                font-size: 14px;
+                color: #474747;
+                padding: 5px 0;
+                background: url("../images/location_icon.png") no-repeat center left;
+                padding-left: 15px;
+                margin: 0;
+                font-weight: normal;
+            }
+
+        .hotel-number {
+            float: right;
+            margin-top: 15px;
+        }
+
+            .hotel-number p {
+                font-size: 14px;
+                color: #474747;
+            }
+
+        .clear {
+            clear: both;
+        }
+
+        .inovoice-page {
+            font-family: 'Roboto', sans-serif;
+            padding: 3% 0;
+            background: #FFF;
+             -webkit-print-color-adjust:exact;
+        }
+
+        .inovoice-header {
+            background: #2781cd;
+            padding: 10px;
+            border-radius: 2px 2px 0 0;
+            -webkit-border-radius: 2px 2px 0 0;
+            -moz-border-radius: 2px 2px 0 0;
+            -o-border-radius: 2px 2px 0 0;
+        }
+
+            .inovoice-header h2 {
+                font-size: 30px;
+                color: #FFF;
+                font-weight: 300;
+                text-align: center;
+                text-transform: uppercase;
+                margin: 0;
+            }
+
+        .inovice-inner-header {
+            padding-bottom: 10px;
+            border-bottom: 2px solid #848484;
+        }
+
+        .inovice-details-block h3 {
+            font-size: 18px;
+            color: #FFF;
+            padding: 6px 10px;
+            background: #848484;
+            font-weight: normal;
+            margin: 0;
+        }
+
+        .invoice_details {
+            padding: 10px;
+        }
+
+        .inovoice-img {
+            float: left;
+            margin-top: 10px;
+        }
+
+            .inovoice-img img {
+                border-radius: 2px;
+                -webkit-border-radius: 2px;
+                -moz-border-radius: 2px;
+                -o-border-radius: 2px;
+            }
+
+        .inovoice-room-details {
+            float: left;
+            width:88.5%;
+            padding-left: 1.5%;
+        }
+
+        .invoice_details table {
+            width:100%;
+        }
+
+            .invoice_details table td {
+                padding: 5px;
+                vertical-align: initial;
+            }
+
+                .invoice_details table td span {
+                    /*float: right;
+                    font-weight: bold;*/
+                }
+
+                .invoice_details table td.inovice-head {
+                    width: 135px;
+                    font-size: 15px;
+                    color: #444444;
+                    font-weight: 500;
+                }
+
+                .invoice_details table td.inovice-desc {
+                    color: #666666;
+                }
+
+        .inovice-details-block {
+            margin-top: 15px;
+        }
+
+        .inovice-price-details table {
+            float: none;
+            width: 100%;
+        }
+
+            .inovice-price-details table td {
+                color: #444444;
+                font-weight: 500;
+            }
+
+        .invoice_details table td.inovice_price {
+            text-align: right;
+            position: relative;
+           
+        }
+
+        .invoice_details table td span.discount-icon {
+            width: 15px;
+            height: 15px;
+            display: inline-block;
+            background: url("../images/sprite-img.png") no-repeat -122px -115px;
+            position: absolute;
+            right: 0;
+            top: 7px;
+        }
+
+        .inovice-price-details table tr.grand-total {
+            border-top: 1px solid #242424;
+            border-bottom: 2px solid #242424;
+            line-height: 25px;
+        }
+
+        .invoice_details table td.inovice_price_total {
+           font-weight:500;
+           color:#222;
+        }
+
+        .inovoice-policeis h4 {
+            font-size: 16px;
+            color: #525252;
+            font-weight: 500;
+            margin-bottom: 5px;
+            margin: 0;
+        }
+
+        .inovoice-policeis p {
+            font-size: 14px;
+            color: #525252;
+            line-height: 1.6em;
+        }
+
+        .inovoice-policeis {
+            margin-bottom: 15px;
+        }
+
+        .inovoice-bottom-desc {
+            font-size: 11px;
+            color: #434343;
+            line-height: 1.6em;
+            border-top: 1px solid #ADADAD;
+            padding-top: 5px;
+        }
+        .inovoice-header-top-right li.email a{ 
+background-position:-56px -449px;
+}
+
+
+ .qs {
+color: #FFFFFF;
+cursor: default;
+display: inline-block;
+font-size: 12px;
+font-weight: normal;
+position: relative;
+text-align: center;
+top: -2px;
+right: -2px;
+background:#4D7496;
+border-radius: 2em;
+width: 15px;
+height: 15px;
+}
+.qs .hint {
+  background-color: rgba(0, 0, 0, 0.85);
+  border-radius:2px;
+  bottom:30px;
+  color: #fff;
+  display: none;
+  font-size:12px;
+  left: -84px;
+  padding: 5px 10px;
+  position: absolute;
+  min-width:170px;
+  z-index: 4;
+  font-weight:normal;
+}
+.qs .hint:before {
+  border-top: 7px solid rgba(0, 0, 0, 0.85);
+  border-right: 7px solid transparent;
+  border-left: 7px solid transparent;
+  bottom: -7px;
+  content: '';
+  display: block;
+  left: 50%;
+  margin-left: -7px;
+  position: absolute;
+  height:inherit;
+}
+.qs:hover .hint {
+  display: block;
+  -webkit-animation: fade-in .3s linear 1, move-up .3s linear 1;
+  -moz-animation: fade-in .3s linear 1, move-up .3s linear 1;
+  -ms-animation: fade-in .3s linear 1, move-up .3s linear 1;
+}
+
+@-webkit-keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-moz-keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-ms-keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.addres-details{
+    padding-top:5px;
+}
+.addres-details span{
+    display:inline-block;
+    font-size: 15px;
+  color: #444444;
+  font-weight: 500;
+  width:100px;
+}
+.addres-details h5,.addres-details h4 {
+    display:inline-block;
+}

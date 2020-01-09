@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "Contact_Us";
+    Layout = "~/Views/Shared/_DefaultConsumer.cshtml";
+}
+
+<div class="contact-us">
+    <div class="wrap">
+        <h2>Contact Us</h2>
+        <section class="contact-top-section">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="contact-form">
+                        <h3></h3>
+                        <form id="formContactUs">
+                            <div class="row row-fileds">
+                                <span class="text_box"><input type="text" data-bind="value:Name" placeholder="Name" class="text-field"></span>
+                            </div>
+
+                            <div class="row row-fileds">
+                                <span class="text_box"><input type="text" data-bind="value:EmailAddress" placeholder="Email Address" class="text-field"></span>
+                            </div>
+
+                            <div class="row row-fileds">
+                                <span class="text_box"><input type="text" data-bind="value:Mobile" maxlength="10" placeholder="Mobile Number" class="text-field"></span>
+                            </div>
+
+                            <div class="row row-fileds">
+                                <span class="text_box"><textarea data-bind="value:Message" placeholder="Message" class="text-field"></textarea></span>
+                            </div>
+
+                            <div class="row row-fileds">
+                                <span class="text_box" style="text-align:right;">
+                                    <input type="submit" data-bind="click:Submit" value="Submit" class="submit-btn">
+                                    <input type="reset" data-bind="click:Cancel" value="Cancel" class="cancel-btn">
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="location-map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7543.178278067648!2d72.84678376838812!3d19.037817961652458!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c92d7aaaaab3%3A0x6c47784617b9332c!2sTravelmartindia!5e0!3m2!1sen!2sin!4v1435128498121" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-bottom-section">
+            <h3>Customer Support</h3>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="customer-support">
+                        <span class="landline"></span>
+                        <h4>+91 80 6845 2564</h4>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="customer-support">
+                        <span class="mobile"></span>
+                        <h4>+91 022 43438150</h4>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="customer-support">
+                        <span class="email"></span>
+                        <h4><a href="mailto:info@lastminutekeys.com">info@lastminutekeys.com</a></h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/Consumer/ContactUs.js"></script>
+}

@@ -1,0 +1,699 @@
+﻿@{
+    ViewBag.Title = "RoomRateCal";
+    Layout = "~/Views/Shared/_SuperadminLayout.cshtml";
+}
+
+<link href="~/Content/error-notifier.css" rel="stylesheet" />
+<style>
+    .table-bordered {
+        table-layout: fixed;
+    }
+
+        .table-bordered > thead > tr > th, .table-bordered > thead > tr > td {
+            width: 150px;
+        }
+
+    #RoomTypeGrid thead tr th {
+        background: #036396;
+        color: #FFF;
+        vertical-align: middle;
+        text-align: center;
+        border: 1px solid #1E76A5;
+    }
+
+        #RoomTypeGrid thead tr th > table {
+            background: inherit;
+        }
+
+            #RoomTypeGrid thead tr th > table td.price-bg {
+                background: #51A351;
+            }
+
+            #RoomTypeGrid thead tr th > table td.avail-bg {
+                background: #E88400;
+            }
+</style>
+@Scripts.Render("~/Scripts/jqueryNotification.js")
+@Scripts.Render("~/Scripts/jquery.blockUI.js")
+@Scripts.Render("~/Scripts/AppCommonScript.js")
+<div class="row">
+    <ul id="breadcrumbs" class="breadcrumb">
+
+
+        <li class="current" id="SelectedProperty">
+
+        </li>
+
+        <li>
+
+            Rate Calendar
+        </li>
+    </ul>
+    @*<a id="btnhide" onclick="Reload()" style="margin-left: 92.4%;margin-top: -9.2%;" class="btn btn-success">Update</a>*@
+
+    <div class="modal fade" id="modelShowDetail" style="margin-top:10%">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background:#3E7EB6;">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" style="color:#FFF;">Profit &amp; Loss</h4>
+                </div>
+
+                <div class="modal-body">
+                    <table class="table table-bordered" style="table-layout:inherit;">
+                        <thead><tr><th>Vendor Price</th><th>Camo Price</th><th>Tax</th><th>Net</th><th>CCAvenue Charges</th><th>Margin</th></tr></thead>
+                        <tbody data-bind="foreach:Details">
+                            <tr>
+                                <td data-bind="text:vndramnt"></td>
+                                <td data-bind="text:camflg_Amnt"></td>
+                                <td data-bind="text:tax_amnt"></td>
+                                <td data-bind="text:net_amt"></td>
+                                <td data-bind="text:ccavenuecharges"></td>
+                                <td data-bind="text:margin"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="modal-footer">
+
+                    <button id="btnModelClose" type="button" class="btn btn-lg btn-primary" data-dismiss="modal">Close</button>
+
+                </div>
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <div class="col-md-12">
+        <div id="nodata" class="widget box">
+            <div class="widget-header">
+                <h4><i class="icon-reorder"></i> Rate Calendar</h4>
+                <div class="toolbar no-padding">
+                    <div class="btn-group">
+                        <span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span>
+
+                    </div>
+                </div>
+            </div>
+
+            <div style="overflow-y:auto" class="widget-content no-padding">
+                <label id="nodatavail" style="text-align:center;display:none">No data Available</label>
+                <table id="RoomTypeGrid" class="table table-bordered table-checkable">
+                    <thead>
+                        <tr>
+                            <th>
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>
+                                            Room Type
+                                        </th>
+                                        <th> Rack Price</th>
+                                    </tr>
+                                </table>
+
+                            </th>
+                            <th id="Row1" style="text-align:center">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td colspan="2"><span data-bind="text:date"></span></td>
+                                    </tr>
+                                    <tr>
+
+                                        <td class="price-bg"> Price</td>
+                                        <td class="avail-bg"> Avail</td>
+                                        @* <td class="price-bg">  P &amp; L</td>*@
+                                    </tr>
+                                </table>
+                            </th>
+                            <th id="Row2" style="text-align:center">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td colspan="2"><span data-bind="text:date1"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="price-bg"> Price</td>
+                                        <td class="avail-bg"> Avail</td>
+                                        @* <td class="price-bg">  P &amp; L</td>*@
+                                    </tr>
+                                </table>
+                            </th>
+                            <th id="Row3" style="text-align:center">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td colspan="2"><span data-bind="text:date2"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="price-bg"> Price</td>
+                                        <td class="avail-bg"> Avail</td>
+                                        @* <td class="price-bg">  P &amp; L</td>*@
+                                    </tr>
+                                </table>
+                            </th>
+                            <th id="Row4" style="text-align:center">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td colspan="2"><span data-bind="text:date3"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="price-bg"> Price</td>
+                                        <td class="avail-bg"> Avail</td>
+                                        @* <td class="price-bg">  P &amp; L</td>*@
+                                    </tr>
+                                </table>
+                            </th>
+                            <th id="Row5" style="text-align:center">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td colspan="2"><span data-bind="text:date4"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="price-bg"> Price</td>
+                                        <td class="avail-bg"> Avail</td>
+                                        @* <td class="price-bg">  P &amp; L</td>*@
+                                    </tr>
+                                </table>
+                            </th>
+                            <th id="Row6" style="text-align:center">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td colspan="2"><span data-bind="text:date5"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="price-bg"> Price</td>
+                                        <td class="avail-bg"> Avail</td>
+                                        @* <td class="price-bg">  P &amp; L</td>*@
+                                    </tr>
+                                </table>
+                            </th>
+                            <th id="Row7" style="text-align:center">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td colspan="2"><span data-bind="text:date6"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="price-bg"> Price</td>
+                                        <td class="avail-bg"> Avail</td>
+                                        @* <td class="price-bg">  P &amp; L</td>*@
+                                    </tr>
+                                </table>
+                            </th>
+                            <th id="Row8" style="text-align:center">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td colspan="2"><span data-bind="text:date7"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="price-bg"> Price</td>
+                                        <td class="avail-bg"> Avail</td>
+                                        @* <td class="price-bg">  P &amp; L</td>*@
+                                    </tr>
+                                </table>
+                            </th>
+                            <th id="Row9" style="text-align:center">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td colspan="2"><span data-bind="text:date8"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="price-bg"> Price</td>
+                                        <td class="avail-bg"> Avail</td>
+                                        @* <td class="price-bg">  P &amp; L</td>*@
+                                    </tr>
+                                </table>
+                            </th>
+                            <th id="Row10" style="text-align:center">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td colspan="2"><span data-bind="text:date9"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="price-bg"> Price</td>
+                                        <td class="avail-bg"> Avail</td>
+                                        @* <td class="price-bg">  P &amp; L</td>*@
+                                    </tr>
+                                </table>
+                            </th>
+
+                            <th id="Row11" style="text-align:center">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td colspan="2"><span data-bind="text:date10"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="price-bg"> Price</td>
+                                        <td class="avail-bg"> Avail</td>
+                                        @* <td class="price-bg">  P &amp; L</td>*@
+                                    </tr>
+                                </table>
+                            </th>
+                            <th id="Row12" style="text-align:center">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td colspan="2"><span data-bind="text:date11"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="price-bg"> Price</td>
+                                        <td class="avail-bg"> Avail</td>
+                                        @* <td class="price-bg">  P &amp; L</td>*@
+                                    </tr>
+                                </table>
+                            </th>
+                            <th id="Row13" style="text-align:center">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td colspan="2"><span data-bind="text:date12"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="price-bg"> Price</td>
+                                        <td class="avail-bg"> Avail</td>
+                                        @* <td class="price-bg">  P &amp; L</td>*@
+                                    </tr>
+                                </table>
+                            </th>
+                            <th id="Row14" style="text-align:center">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td colspan="2"><span data-bind="text:date13"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="price-bg"> Price</td>
+                                        <td class="avail-bg"> Avail</td>
+                                        @* <td class="price-bg">  P &amp; L</td>*@
+                                    </tr>
+                                </table>
+                            </th>
+                            <th id="Row15" style="text-align:center">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td colspan="2"><span data-bind="text:date14"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="price-bg"> Price</td>
+                                        <td class="avail-bg"> Avail</td>
+                                        @* <td class="price-bg">  P &amp; L</td>*@
+                                    </tr>
+                                </table>
+                            </th>
+                            </th>
+                    </thead>
+                    <tbody style="text-align:center">
+                        <tr>
+                            <td width="10%" data-bind="foreach:DayList">
+                                <table class="table table-bordered">
+                                    <tr>
+
+                                        <td data-bind="text: Room_Name"></td>
+
+                                        <td>
+                                            <span data-bind="visible: !changeRoom_Standard_rate(), text: Room_Standard_rate, click: editRoom_Standard_rate"></span>
+                                            <input style="width:50px;height:22px" maxlength="5" onkeypress="return isNumber(event)" data-bind="visible: changeRoom_Standard_rate, value: Room_Standard_rate,  hasFocus: changeRoom_Standard_rate,event:{change:SaveRoom_Standard_rate}" />
+                                        </td>
+                                    </tr>
+                                </table>
+                                @*<span data-bind="text:Room_Name" style="width:10px !important"></span>*@
+                            </td>
+                            <td id="tdRow1" width="10%" data-bind="foreach:DayList">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td data-bind="text: Inv_Id,visible:false"></td>
+
+                                        <td>
+                                            <span data-bind="visible: !change(), text: Price, click: editPrice"></span>
+                                            <input style="width:50px;height:22px" maxlength="5" onkeypress="return isNumber(event)" data-bind="visible: change, value: Price,  hasFocus: change,event:{change:SavePrice}" />
+                                        </td>
+                                        <td style="display:none" data-bind="text:Hold_Room"></td>
+                                        <td>
+                                            <a href="#" data-bind="click:down,visible:Available">
+                                                <img src="~/img/RateCalenderContent/down_arrow.png" />
+                                            </a>
+                                            <span data-bind="text: Available"></span>
+                                            <a href="#" data-bind="click:up">
+                                                <img src="~/img/RateCalenderContent/up_arrow.png" />
+                                            </a>
+                                        </td>
+                                        @*<td><a style="width:50px;  text-align:center" data-bind="click:ShowDetails" data-toggle="modal" href="#modelShowDetail"><img src="~/img/question_mark.png" /></a></td>*@
+
+                                    </tr>
+                                </table>
+
+                            </td>
+
+
+                            <td id="tdRow2" width="10%" data-bind="foreach:DayList1">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td data-bind="text: Inv_Id,visible:false"></td>
+
+                                        <td>
+                                            <span data-bind="visible: !change(), text: Price, click: editPrice"></span>
+                                            <input style="width:40px;height:22px" maxlength="5" onkeypress="return isNumber(event)" data-bind="visible: change, value: Price,  hasFocus: change,event:{change:SavePrice}" />
+                                        </td>
+                                        <td style="display:none" data-bind="text:Hold_Room"></td>
+                                        <td>
+                                            <a href="#" data-bind="click:down,visible:Available">
+                                                <img src="~/img/RateCalenderContent/down_arrow.png" />
+                                            </a>
+                                            <span data-bind="text: Available"></span>
+                                            <a href="#" data-bind="click:up">
+                                                <img src="~/img/RateCalenderContent/up_arrow.png" />
+                                            </a>
+                                        </td>
+                                        @*<td>
+                                                <a  data-bind="click:ShowDetails" data-toggle="modal" href="#modelShowDetail"><img src="~/img/question_mark.png" /></a>
+                                            </td>*@
+                                    </tr>
+                                </table>
+                            </td>
+                            <td id="tdRow3" width="10%" data-bind="foreach:DayList2">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td data-bind="text: Inv_Id,visible:false"></td>
+
+                                        <td>
+                                            <span data-bind="visible: !change(), text: Price, click: editPrice"></span>
+                                            <input style="width:40px;height:22px" maxlength="5" onkeypress="return isNumber(event)" data-bind="visible: change, value: Price,  hasFocus: change,event:{change:SavePrice}" />
+                                        </td>
+                                        <td style="display:none" data-bind="text:Hold_Room"></td>
+                                        <td>
+                                            <a href="#" data-bind="click:down,visible:Available">
+                                                <img src="~/img/RateCalenderContent/down_arrow.png" />
+                                            </a>
+                                            <span data-bind="text: Available"></span>
+                                            <a href="#" data-bind="click:up">
+                                                <img src="~/img/RateCalenderContent/up_arrow.png" />
+                                            </a>
+                                        </td>
+                                        @*<td>
+                                                <a data-bind="click:ShowDetails" data-toggle="modal" href="#modelShowDetail"><img src="~/img/question_mark.png" /></a>
+                                            </td>*@
+                                    </tr>
+                                </table>
+                            </td>
+
+                            <td id="tdRow4" width="10%" data-bind="foreach:DayList3">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td data-bind="text: Inv_Id,visible:false"></td>
+
+                                        <td>
+                                            <span data-bind="visible: !change(), text: Price, click: editPrice"></span>
+                                            <input style="width:40px;height:22px" maxlength="5" onkeypress="return isNumber(event)" data-bind="visible: change, value: Price,  hasFocus: change,event:{change:SavePrice}" />
+                                        </td>
+                                        <td style="display:none" data-bind="text:Hold_Room"></td>
+                                        <td>
+                                            <a href="#" data-bind="click:down,visible:Available">
+                                                <img src="~/img/RateCalenderContent/down_arrow.png" />
+                                            </a>
+                                            <span data-bind="text: Available"></span>
+                                            <a href="#" data-bind="click:up">
+                                                <img src="~/img/RateCalenderContent/up_arrow.png" />
+                                            </a>
+                                        </td>
+                                        @*<td>
+                                                <a data-bind="click:ShowDetails" data-toggle="modal" href="#modelShowDetail"><img src="~/img/question_mark.png" /></a>
+                                            </td>*@
+                                    </tr>
+                                </table>
+                            </td>
+
+
+                            <td id="tdRow5" width="10%" data-bind="foreach:DayList4">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td data-bind="text: Inv_Id,visible:false"></td>
+
+                                        <td>
+                                            <span data-bind="visible: !change(), text: Price, click: editPrice"></span>
+                                            <input style="width:40px;height:22px" maxlength="5" onkeypress="return isNumber(event)" data-bind="visible: change, value: Price,  hasFocus: change,event:{change:SavePrice}" />
+                                        </td>
+                                        <td>
+                                            <a href="#" data-bind="click:down,visible:Available">
+                                                <img src="~/img/RateCalenderContent/down_arrow.png" />
+                                            </a>
+                                            <span data-bind="text: Available"></span>
+                                            <a href="#" data-bind="click:up">
+                                                <img src="~/img/RateCalenderContent/up_arrow.png" />
+                                            </a>
+                                        </td>
+                                        @*<td>
+                                                <a  data-bind="click:ShowDetails" data-toggle="modal" href="#modelShowDetail"><img src="~/img/question_mark.png" /></a>
+                                            </td>*@
+                                    </tr>
+                                </table>
+                            </td>
+                            <td id="tdRow6" width="10%" data-bind="foreach:DayList5">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td data-bind="text: Inv_Id,visible:false"></td>
+
+                                        <td>
+                                            <span data-bind="visible: !change(), text: Price, click: editPrice"></span>
+                                            <input style="width:40px;height:22px" maxlength="5" onkeypress="return isNumber(event)" data-bind="visible: change, value: Price,  hasFocus: change,event:{change:SavePrice}" />
+                                        </td>
+                                        <td>
+                                            <a href="#" data-bind="click:down,visible:Available">
+                                                <img src="~/img/RateCalenderContent/down_arrow.png" />
+                                            </a>
+                                            <span data-bind="text: Available"></span>
+                                            <a href="#" data-bind="click:up">
+                                                <img src="~/img/RateCalenderContent/up_arrow.png" />
+                                            </a>
+                                        </td>
+                                        @*<td>
+                                                <a  data-bind="click:ShowDetails" data-toggle="modal" href="#modelShowDetail"><img src="~/img/question_mark.png" /></a>
+                                            </td>*@
+                                    </tr>
+                                </table>
+                            </td>
+                            <td id="tdRow7" width="10%" data-bind="foreach:DayList6">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td data-bind="text: Inv_Id,visible:false"></td>
+
+                                        <td>
+                                            <span data-bind="visible: !change(), text: Price, click: editPrice"></span>
+                                            <input style="width:40px;height:22px" maxlength="5" onkeypress="return isNumber(event)" data-bind="visible: change, value: Price,  hasFocus: change,event:{change:SavePrice}" />
+                                        </td>
+
+                                        <td>
+                                            <a href="#" data-bind="click:down,visible:Available">
+                                                <img src="~/img/RateCalenderContent/down_arrow.png" />
+                                            </a>
+                                            <span data-bind="text: Available"></span>
+                                            <a href="#" data-bind="click:up">
+                                                <img src="~/img/RateCalenderContent/up_arrow.png" />
+                                            </a>
+                                        </td>
+                                        @*<td>
+                                                <a  data-bind="click:ShowDetails" data-toggle="modal" href="#modelShowDetail"><img src="~/img/question_mark.png" /></a>
+                                            </td>*@
+                                    </tr>
+                                </table>
+                            </td>
+                            <td id="tdRow8" width="10%" data-bind="foreach:DayList7">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td data-bind="text: Inv_Id,visible:false"></td>
+
+                                        <td>
+                                            <span data-bind="visible: !change(), text: Price, click: editPrice"></span>
+                                            <input style="width:40px;height:22px" maxlength="5" onkeypress="return isNumber(event)" data-bind="visible: change, value: Price,  hasFocus: change,event:{change:SavePrice}" />
+                                        </td>
+                                        <td>
+                                            <a href="#" data-bind="click:down,visible:Available">
+                                                <img src="~/img/RateCalenderContent/down_arrow.png" />
+                                            </a>
+                                            <span data-bind="text: Available"></span>
+                                            <a href="#" data-bind="click:up">
+                                                <img src="~/img/RateCalenderContent/up_arrow.png" />
+                                            </a>
+                                        </td>
+                                        @*<td>
+                                                <a  data-bind="click:ShowDetails" data-toggle="modal" href="#modelShowDetail"><img src="~/img/question_mark.png" /></a>
+                                            </td>*@
+                                    </tr>
+                                </table>
+                            </td>
+                            <td id="tdRow9" width="10%" data-bind="foreach:DayList8">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td data-bind="text: Inv_Id,visible:false"></td>
+
+                                        <td>
+                                            <span data-bind="visible: !change(), text: Price, click: editPrice"></span>
+                                            <input style="width:40px;height:22px" maxlength="5" onkeypress="return isNumber(event)" data-bind="visible: change, value: Price,  hasFocus: change,event:{change:SavePrice}" />
+                                        </td>
+                                        <td>
+                                            <a href="#" data-bind="click:down,visible:Available">
+                                                <img src="~/img/RateCalenderContent/down_arrow.png" />
+                                            </a>
+                                            <span data-bind="text: Available"></span>
+                                            <a href="#" data-bind="click:up">
+                                                <img src="~/img/RateCalenderContent/up_arrow.png" />
+                                            </a>
+                                        </td>
+                                        @*<td>
+                                                <a  data-bind="click:ShowDetails" data-toggle="modal" href="#modelShowDetail"><img src="~/img/question_mark.png" /></a>
+                                            </td>*@
+                                    </tr>
+                                </table>
+                            </td>
+                            <td id="tdRow10" width="10%" data-bind="foreach:DayList9">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td data-bind="text: Inv_Id,visible:false"></td>
+
+                                        <td>
+                                            <span data-bind="visible: !change(), text: Price, click: editPrice"></span>
+                                            <input style="width:40px;height:22px" maxlength="5" onkeypress="return isNumber(event)" data-bind="visible: change, value: Price,  hasFocus: change,event:{change:SavePrice}" />
+                                        </td>
+                                        <td>
+                                            <a href="#" data-bind="click:down,visible:Available">
+                                                <img src="~/img/RateCalenderContent/down_arrow.png" />
+                                            </a>
+                                            <span data-bind="text: Available"></span>
+                                            <a href="#" data-bind="click:up">
+                                                <img src="~/img/RateCalenderContent/up_arrow.png" />
+                                            </a>
+                                        </td>
+                                        @*<td>
+                                                <a  data-bind="click:ShowDetails" data-toggle="modal" href="#modelShowDetail"><img src="~/img/question_mark.png" /></a>
+                                            </td>*@
+                                    </tr>
+                                </table>
+                            </td>
+                            <td id="tdRow11" width="10%" data-bind="foreach:DayList10">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td data-bind="text: Inv_Id,visible:false"></td>
+
+                                        <td>
+                                            <span data-bind="visible: !change(), text: Price, click: editPrice"></span>
+                                            <input style="width:40px;height:22px" maxlength="5" onkeypress="return isNumber(event)" data-bind="visible: change, value: Price,  hasFocus: change,event:{change:SavePrice}" />
+                                        </td>
+                                        <td>
+                                            <a href="#" data-bind="click:down,visible:Available">
+                                                <img src="~/img/RateCalenderContent/down_arrow.png" />
+                                            </a>
+                                            <span data-bind="text: Available"></span>
+                                            <a href="#" data-bind="click:up">
+                                                <img src="~/img/RateCalenderContent/up_arrow.png" />
+                                            </a>
+                                        </td>
+                                        @*<td>
+                                                <a  data-bind="click:ShowDetails" data-toggle="modal" href="#modelShowDetail"><img src="~/img/question_mark.png" /></a>
+                                            </td>*@
+                                    </tr>
+                                </table>
+                            </td>
+                            <td id="tdRow12" width="10%" data-bind="foreach:DayList11">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td data-bind="text: Inv_Id,visible:false"></td>
+
+                                        <td>
+                                            <span data-bind="visible: !change(), text: Price, click: editPrice"></span>
+                                            <input style="width:40px;height:22px" maxlength="5" onkeypress="return isNumber(event)" data-bind="visible: change, value: Price,  hasFocus: change,event:{change:SavePrice}" />
+                                        </td>
+                                        <td>
+                                            <a href="#" data-bind="click:down,visible:Available">
+                                                <img src="~/img/RateCalenderContent/down_arrow.png" />
+                                            </a>
+                                            <span data-bind="text: Available"></span>
+                                            <a href="#" data-bind="click:up">
+                                                <img src="~/img/RateCalenderContent/up_arrow.png" />
+                                            </a>
+                                        </td>
+                                        @*<td>
+                                                <a  data-bind="click:ShowDetails" data-toggle="modal" href="#modelShowDetail"><img src="~/img/question_mark.png" /></a>
+                                            </td>*@
+                                    </tr>
+                                </table>
+                            </td>
+                            <td id="tdRow13" width="10%" data-bind="foreach:DayList12">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td data-bind="text: Inv_Id,visible:false"></td>
+
+                                        <td>
+                                            <span data-bind="visible: !change(), text: Price, click: editPrice"></span>
+                                            <input style="width:40px;height:22px" maxlength="5" onkeypress="return isNumber(event)" data-bind="visible: change, value: Price,  hasFocus: change,event:{change:SavePrice}" />
+                                        </td>
+                                        <td>
+                                            <a href="#" data-bind="click:down,visible:Available">
+                                                <img src="~/img/RateCalenderContent/down_arrow.png" />
+                                            </a>
+                                            <span data-bind="text: Available"></span>
+                                            <a href="#" data-bind="click:up">
+                                                <img src="~/img/RateCalenderContent/up_arrow.png" />
+                                            </a>
+                                        </td>
+                                        @*<td>
+                                                <a  data-bind="click:ShowDetails" data-toggle="modal" href="#modelShowDetail"><img src="~/img/question_mark.png" /></a>
+                                            </td>*@
+                                    </tr>
+                                </table>
+                            </td>
+                            <td id="tdRow14" width="10%" data-bind="foreach:DayList13">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td data-bind="text: Inv_Id,visible:false"></td>
+
+                                        <td>
+                                            <span data-bind="visible: !change(), text: Price, click: editPrice"></span>
+                                            <input style="width:40px;height:22px" maxlength="5" onkeypress="return isNumber(event)" data-bind="visible: change, value: Price,  hasFocus: change,event:{change:SavePrice}" />
+                                        </td>
+                                        <td>
+                                            <a href="#" data-bind="click:down,visible:Available">
+                                                <img src="~/img/RateCalenderContent/down_arrow.png" />
+                                            </a>
+                                            <span data-bind="text: Available"></span>
+                                            <a href="#" data-bind="click:up">
+                                                <img src="~/img/RateCalenderContent/up_arrow.png" />
+                                            </a>
+                                        </td>
+                                        @*<td>
+                                                <a  data-bind="click:ShowDetails" data-toggle="modal" href="#modelShowDetail"><img src="~/img/question_mark.png" /></a>
+                                            </td>*@
+                                    </tr>
+                                </table>
+                            </td>
+                            <td id="tdRow15" width="10%" data-bind="foreach:DayList14">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td data-bind="text: Inv_Id,visible:false"></td>
+
+                                        <td>
+                                            <span data-bind="visible: !change(), text: Price, click: editPrice"></span>
+                                            <input style="width:40px;height:22px" maxlength="5" onkeypress="return isNumber(event)" data-bind="visible: change, value: Price,  hasFocus: change,event:{change:SavePrice}" />
+                                        </td>
+                                        <td>
+                                            <a href="#" data-bind="click:down,visible:Available">
+                                                <img src="~/img/RateCalenderContent/down_arrow.png" />
+                                            </a>
+                                            <span data-bind="text: Available"></span>
+                                            <a href="#" data-bind="click:up">
+                                                <img src="~/img/RateCalenderContent/up_arrow.png" />
+                                            </a>
+                                        </td>
+                                        @*<td>
+                                                <a  data-bind="click:ShowDetails" data-bind="click:ShowDetails" data-toggle="modal" href="#modelShowDetail"><img src="~/img/question_mark.png" /></a>
+                                            </td>*@
+                                    </tr>
+                                </table>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/Properties/RoomRateCalender.js"></script>
+
+
+
+
+<script src="~/Scripts/SuperAdminMaster.js"></script>

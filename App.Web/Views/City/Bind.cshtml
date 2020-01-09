@@ -1,0 +1,59 @@
+@model App.Web.ViewModels.CityViewModel
+
+@{
+    ViewBag.Title = "LMK Maintenance";
+}
+<link href="~/Content/font-awesome.css" rel="stylesheet" />
+<link href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
+<link href="~/Content/error-notifier.css" rel="stylesheet" />
+
+
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/Scripts/jquery-1.8.2.min.js")
+
+
+@Scripts.Render("~/Scripts/jquery-ui-1.10.3.js")
+@Scripts.Render("~/Scripts/knockout-2.3.0.js")
+
+<script src="~/Scripts/User/knockout.mapping-latest.debug.js"></script>
+@Scripts.Render("~/Scripts/jqueryNotification.js")
+@Scripts.Render("~/Scripts/jquery.blockUI.js")
+@Scripts.Render("~/Scripts/AppCommonScript.js") 
+
+ <form class="form-horizontal">
+     @Html.ActionLink("Create City", "Create", "City")
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th style="display:none">
+                    City_Id
+                </th>
+
+                <th>
+                    City_Name
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: Cities">
+            <tr>
+
+                <td style="display:none" data-bind="text: City_Id"></td>
+
+                <td data-bind="text: City_Name"></td>
+
+                <td>
+                    <a style="cursor:pointer" data-bind="click: editCity">Edit</a>
+
+                </td>
+               
+            </tr>
+        </tbody>
+    </table>
+
+
+
+</form>
+
+    <script src="@Url.Content("~/Scripts/City/Bind.js")" type="text/javascript"></script>

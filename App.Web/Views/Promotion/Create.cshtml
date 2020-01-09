@@ -1,0 +1,110 @@
+﻿@model App.Web.ViewModels.PromotionViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<link href="~/Content/font-awesome.css" rel="stylesheet" />
+<link href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
+<link href="~/Content/error-notifier.css" rel="stylesheet" />
+
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/Scripts/jquery-1.8.2.min.js")
+@Scripts.Render("~/Scripts/jquery-ui-1.10.3.js")
+@Scripts.Render("~/Scripts/knockout-2.3.0.js")
+@Scripts.Render("~/Scripts/jqueryNotification.js")
+@Scripts.Render("~/Scripts/jquery.blockUI.js")
+@Scripts.Render("~/Scripts/AppCommonScript.js")
+
+<div class="row">
+    <div class="span10">
+        <div class="page-header">
+            <h2>Promotion Information <small><i class="icon-double-angle-right"></i>  Add  Promotion</small></h2>
+        </div>
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-lg-12" id="divCreatePromotion">
+        <div class="span5">
+            <div class="form-horizontal">
+                <label style="display:none" data-bind="value:Promo_Id"></label>
+                <div class="control-group">
+                    <label class="control-label" for="LastName">Description <span class="required"></span></label>
+                    <div class="controls">
+                        <textarea id="Promo_descr" rows="3" style="width:300px;" data-bind="value: Promo_descr"></textarea>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Name">Promo_Type  <span class="required"></span></label>
+                    <div class="controls">
+                        <input id="Promo_Type" type="text" data-bind="value: Promo_Type" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Name">Promo_Code  <span class="required"></span></label>
+                    <div class="controls">
+                        <input id="Promo_Code" type="text" data-bind="value: Promo_Code" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Name">Prop_Value  <span class="required"></span></label>
+                    <div class="controls">
+                        <input id="Prop_Value" type="text" data-bind="value: Prop_Value" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="FirstName">Promo_Start<span class="required"></span></label>
+                    <div class="controls">
+                        <input id="Promo_Start" type="text" data-bind="value:Promo_Start" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="FirstName">Promo_End<span class="required"></span></label>
+                    <div class="controls">
+                        <input id="Promo_End" type="text" data-bind="value:Promo_End" />
+                    </div>
+                </div>
+
+                <label style="display:none" data-bind="value:Promo_Active_flag"></label>
+
+                <div class="control-group float-right">
+                    <input id="btnSave" type="button" value="Save" data-bind="click: CreatePromotion" class="btn btn-lg btn-primary" />
+                    @Html.ActionLink("Back to List", "Index", "Promotion")
+                </div>
+            </div>
+            <div class="span5">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    $("#Promo_Start").datepicker({
+        //  showOn: "button",
+        //  buttonImage: '/img/icon-calendar.gif',
+        //  buttonImageOnly: true,
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '2015:2050'
+    });
+
+</script>
+
+<script type="text/javascript">
+
+    $("#Promo_End").datepicker({
+        // showOn: "button",
+        // buttonImage: '/img/icon-calendar.gif',
+        // buttonImageOnly: true,
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '2015:2050'
+
+    });
+
+</script>
+<script src="~/Scripts/jquery.cookie.js"></script>
+<script src="@Url.Content("~/Scripts/Promotion/CreatePromotion.js")" type="text/javascript"></script>

@@ -1,0 +1,112 @@
+﻿@{
+    ViewBag.Title = "Occupancy";
+    Layout = "~/Views/Shared/_SuperadminLayout.cshtml";
+}
+
+<meta charset="utf-8">
+<title>LMK :: Manage Corporate User</title>
+<link rel="shortcut icon" href="~/img/Splitted_Images/favicon.ico" type="image/x-icon" />
+<meta name="keywords" content="Last Minute Keys" />
+<meta name="description" content="Last Minute Keys" />
+@*Scripts for create*@
+
+<!-- DataTables -->
+
+<form class="form-horizontal">
+
+    <div class="crumbs">
+        <ul id="breadcrumbs" class="breadcrumb">
+            <li>
+                <i class="icon-home"></i>
+                <a href="#">Home</a>
+            </li>
+
+            <li class="current">
+                System Settings
+            </li>
+            <li class="current">
+                Manage Corporate User
+            </li>
+
+        </ul>
+
+    </div><br /><br />
+
+    <br /><br />
+    <div class="row" id="CorporateUser">
+        <div class="col-md-12" style="margin-top: -5%;">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4><i class="icon-reorder"></i>Corporate User</h4>
+                    <div class="toolbar no-padding">
+                        <div class="btn-group">
+                            <span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="widget-content no-padding">
+                    <div class="customize-fileds customize-fileds2">
+
+                        <label>Select Corporate</label>
+
+                        <select data-bind="options: CorporateCompanyArray, optionsText: 'CompanyName',optionsValue: 'Id', value: selectedCompany,event:{change: GetCorporateUserInfo }"></select>
+
+                        <div class="clear"></div>
+                    </div>
+                    <table class="table table-striped table-bordered table-hover table-checkable CorporateUser" style="padding-top:20px;">
+                        <thead>
+                            <tr>
+
+                                <th>
+                                    First Name
+                                </th>
+                                <th>
+                                    Last Name
+                                </th>
+                                <th>
+                                    Mail Id
+                                </th>
+                                <th>
+                                    Mobile Number
+                                </th>
+                                <th>
+                                    Company Name
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: CorporateUserArray">
+                            <tr>
+                                <td data-bind="text: FirstName"></td>
+                                <td data-bind="text: LastName"></td>
+                                <td data-bind="text: MailId"></td>
+                                <td data-bind="text: Mobile"></td>
+                                <td data-bind="text: Company"></td>
+                                <td class="admin-message">
+                                    <!--ko if:isAdmin=='False'-->
+                                    <a href="#" class="linkmsg">
+                                        <span data-bind="click:$parent.ChangeToAdmin">Grant Admin</span>
+                                    </a>
+                                    <!--/ko-->
+                                    <!--ko if:isAdmin=='True'-->
+                                    <label class="labelmsg">Admin</label>
+                                    <!--/ko-->
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script src="~/Scripts/SuperAdminMaster.js"></script>
+<script src="~/Scripts/Corporate/CorporateUser.js"></script>
+
+

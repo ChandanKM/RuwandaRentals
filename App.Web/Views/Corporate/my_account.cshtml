@@ -1,0 +1,391 @@
+﻿@{
+    ViewBag.Title = "my_account";
+    Layout = "~/Views/Shared/_CorporateLayout.cshtml";
+}
+<link rel="shortcut icon" href="~/img/Splitted_Images/favicon.ico" type="image/x-icon" />
+@*<link href="~/Content/assets/css/main.css" rel="stylesheet" type="text/css" />*@
+<link href="~/Content/Corporate/css/datatables.css" rel="stylesheet" />
+<div class="my-account-page">
+    <div class="my-account-header">
+        <div class="wrap" id="headerName">
+            <h2>Hi, <strong data-bind="text:User_Name"></strong></h2>
+        </div>
+    </div>
+    <div class="my-account-details">
+        <div class="wrap">
+            <!--Vertical Tab-->
+            <div id="VerticalTab">
+                <ul class="resp-tabs-list hor_1">
+                
+                    <li id="liProfile"><i class="profile-icon"></i> Profile</li>
+                    <li id="liMybooking"><i class="booking-icon"></i> Corporates</li>
+                    <li id="lireport"><i class="overview-icon"></i>Booking Reports</li>
+                    @*<li id="liSettings"><i class="settings-icon"></i> Settings</li>*@
+                </ul>
+                <div class="resp-tabs-container">
+                    <!-- Overview -->
+                    
+                    <!-- Profile -->
+                    <div>
+                        <div class="account-details profile-details" id="divProfileInfo">
+                            <h3>Profile Info <a class="edit-btn" href="#" data-bind="click:EditProfile"><i class="edit-icon"></i> Edit</a></h3>
+                            <div class="account-desc" id="user_profileInfo">
+                                <section>
+                                    <div class="profile_img">
+                                        @*<span><img src="~/Content/Consumer/images/profile_img.jpg" data-bind="attr:{title:User_Name}" alt="" /></span>*@
+                                    </div>
+                                    <div class="profile-desc">
+                                        <h2 data-bind="text:User_Name"></h2>
+                                        <ul>
+                                            <li><span class="bold">Email Address</span><span data-bind="text:Cons_mailid"></span></li>
+                                            <li><span class="bold">Mobile Number</span><span data-bind="text:Cons_Mobile"></span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="clear"></div>
+                                </section>
+                            </div>
+                        </div>
+
+                        <!-- Edit Profile -->
+                        <div class="account-details edit-details" style="display:none" id="divEditProfile">
+                            <h3>Edit Profile</h3>
+                            <div class="account-desc">
+                                <h4>Personal Info</h4>
+                                <form>
+                                    <input type="hidden" data-bind="text:Cons_Id" />
+                                    @*<div class="row row-fileds">
+                                            <span class="field-name field_name2">Title</span>
+                                            <span class="text_box text_box2">
+                                                <select class="text-field select-box">
+                                                    <option>Mr</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                </select>
+                                            </span>
+                                            <div class="clear"></div>
+                                        </div>*@
+
+                                    <div class="row row-fileds">
+                                        <span class="field-name field_name2">First Name</span>
+                                        <span class="text_box text_box2"><input type="text" class="text-field" data-bind="value:Cons_First_Name" disabled></span>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    <div class="row row-fileds">
+                                        <span class="field-name field_name2">Last Name</span>
+                                        <span class="text_box text_box2"><input type="text" class="text-field" data-bind="value:Cons_Last_Name" disabled></span>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    @*<div class="row row-fileds">
+                                            <span class="field-name field_name2">Screen Name</span>
+                                            <span class="text_box text_box2"><input type="password" value="" class="text-field"></span>
+                                            <div class="clear"></div>
+                                        </div>*@
+
+                                    <div class="row row-fileds">
+                                        <span class="field-name field_name2">Date of Birth</span>
+                                        <span class="text_box text_box2">
+                                            <div class="input-group" id="checkin">
+                                                <input type="text" id="peekDob" name="dob" data-format="DD/MM/YYYY" data-bind="value:Cons_Dob" />
+                                                <span class="input-group-addon calendar-btn">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </span>
+                                        <div class="clear"></div>
+                                    </div>
+
+
+                                    <div class="profile-edit-details">
+                                        <h4>Contact Details</h4>
+
+                                        <div class="row row-fileds">
+                                            <span class="field-name field_name2">Email Address</span>
+                                            <span class="text_box text_box2"><input type="text" class="text-field" data-bind="value:Cons_mailid" disabled></span>
+                                            <div class="clear"></div>
+                                        </div>
+
+                                        <div class="row row-fileds">
+                                            <span class="field-name field_name2">Mobile Number</span>
+                                            <span class="text_box text_box2"><input type="text" class="text-field" data-bind="value:Cons_Mobile" maxlength="10"></span>
+                                            <div class="clear"></div>
+                                        </div>
+
+                                        <div class="row row-fileds">
+                                            <span class="field-name field_name2">Address</span>
+                                            <span class="text_box text_box2 text_box3"><textarea class="text-field textarea-box" data-bind="value:Cons_Addr1"></textarea></span>
+                                            <div class="clear"></div>
+                                        </div>
+
+                                        <div class="row row-fileds">
+                                            <span class="field-name field_name2">City</span>
+
+                                            <input hidden data-bind="value:Cons_City" id="hdnLocationId" />
+                                            <span class="text_box text_box2"><input type="text" id="txtLocation" class="text-field" data-bind="value:Cons_Area"></span>
+                                            <div class="clear"></div>
+                                        </div>
+
+                                        <div class="row row-fileds">
+                                            <span class="field-name field_name2">State</span>
+                                            <span class="text_box text_box2">
+                                                <input type="text" id="txtState" class="text-field" disabled>
+                                            </span>
+                                            <div class="clear"></div>
+                                        </div>
+
+                                        <div class="row row-fileds">
+                                            <span class="field-name field_name2">Pincode</span>
+                                            <span class="text_box text_box2"><input type="text" id="txtPincode" class="text-field" disabled></span>
+                                            <div class="clear"></div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row row-fileds row-fileds2">
+                                        <span class="text_box" style="text-align:right;">
+                                            <input type="submit" value="Save Changes" class="submit-btn" data-bind="click:SaveChanges">
+                                            <input type="reset" value="Back" class="cancel-btn" data-bind="click:DiscardChanges">
+                                        </span>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <!-- corporate -->
+
+                    <div id="divMyBooking">
+                        <div class="account-details booking-deals">
+                            <h3>Corporates </h3>
+
+                            <table class="table table-striped table-bordered table-hover table-checkable corporateTd">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            First_Name
+                                        </th>
+                                        <th>
+                                            Last_Name
+                                        </th>
+                                        <th>
+                                            mailid
+                                        </th>
+
+                                        <th>
+                                            Mobile
+                                        </th>
+                                        <th>
+                                            Company
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody data-bind="foreach: corporates" id="corporateTd">
+                                    <tr>
+
+                                        <td data-bind="text: First_Name"></td>
+                                        <td data-bind="text: Last_Name"></td>
+
+                                        @*<td data-bind="text: Facility_Type"></td>*@
+                                        <td data-bind="text: mailid"></td>
+                                        <td data-bind="text: Mobile"></td>
+                                        <td data-bind="text: Company"></td>
+
+
+
+                                        @*<td data-bind="text: Facility_Active_flag"></td>*@
+
+
+                                        @*<td>
+                                                <a style="cursor:pointer" data-bind="click: FacilityListVM.DeleteFacility">Delete</a>
+
+                                            </td>*@
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                    <!-- Report -->
+
+                    <div id="divreport">
+                            <div class="widget box">
+                                <div class="widget-header">
+                                    <h4><i class="icon-reorder"></i> Booking Report</h4>
+                                </div>
+
+
+
+                                <div class="widget-content no-padding Report-Page">
+                                    <div class="customize-fileds">
+                                        <div class="report-datepicker">
+                                            <label>Booking Date Wise</label>
+                                            <select hidden onchange="myFunction()" id="Days" style="display:none;" class="form-control input-width-xlarge"><option>30</option><option>60</option><option>90</option></select>
+                                            <input type="text" placeholder="Report From" id="txtFrom" />
+                                            <input type="text" placeholder="Report To" id="txtTo" />
+
+                                        </div>
+
+                                        <div class="Checkin-out-datepicker">
+                                            <label>Check In & Check Out Date Wise</label>
+                                            <select hidden onchange="myFunction()" id="Days" style="display:none;" class="form-control input-width-xlarge"><option>30</option><option>60</option><option>90</option></select>
+                                            <input type="text" placeholder="Report From" id="txtCheckin" />
+                                            <input type="text" placeholder="Report To" id="txtCheckOut" />
+                                            <input type="button" class="submit-btn" value="Submit" onclick="RefineReport()" />
+                                            @*<a onclick="RefineReport()" class="submit-btn">Submit</a>*@
+                                        </div>
+                                        <input type="button" id="btnmarginExport" class="btn btn-info export-btn" onclick="marginExcel()" value="Export">
+
+                                        <div class="clear"></div>
+                                    </div>
+                                    <table class="table table-striped table-bordered table-hover table-checkable BookingsDT" style="padding-top:20px;" id="example">
+                                        <thead>
+                                            <tr>
+
+                                                <th>
+                                                    BookingID
+                                                </th>
+                                                <th>
+                                                    Destination
+                                                </th>
+                                                <th>
+                                                    Property
+                                                </th>
+                                                <th>
+                                                    Room Type
+                                                </th>
+                                                <th>
+                                                    Checkin
+                                                </th>
+                                                <th>
+                                                    Checkout
+                                                </th>
+
+                                                <th>
+                                                    No. of Nights
+                                                </th>
+                                                <th>
+                                                    Client Name
+                                                </th>
+                                                <th>
+                                                    Client Mobile
+                                                </th>
+
+                                                <th>
+                                                    Email Id
+                                                </th>
+                                                <th>
+                                                    City of Origin
+                                                </th>
+                                                <th>
+                                                    Rate
+                                                </th>
+                                                <th>
+                                                    Service Tax
+                                                </th>
+                                                <th>
+                                                    Total Amount
+                                                </th>
+                                                @*<th>
+                                                        Options
+                                                    </th>*@
+
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="foreach: Bookings" id="BookingsDT">
+                                            <tr>
+                                                <td><span data-bind="text: Invce_Num"></span></td>
+                                                <td data-bind="text: Destination"></td>
+                                                <td data-bind="text: Prop_Name"></td>
+                                                <td data-bind="text: Room_Type"></td>
+                                                <td data-bind="text: Checkin"></td>
+                                                <td data-bind="text: Checkout"></td>
+                                                <td data-bind="text: NumberofNights"></td>
+                                                <td data-bind="text: Name"></td>
+                                                <td data-bind="text: Mobile"></td>
+                                                <td data-bind="text: Email"></td>
+                                                <td data-bind="text: City"></td>
+                                                <td data-bind="text: Rate"></td>
+                                                <td data-bind="text: Tax"></td>
+                                                <td data-bind="text: Amount"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- Settings -->
+                    <div class="account-details" id="divSetting">
+                        <h3>Settings</h3>
+                        <div class="account-desc" data-bind="foreach:SettingList">
+                            <h4><i class="pass-icon"></i> Change Password</h4>
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <input type="hidden" data-bind="value:Cons_Id">
+                                        <div class="row row-fileds">
+                                            <div class="col-md-4"><span class="field-name">Current Password</span></div>
+                                            <div class="col-md-8"><span class="text_box"><input id="txtCurnt_Pswd" type="password" class="text-field" data-bind="value:Curnt_Pswd"></span></div>
+                                        </div>
+
+                                        <div class="row row-fileds">
+                                            <div class="col-md-4"><span class="field-name">New Password</span></div>
+                                            <div class="col-md-8"><span class="text_box"><input id="txtNewPassword" type="password" class="text-field" data-bind="value:NewPassword"></span></div>
+                                        </div>
+
+                                        <div class="row row-fileds">
+                                            <div class="col-md-4"><span class="field-name">Confirm Password</span></div>
+                                            <div class="col-md-8"><span class="text_box"><input id="txtConfirmPassword" type="password" class="text-field" data-bind="value:ConfirmPassword"></span></div>
+                                        </div>
+                                        <div class="row row-fileds row-fileds2">
+                                            <div class="col-md-4"> </div>
+                                            <div class="col-md-8">
+                                                <span class="text_box">
+                                                    <input type="submit" value="Submit" data-bind="click:Submit" class="submit-btn">
+                                                    <input type="reset" value="Cancel" class="cancel-btn" data-bind="click:Cancel">
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div class="newsletter-section">
+                                <h4><i class="subscribe-icon"></i> Subscribe Newslatter</h4>
+                                <p>Get the LMK Newsletter for the best travel deals and latest news. And remember, we HATE spam as much as you do—we will never, ever, sell or share your email address with spammers.</p>
+                                <div class="email-newsletter">
+                                    <span class="field_name">Email Newsletter</span>
+                                    <span class="text_box" style="display:inline-block;">
+                                        <label class="radio"><input type="radio" name="radio" data-bind="checked:EmailLatter, click:ChangeEmailLatter" value="Yes" checked=""><i></i><span>Yes</span></label>
+                                        <label class="radio no"><input type="radio" name="radio" data-bind="checked:EmailLatter,click:ChangeEmailLatter" value="No"><i></i><span>NO</span></label>
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    
+    <script src="~/Scripts/Corporate/User_ProfileData.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#peekDob').datetimepicker({
+                pickTime: false
+            });
+        });
+    </script>
+}

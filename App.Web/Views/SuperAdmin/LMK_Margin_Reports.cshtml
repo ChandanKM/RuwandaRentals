@@ -1,0 +1,217 @@
+﻿@{
+    ViewBag.Title = "LMK_Margin_Reports";
+    Layout = "~/Views/Shared/_SuperadminLayout.cshtml";
+}
+
+<meta charset="utf-8">
+<title>LMK :: Manage Property</title>
+<link rel="shortcut icon" href="~/img/Splitted_Images/favicon.ico" type="image/x-icon" />
+<meta name="keywords" content="Last Minute Keys" />
+<meta name="description" content="Last Minute Keys" />
+@*Scripts for create*@
+<style>
+    div.dataTables_filter label {
+        margin-bottom: 20px;
+        margin-right: 10px;
+    }
+
+        div.dataTables_filter label input {
+            border: 1px solid #DDD;
+            vertical-align: middle;
+        }
+
+    #txtFrom, #txtTo {
+        border: 1px solid #DDD;
+    }
+
+    .dataTables_paginate .pagination {
+        margin-top: 10px;
+    }
+
+    .pagination > li > a, .pagination > li > span {
+        margin-left: 5px !important;
+    }
+
+    div.dataTables_info {
+        padding: 5px;
+        border-top: 1px solid #eee;
+        color: #444;
+    }
+
+    #BookingsDT thead tr:first-child > th {
+        border-top: 1px solid #ddd;
+    }
+
+    #BookingsDT thead > tr > th {
+        font-size: 12px;
+        vertical-align: middle;
+    }
+</style>
+<!-- DataTables -->
+
+<form class="form-horizontal">
+
+    <div class="crumbs">
+        <ul id="breadcrumbs" class="breadcrumb">
+            <li>
+                <i class="icon-home"></i>
+                <a href="#">Home</a>
+            </li>
+
+            <li class="current">
+                Reports
+            </li>
+            <li class="current">
+                Revenue Report
+            </li>
+
+        </ul>
+
+    </div><br /><br />
+
+    <br /><br />
+    <div class="row" id="BookingsDT">
+        <div class="col-md-12" style="margin-top: -5%;">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4><i class="icon-reorder"></i>Revenue Report</h4>
+                    <div class="toolbar no-padding">
+                        <div class="btn-group">
+                            <span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="customize-fileds">
+
+                    <input type="text" placeholder="Report From" id="txtFrom" />
+                    <input type="text" placeholder="Report To" id="txtTo" />
+
+                    <a onclick="RefineReport()" class="btn btn-success">Submit</a>
+
+                    <input type="button" id="btnmarginExport" class="btn btn-info export-btn" style="margin-top:0;" onclick="marginExcel()" value="EXPORT">
+
+                    <div class="clear"></div>
+                </div>
+                <div class="widget-content no-padding">
+                    <table class="table table-striped table-bordered table-hover table-checkable BookingsDT">
+                        <thead>
+                            <tr>
+
+                                @*<th>
+                                        Vendor Name
+                                    </th>
+                                    <th>
+                                        Property Name
+                                    </th>*@
+
+                                @*<th>
+                                       Param Type
+                                    </th>*@
+                                <th>
+                                    Booking Date
+                                </th>
+                                <th>
+                                    Booking Id
+                                </th>
+                                <th>
+                                    Client Name
+                                </th>
+                                <th>
+                                    Property Name
+                                </th>
+                                <th>
+                                    Cost Price
+                                </th>
+                                <th>
+                                    Mark %
+                                </th>
+                                <th>
+                                    Selling Price
+                                </th>
+                                <th>
+                                    Service Tax
+                                </th>
+                                <th>
+                                   Total
+                                </th>
+                                <th>
+                                    CC Avenue Charges % and Payment Mode
+                                </th>
+                                <th>
+                                    CC Avenue Charges and Amount
+                                </th>
+
+
+                                <th>
+                                    Net Profit
+                                    </th>
+
+                            </tr>
+
+                        </thead>
+                        <tbody data-bind="foreach: TaxList">
+                            <tr>
+
+
+                                @*<td data-bind="text: VendorID"></td>
+                                    <td data-bind="text: Prop_Id"></td>*@
+
+                                @*<td data-bind="text: VparamType"></td>*@
+                                <td data-bind="text: Inv_Date"></td>
+                                <td data-bind="text: Inv_Num"></td>
+                                <td data-bind="text:ClientName"></td>
+                                <td data-bind="text:PropName"></td>
+                                <td data-bind="text: Room_Rate"></td>                                
+                                <td data-bind="text: Markup"></td>
+                                <td data-bind="text: Camo_Rate"></td>
+                                <td data-bind="text: TaxAmnt"></td>
+                                <td data-bind="text: Net_Amnt"></td>
+                                <td ><span data-bind="text: PayType"></span> ( <span data-bind="text: ccavenuepercent"></span> )</td>
+                                <td data-bind="text: ccavenuecharges"></td>
+
+                                @*<td data-bind="text: PayType"></td>*@
+                                    <td data-bind="text: lmkmargin"></td>
+
+                                @* <td>
+                                        <a style="cursor:pointer;" data-bind="click:DT"> Details</a>
+                                    <a style="cursor:pointer" data-bind="click: deleteProperty"><img src="../../img/Splitted_Images/disable_button.png" /></a>
+
+                                                                </td>*@
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr data-bind="foreach:AverageList">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td data-btabindex="text:roomrate"></td>
+                                <td data-btabindex="text:sellingrate"></td>
+                                <td data-btabindex="text:tax"></td>
+                                <td data-btabindex="text:netamount"></td>
+                                <td data-btabindex="text:ccavenuecharges"></td>
+                                <td data-btabindex="text:margin"></td>
+                            </tr>
+
+                        </tfoot>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        @*<div data-bind="foreach: AverageList">
+            <span><b>CCAvenue Charges: </b></span><span data-bind="text:ccavenuecharges"></span><br />
+            <span><b>Total Margin: </b></span><span data-bind="text:margin"></span><br />
+            <span><b>Total Invoice Amount: </b></span><span data-bind="text:roomrate"></span><br />
+            <span><b>Total Selling Amount: </b></span><span data-bind="text:sellingrate"></span><br />
+            <span><b>Total Tax Amount: </b></span><span data-bind="text:tax"></span>
+        </div>*@
+    </div>
+</form>
+<script src="~/Scripts/jquery.storage.js"></script>
+<script src="~/Scripts/LMK_MArgin/Bind.js"></script>
+<script src="~/Scripts/SuperAdminMaster.js"></script>

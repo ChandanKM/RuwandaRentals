@@ -1,0 +1,238 @@
+﻿@{
+    ViewBag.Title = "Booking_payment_method";
+    Layout = "~/Views/Shared/_Consumer.cshtml";
+}
+
+<div class="booking-payment-method">
+    <div class="wrap">
+        <h2>A faster & easier booking experience.</h2>
+
+        <div class="booking-details">
+            <div class="booking-header">
+                <h3>Itinerary</h3>
+                <p>Preview Of the Hotel Details.</p>
+                <div class="clear"></div>
+            </div>
+            <div class="booking-details-inner" id="divBookingdetails">
+                <section class="booking-inner-header">
+                    <input hidden data-bind="value:PropId">
+                    <div class="hotel-name">
+                        <h4 data-bind="text:Prop_Name"></h4>
+                        <h5 data-bind="text:Prop_Address"></h5>
+                    </div>
+                    <div class="hotel-number">
+                        @*<p><i class="phone-icon"></i> 1800 999 1200</p>*@
+                    </div>
+                    <div class="clear"></div>
+                </section>
+
+                <section>
+                    <div class="booking-hotel-img">
+                        <img data-bind="attr:{src:Prop_Image,title:Prop_Name}" alt="" />
+                    </div>
+                    <div class="booking-hotel-details">
+                        <div class="booking-hotel-desc">
+                            <input hidden data-bind="value:RoomID"><div>
+                                <h3 data-bind="text:RoomName"></h3>
+                                @*<p class="policy-link"><a href="#">Booking Policies >></a></p>*@
+                                <div class="clear"></div>
+                            </div>
+                            <p data-bind="text:Room_Overview"></p>
+                            <section>
+
+                                <div class="booking_hotel_details">
+                                    <ul class="booking_details">
+                                        <li>
+                                            <div class="checkin-details">
+                                                <h4 class="checkin-h4">Check In</h4>
+                                                <div class="week-details">
+                                                    <span class="checkin-date" data-bind="text:Room_Checkin"></span>
+                                                    <span class="checkin-week-name"></span>
+                                                    <div class="reseved-days">
+                                                        <span class="days"><strong data-bind="text:Day_Count"></strong> <em>Night</em></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="checkin-details">
+                                                <h4>Check Out</h4>
+                                                <div class="week-details">
+                                                    <span class="checkin-date" data-bind="text:Room_Checkout"></span>
+                                                    <span class="checkin-week-name"></span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <div class="clear"></div>
+                                    </ul>
+                                    <h4 class="facility-heading">Facilities For the Room</h4>
+                                    <div class="hotel_facilities hotel_facilities2">
+                                        <ul data-bind="foreach:RoomFacilityList">
+                                            <li><img data-bind="attr:{src:Facility_Image_dir,title:FacilityName}" style="width:30px;height:30px"></li>
+                                            @*<li><img src="~/Content/Consumer/images/24x7-checkin.png" title="24x7 Checkin"></li>
+                                                <li><img src="~/Content/Consumer/images/meeting.png" title="Metting Space"></li>
+                                                <li><img src="~/Content/Consumer/images/wifi.png" title="Wifi"></li>
+                                                <li><img src="~/Content/Consumer/images/bar.png" title="Image"></li>
+                                                <li><img src="~/Content/Consumer/images/restaurant.png" title="Restaurant"></li>*@
+                                        </ul>
+                                    </div>
+
+                                    <div class="coupon-code-section" style="display:none">
+                                        <h4> Have a coupon code or gift card to redeem?</h4> 
+                                        <form>
+                                            <input type="text" placeholder="Enter Coupon Code">
+                                            <input type="submit" value="Apply Code">
+                                        </form>
+                                        <div class="coupon-discount-msg">Congrats! You got <span>&#8377;100</span> off... </div>
+                                    </div>
+                                    <div class="payment-btn" hidden>
+                                        <a href="#" data-bind="click:ContinueToPayment">Continue to payment</a>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="hotel_booking_price">
+                                    <h4>Price Details</h4>
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td>Number of Room</td>
+                                                <td class="inovice_price"><span data-bind="text:Room_Count"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Room Charges</td>
+                                                <td class="inovice_price">₹ <span data-bind="text:camo_room_rate"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td> Tax </td>
+                                                <td class="inovice_price">₹ <span data-bind="text:ServiceTax"></span></td>
+                                            </tr>
+                                            @*<tr>
+                                                    <td>VAT 4%</td>
+                                                    <td class="inovice_price">₹ 84.00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Discount</td>
+                                                    <td class="inovice_price">₹ 100.00 <span class="discount-icon"></span></td>
+                                                </tr>*@
+                                            <tr><td></td></tr>
+                                            <tr class="grand-total">
+                                                <td style="font-size:18px;">Grand Total</td>
+                                                <td class="inovice_price inovice_price_total">₹ <span data-bind="text:net_amt"></span> </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="clear"></div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </section>
+
+            </div>
+        </div>
+
+        <div class="billing-info">
+            <div class="booking-header">
+                <h3>Billing Info</h3>
+                <p>Where do you want your voucher to be sent?</p>
+                <div class="clear"></div>
+            </div>
+            <div class="booking-details-inner">
+                <form id="formUserDetails">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input hidden data-bind="value:Cons_Id" />
+                                @*<div class="row row-fileds">
+                                        <div class="col-md-4"><span class="field-name">Title</span></div>
+                                        <div class="col-md-8"><span class="text_box"><input type="text" value="" class="text-field"></span></div>
+                                    </div>*@
+
+                                <div class="row row-fileds">
+                                    <div class="col-md-4"><span class="field-name">First Name</span></div>
+                                    <div class="col-md-8"><span class="text_box"><input type="text" data-bind="value:Cons_First_Name" class="text-field" readonly></span></div>
+                                </div>
+
+                                <div class="row row-fileds">
+                                    <div class="col-md-4"><span class="field-name">Last Name</span></div>
+                                    <div class="col-md-8"><span class="text_box"><input type="text" data-bind="value:Cons_Last_Name" class="text-field" readonly></span></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="row row-fileds">
+                                    <div class="col-md-4"><span class="field-name">Mobile No.</span></div>
+                                    <div class="col-md-8"><span class="text_box"><input type="text" data-bind="value:Cons_Mobile" class="text-field" readonly></span></div>
+                                </div>
+
+                                <div class="row row-fileds">
+                                    <div class="col-md-4"><span class="field-name">Email Id</span></div>
+                                    <div class="col-md-8"> <span class="text_box"><input type="text" data-bind="value:Cons_mailid" class="text-field" readonly></span> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="row row-fileds">
+                                    <div class="col-md-4 request-field"><span class="field-name">Special Requests</span></div>
+                                    <div class="col-md-9"> <span class="text_box"><textarea class="text-field textarea-box" data-bind="value:Invce_note"> </textarea></span> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="container-fluid occupant-details">
+                        <div class="row row-fileds">
+                            <div class="col-md-6">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-8"> <h4>Occupant Details</h4></div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row row-fileds">
+                                    <div class="col-md-4"><span class="field-name">First Name</span></div>
+                                    <div class="col-md-8"><span class="text_box"><input type="text"  data-bind="value:Occupant_firstname" required class="text-field"></span></div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="row row-fileds">
+                                    <div class="col-md-4"><span class="field-name">Last Name</span></div>
+                                    <div class="col-md-8"><span class="text_box"><input type="text" data-bind="value:Occupant_lastname" class="text-field"></span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-fileds">
+                            <div class="col-md-6">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-8">
+                                    <div class="payment-btn">
+                                        <a href="#" data-bind="click:ContinueToPayment">Continue to payment</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/Consumer/booking_payment_method.js"></script>
+}

@@ -1,0 +1,46 @@
+@model App.Web.ViewModels.PincodeViewModel
+
+@{
+    ViewBag.Title = "LMK Maintenance";
+}
+
+
+    
+<form class="form-horizontal">
+ 
+    
+    <div class="row">
+        <div class="span10">
+            <div class="page-header">
+                <h2>Pincode Information <small><i class="icon-double-angle-right"></i>  manage Pincode records</small></h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="span5">
+
+            <div class="control-group">
+                <span class="control-label" for="Pincode">Pincode <span class="required"></span></span>
+                <div class="controls">
+                    <input id="Pincode" type="text" data-bind="value: Pincode" />
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="span10">
+            <div class="form-actions">
+                <input id="btnCreate" type="button" value="Save" data-bind="click: CreatePincode" class="btn btn-primary btn-medium" />
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+<script src="@Url.Content("~/Scripts/Pincode/CreatePincode.js")" type="text/javascript"></script>
+

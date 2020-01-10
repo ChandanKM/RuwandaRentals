@@ -2024,7 +2024,6 @@
     <Content Include="Content\Consumer\images\login-bg-image.jpg" />
     <Content Include="Content\Consumer\images\login-bg-image2.jpg" />
     <Content Include="Content\Consumer\images\logo-big.png" />
-    <Content Include="Content\Consumer\images\logo.png" />
     <Content Include="Content\Consumer\images\mastercard.png" />
     <Content Include="Content\Consumer\images\meeting.png" />
     <Content Include="Content\Consumer\images\mobile.png" />
@@ -2061,6 +2060,7 @@
     <Content Include="Content\Consumer\images\verify.png" />
     <Content Include="Content\Consumer\images\visa.png" />
     <Content Include="Content\Consumer\images\wifi.png" />
+    <Content Include="Content\Consumer\images\_logo.png" />
     <Content Include="Content\Consumer\js\bootstrap-datetimepicker.min.js" />
     <Content Include="Content\Consumer\js\bootstrap-popover.js" />
     <Content Include="Content\Consumer\js\bootstrap-tooltip.js" />

@@ -36,7 +36,11 @@ namespace App.UIServices
             SqlCommand cmd = new SqlCommand("dbo.proc_AuthenticateUser", conn);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@userid", login.UserId);
-            var abcd = DESEncrypt(login.Pswd);
+
+            //Encryptions and decryptions of the password in the application level.
+            //var encrypt = DESEncrypt(login.Pswd);
+            //var decrypt = DESDecrypt(encrypt);
+
             cmd.Parameters.AddWithValue("@pswd", DESEncrypt(login.Pswd));
             cmd.Parameters.AddWithValue("@opReturnValue", SqlDbType.Int);
             SqlDataReader reader = cmd.ExecuteReader();

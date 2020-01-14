@@ -5,7 +5,7 @@ var systemprofileVM = new SystemProfileViewModel();
 systemprofileVM.GetProfile(UserID);
 
 function SystemProfileModel(data, datafdf) {
-    
+    debugger;
     var self = this;
     //self.AllLoc = GetAllLocation();
     self.Id = ko.observable(data.Id);
@@ -22,12 +22,11 @@ function SystemProfileModel(data, datafdf) {
     self.Email = ko.observable(data.Email);
     self.Sms_Url = ko.observable(data.Sms_Url);
     self.User_Id = ko.observable(data.User_Id);
-    self.SetupEmail = ko.observable(datafdf.email);
-    self.Password = ko.observable(datafdf.pswd);
-    self.SMTP = ko.observable(datafdf.smtp);
+    //self.SetupEmail = ko.observable(datafdf.email);
+    //self.Password = ko.observable(datafdf.pswd);
+    //self.SMTP = ko.observable(datafdf.smtp);
     
     self.Update = function (data) {
-        
         $.ajax({
             type: "POST",
             url: "/api/SystemProfile/update",

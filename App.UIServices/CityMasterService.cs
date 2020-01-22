@@ -52,8 +52,6 @@ namespace App.UIServices
         public DataSet Bind()
         {
             CemexDb con = new CemexDb();
-
-          
             DataSet ds = SqlHelper.ExecuteDataset(con.GetConnection(), CommandType.StoredProcedure, "proc_SelectAllCity_and_Location");
             return ds;
         }

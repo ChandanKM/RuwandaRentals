@@ -600,8 +600,8 @@ namespace App.UIServices
                       
 			};
 
-            //DataSet ds = SqlHelper.ExecuteDataset(con.GetConnection(), CommandType.StoredProcedure, "proc_PropertyListing_Sort_New3", Params);
-            DataSet ds = SqlHelper.ExecuteDataset(con.GetConnection(), CommandType.StoredProcedure, "USP_GetAllRooms", Params);
+            DataSet ds = SqlHelper.ExecuteDataset(con.GetConnection(), CommandType.StoredProcedure, "proc_PropertyListing_Sort_New3", Params);
+            //DataSet ds = SqlHelper.ExecuteDataset(con.GetConnection(), CommandType.StoredProcedure, "USP_GetAllRooms", Params);
             return ds;
         }
         public DataSet PropertyListDetails(ListingDetailsBo listBo)

@@ -3417,6 +3417,7 @@
     <Content Include="Content\Corporate\images\facilities-icons\Thumbs.db" />
     <Content Include="Content\Corporate\images\sprite-img.psd" />
     <Content Include="Content\Corporate\images\Thumbs.db" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\lastminutekeys %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\lastminutekeys %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\lastminutekeys %284%29.pubxml" />

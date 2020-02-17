@@ -18,7 +18,7 @@ function OrderViewModel() {
 }
 
 function BookingPaymentViewModel() {
-    
+    debugger;
     var self = this;
     self.Vndr_ID = ko.observable();
     self.PropId = ko.observable();

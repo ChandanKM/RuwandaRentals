@@ -503,7 +503,7 @@ function RoomDetailsModel(data, dataFaci, dataPolicy) {
     }
 
     self.RoomDetails = function (eRow) {
-
+        debugger;
         hotelVM.GetRoomDetailsId(eRow.Prop_Id(), eRow.Room_Id());
     }
 }

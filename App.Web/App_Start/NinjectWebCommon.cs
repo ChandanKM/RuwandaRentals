@@ -135,7 +135,7 @@ namespace App.Web.App_Start
             kernel.Bind<IRoomTypeServices>().To<RoomTypeServices>();
             kernel.Bind<ILoyaltyServices>().To<LoyaltyServices>();
             kernel.Bind<IPromotionServices>().To<PromotionServices>();
-
+     
             kernel.Bind<ISubscribeServices>().To<SubscribeServices>();
             kernel.Bind<IUserProfileServices>().To<UserProfileServices>();
             kernel.Bind<IParamServices>().To<ParamServices>();

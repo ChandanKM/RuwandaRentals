@@ -357,7 +357,7 @@ function SearchResultViewModel() {
     }
     self.ModifySearch = function () {
 
-
+        debugger;
         if ($('#formSearch').valid()) {
             SplitTheLocation($('#txtLocation').val());
             searchVM.CityMasterId = $('#hdnLocationId').val();
@@ -366,16 +366,16 @@ function SearchResultViewModel() {
 
             searchVM.Room_Checkin = ConverToValidFormate($('#txtCheckIn').val());
             searchVM.Room_Checkout = ConverToValidFormate($('#txtCheckOut').val());
-            //   searchVM.No_Of_Rooms = $('#txtNoOfRoom').val()
+            searchVM.No_Of_Rooms = $('#txtNoOfRoom').val()
             searchVM.Price1 = minPrice;
             searchVM.Price2 = maxPrice;
             searchVM.Rating = starValue;
             searchVM.Facilities = '';
             searchVM.SortBy = 'Cheapest';
 
-            var nor = self.RoomCount().split(' ');
+            //var nor = self.RoomCount().split(' ');
 
-            searchVM.No_Of_Rooms = nor[0];
+            //searchVM.No_Of_Rooms = nor[0];
 
             self.GetLocationByCity();
             self.GetResults(searchVM);
@@ -659,19 +659,21 @@ function HotelListModel(data, NoRoomType, rating, Numberreviews, ReviewUrl) {
 
     self.BookNow = function (eRow) {
 
+        debugger;
         if ($('#formSearch').valid()) {
             $.localStorage("Prop_Id", eRow.Prop_Id());
             $.localStorage("City_Id", $("#hdnLocationId").val());
             $.localStorage("Location", $("#txtLocation").val());
             $.localStorage("CheckInDate", $("#txtCheckIn").val());
             $.localStorage("CheckOutDate", $("#txtCheckOut").val());
-            var rmCount = ($('#country :selected').text());
+            //var rmCount = ($('#country :selected').text());
 
-            var nor = rmCount.split(' ');
+            //var nor = rmCount.split(' ');
             //searchVM.RoomCount = nor[0];
             // alert(nor[0])
 
-            $.localStorage("NoOfRoom", nor[0]);
+            //Chandan changed to pass the Number of rooms to next page
+            $.localStorage("NoOfRoom", this.NoOfRoom);
 
             window.location.href = '/hotel_details';
         }

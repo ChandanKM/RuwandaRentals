@@ -116,7 +116,7 @@ hotelVM.GetHotelCompleteDetails();
 ko.applyBindings(hotelVM, document.getElementById("divCompleteHotelDetails"));
 
 function HotelDetailsViewModel() {
-    
+    debugger;
     var self = this;
     var gp1 = "";
     var gp2 = "";
@@ -132,7 +132,7 @@ function HotelDetailsViewModel() {
     self.HotelPoliciesList = ko.observableArray();
 
     self.GetHotelCompleteDetails = function () {
-        
+        debugger;
         AppCommonScript.ShowWaitBlock();
         var searchVM = new SearchViewModel();
         searchVM.PropId = $.localStorage('Prop_Id');
@@ -481,9 +481,7 @@ function RoomDetailsModel(data, dataFaci, dataPolicy) {
 
     self.BookNow = function (eRow) {
 
-
-
-        
+        debugger;
         $.localStorage("Prop_Id", eRow.Prop_Id());
         $.localStorage("Room_Id", eRow.Room_Id());
         $.localStorage("CheckInDate", $("#txtCheckIn").val());
@@ -493,7 +491,8 @@ function RoomDetailsModel(data, dataFaci, dataPolicy) {
         var nor = rmCount.split(' ');
         //searchVM.RoomCount = nor[0];
         // alert(nor[0])
-        $.localStorage("NoOfRoom", nor[0]);
+        //Changed the NoOfRooms value Chandan 11-02-2020
+        $.localStorage("NoOfRoom", $('#txtNoOfRoom').val());
 
         $.localStorage("DayCount", $("#txtDayCount").val());
         window.location.href = '/Booking_payment_method'

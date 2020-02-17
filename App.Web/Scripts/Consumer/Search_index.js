@@ -44,8 +44,8 @@ function CheckSubscribeEmailLatter(subData) {
 }
 
 $("#txtLocation").autocomplete({
-
     source: function (request, response) {
+        debugger;
         $('#txtLocation').addClass('loadinggif');
         $.ajax({
             type: "GET",
@@ -157,7 +157,7 @@ function SearchHotelViewModel() {
     self.RoomCount = ko.observable();
 
     self.SearchSubmit = function () {
-
+        debugger;
         //if ($('#formSearch').valid()) {
 
             //$.localStorage("City_Id", $("#hdnLocationId").val());
@@ -184,16 +184,14 @@ function SearchHotelViewModel() {
             searchVM.Room_Checkin = din;
             searchVM.Room_Checkout = dout;
             searchVM.Room_Checkout = ConverToValidFormate($("#txtCheckOut").val());
-            var rmCount = ($('#country :selected').text());
-            var nor = rmCount.split(' ');
-            //searchVM.RoomCount = nor[0];
-            // alert(nor[0])
-            // $.localStorage("NoOfRoom", nor[0]);
-            searchVM.No_Of_Rooms = nor[0];
-
+            //var rmCount = $('#NoOfRoomId').val();
+            //var nor = rmCount.split('');
+            searchVM.No_Of_Rooms = $('#NoOfRoomId').val();
+            $.localStorage("NoOfRoom", searchVM.No_Of_Rooms);
+            //searchVM.No_Of_Rooms = nor[0];
             searchVM.Price1 = 0;
             searchVM.Price2 = 90000;
-            searchVM.Rating = '%';
+            searchVM.Rating = '3';
             searchVM.Facilities = '';
             searchVM.SortBy = 'rating';
             self.GetResults(searchVM);
@@ -201,7 +199,9 @@ function SearchHotelViewModel() {
     }
 
 
-    self.BindCountries = function () {
+    self.BindCountries = function ()
+    {
+        debugger;
         $.ajax({
             url: "api/Property/GetCountries",
             dataType: "json",
@@ -223,7 +223,9 @@ function SearchHotelViewModel() {
         }
     }
 
-    function myfunction() {
+    function myfunction()
+    {
+        debugger;
         $.ajax({
             type: "POST",
             url: "api/Consumer/SearchHotels",
@@ -240,21 +242,23 @@ function SearchHotelViewModel() {
         });
     }
 
-    self.GetResults = function (searchVM) {
+    self.GetResults = function (searchVM)
+    {
+        debugger;
         $.ajax({
             type: "Post",
             url: '/api/Consumer/HotelListing_Sort',
             data: ko.toJSON(searchVM),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            success: function (data) {
-                var rmCount = ($('#country :selected').text());
-                var nor = rmCount.split(' ');
+            success: function (data)
+            {
+                //var rmCount = ($('#country :selected').text());
+                //var nor = rmCount.split(' ');
                 //searchVM.RoomCount = nor[0];
                 // alert(nor[0])
 
-                $.localStorage("NoOfRoom", nor[0]);
-
+                $.localStorage("NoOfRoom", $('#NoOfRoomId').val());
                 $.localStorage("City_Id", $("#hdnLocationId").val());
                 $.localStorage("Location", $("#txtLocation").val());
                 $.localStorage("CheckInDate", $("#txtCheckIn").val());

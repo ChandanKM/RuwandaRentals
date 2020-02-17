@@ -132,7 +132,9 @@ function Failed(response) {
     AppCommonScript.HideWaitBlock();
     AppCommonScript.showNotify(response);
 }
-function PropertyViewModel() {
+function PropertyViewModel()
+{
+    debugger
     this.ImagesList = ko.observableArray();
     this.Facilities = ko.observableArray([]);
     this.Images = ko.observableArray([]);

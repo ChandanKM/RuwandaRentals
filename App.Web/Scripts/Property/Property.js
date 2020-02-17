@@ -130,7 +130,7 @@ function phonenumber(inputtxt) {
 
 //var abc = '';
 function InitializepropertyViewModel() {
-
+    debugger;
     propertyViewModel = new PropertyViewModel();
     $.ajax({
         type: "GET",
@@ -139,10 +139,12 @@ function InitializepropertyViewModel() {
         contentType: "application/json; charset=utf-8",
         // dataType: "json",
         async: false,
-        success: function (data) {
+        success: function (data)
+        {
+            debugger;
             if (data == 2) {
                 alert('You have exceeded you property creation limit')
-                window.location.href = '/Vendor/PropertyPage'
+                //window.location.href = '/Vendor/PropertyPage'
             }
 
 
@@ -210,8 +212,7 @@ function UpdateImageFlag(data) {
     });
 }
 function PropertyViewModel() {
-    //   
-
+    debugger;
     this.Facilities = ko.observableArray([]);
     this.Policies = ko.observableArray([]);
     this.Images = ko.observableArray([]);
@@ -272,7 +273,9 @@ function PropertyViewModel() {
     this.Prop_Id = ko.observable("");
     this.Room_Checkins = ko.observable("12:00pm");
     this.Room_Checkouts = ko.observable("12:00pm");
-    this.CreateProperty = function (tab) {
+    this.CreateProperty = function (tab)
+    {
+        debugger;
         CreateProperty();
     };
 
@@ -383,16 +386,17 @@ function TripAdviser() {
     });
 }
 function CreateProperty() {
-
+    debugger;
     $.ajax({
         type: "POST",
         url: "/Vendor/GetLoginVendorId",
         dataType: "json",
-        success: function (response) {
+        success: function (response)
+        {
+            debugger;
             $.localStorage("VendId", response)
         },
         error: function (jqxhr) {
-
             Failed(JSON.parse(jqxhr.responseText));
         }
     });

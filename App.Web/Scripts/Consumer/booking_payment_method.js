@@ -1,6 +1,6 @@
 ﻿
 
-
+debugger;
 var Consumer_Id = 0;
 
 var StarCount = 0;
@@ -45,7 +45,8 @@ function BookingPaymentViewModel() {
     orderVM.Room_Id = $.localStorage("Room_Id");
     orderVM.Room_Checkin = ConverToValidFormate($.localStorage("CheckInDate"));
     orderVM.Room_Checkout = ConverToValidFormate($.localStorage("CheckOutDate"));
-    orderVM.No_Of_Rooms = $.localStorage("NoOfRoom");
+
+    orderVM.No_Of_Rooms = $.localStorage("NoOfRoom"); 
     self.RoomDTList = ko.observableArray();
     self.RoomDTListother = ko.observableArray();
     self.RoomDTListImage = ko.observableArray();
@@ -88,7 +89,9 @@ function BookingPaymentViewModel() {
         return  (self.camo_room_rate() * parseInt(self.Room_Count()) * self.Day_Count()).toFixed(2);
     });
 
-    self.tax_amnt = ko.computed(function () {
+    self.tax_amnt = ko.computed(function ()
+    {
+        debugger;
         return ((self.ServiceTax() + self.LuxuryTax()) * parseInt(self.Room_Count()) * self.Day_Count()).toFixed(2);
     });
    
@@ -311,7 +314,7 @@ function BookingPaymentViewModel() {
     }
 
     self.ContinueToPayment = function (data) {
-       
+        debugger;
         if ($('#fn1').val() == '') {
             var result = { Status: true, ReturnMessage: { ReturnMessage: "Please Enter FirstName" }, ErrorType: "error" };
             Failed(result)

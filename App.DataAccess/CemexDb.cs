@@ -11,6 +11,7 @@ namespace App.DataAccess
       
         public CemexDb() : base(ConfigurationManager.ConnectionStrings["CemexDb"].ConnectionString)
         {
+
         }
         public SqlConnection GetConnection()
         {
@@ -21,6 +22,7 @@ namespace App.DataAccess
         public CemexDb(string connectionString) : base(connectionString)
         {
         }
+
         public DbSet<User> User { get; set; }
     
 

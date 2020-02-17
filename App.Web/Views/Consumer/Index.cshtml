@@ -51,7 +51,7 @@
                                 <i class="room-icon"></i>
                                 @*<select id="country" onchange="change_country(this.value)" class="frm-field required">*@
                                 @*<select class="frm-field required" data-bind="options: RoomSelectList , value: RoomCount"></select>*@
-                                <input type="text" name="NoOfRoom" data-bind="value:RoomCount" maxlength="2" min="1" max="15" onkeypress='validate(event)' title="Should be Between 1 to 15" class="frm-field required" />
+                                <input type="text" id="NoOfRoomId" name="NoOfRoom" data-bind="value:RoomCount" maxlength="2" min="1" max="15" onkeypress='validate(event)' title="Should be Between 1 to 15" class="frm-field required" />
                             </div>
 
                             <div class="search_btn"><i class="search-icon"></i><input type="submit" value="Search" data-bind="click:SearchSubmit" /></div>

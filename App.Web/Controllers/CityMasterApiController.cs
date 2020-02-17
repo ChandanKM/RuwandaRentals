@@ -39,7 +39,7 @@ namespace App.Web.Controllers
         [HttpGet("City")]
         public HttpResponseMessage Bind()
         {
-           // List<Object> Userlist = _cityService.Bind();
+            // List<Object> Userlist = _cityService.Bind();
 
             var jsonResult = JsonConvert.SerializeObject(_cityService.Bind());
 
@@ -68,27 +68,28 @@ namespace App.Web.Controllers
                 var badResponse = Request.CreateResponse(HttpStatusCode.BadRequest, cityViewModel);
                 return badResponse;
             }
-            try{
-            var userBo = BuiltUserBo(cityViewModel);
-            transactionStatus = _cityService.AddCityMaster(userBo);
-
-            if (transactionStatus.Status == false)
+            try
             {
-                var badResponse = Request.CreateResponse(HttpStatusCode.BadRequest, JsonConvert.SerializeObject(cityViewModel));
-                return badResponse;
+                var userBo = BuiltUserBo(cityViewModel);
+                transactionStatus = _cityService.AddCityMaster(userBo);
+
+                if (transactionStatus.Status == false)
+                {
+                    var badResponse = Request.CreateResponse(HttpStatusCode.BadRequest, JsonConvert.SerializeObject(cityViewModel));
+                    return badResponse;
+                }
+                else
+                {
+                    transactionStatus.ErrorType = ErrorTypeEnum.Success.ToString();
+                    transactionStatus.ReturnMessage.Add("Record successfully inserted to database");
+
+                    var badResponse = Request.CreateResponse(HttpStatusCode.Created, transactionStatus);
+
+                    return badResponse;
+                }
             }
-            else
-            {
-                transactionStatus.ErrorType = ErrorTypeEnum.Success.ToString();
-                transactionStatus.ReturnMessage.Add("Record successfully inserted to database");
 
-                var badResponse = Request.CreateResponse(HttpStatusCode.Created, transactionStatus);
-
-                return badResponse;
-            }
-             }
-
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ApplicationErrorLogServices.AppException(ex);
                 return null;
@@ -98,6 +99,6 @@ namespace App.Web.Controllers
         {
             return (CityMasterBo)new CityMasterBo().InjectFrom(cityViewModel);
         }
-    
+
     }
 }

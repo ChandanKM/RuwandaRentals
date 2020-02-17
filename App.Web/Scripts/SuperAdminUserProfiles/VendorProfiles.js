@@ -58,7 +58,9 @@ function UserProfileModel(data) {
         }
     }
 
-    self.Permission = function (eRow) {
+    self.Permission = function (eRow)
+    {
+        debugger;
         $('#Tab1').removeClass('active');
         $('#tab_1_1').removeClass('active');
         $('#Tab3').addClass('active');

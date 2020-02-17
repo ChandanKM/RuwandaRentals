@@ -191,7 +191,7 @@ function SearchHotelViewModel() {
             //searchVM.No_Of_Rooms = nor[0];
             searchVM.Price1 = 0;
             searchVM.Price2 = 90000;
-            searchVM.Rating = '3';
+            searchVM.Rating = '5';
             searchVM.Facilities = '';
             searchVM.SortBy = 'rating';
             self.GetResults(searchVM);

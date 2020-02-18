@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2013 for Web
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.757
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Web", "App.Web\App.Web.csproj", "{FF908883-5060-4EBB-8D36-38BB6D8CDDF8}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -20,30 +20,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.BusinessObject", "App.BusinessObject\App.BusinessObject.csproj", "{B404EE8A-3D4C-4ADF-B9DD-4EFFE0978A0C}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://katprotfs.cloudapp.net:8080/tfs/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = App.BusinessObject\\App.BusinessObject.csproj
-		SccProjectName1 = App.BusinessObject
-		SccLocalPath1 = App.BusinessObject
-		SccProjectUniqueName2 = App.Common\\App.Common.csproj
-		SccProjectName2 = App.Common
-		SccLocalPath2 = App.Common
-		SccProjectUniqueName3 = App.DataAccess\\App.DataAccess.csproj
-		SccProjectName3 = App.DataAccess
-		SccLocalPath3 = App.DataAccess
-		SccProjectUniqueName4 = App.Domain\\App.Domain.csproj
-		SccProjectName4 = App.Domain
-		SccLocalPath4 = App.Domain
-		SccProjectUniqueName5 = App.UIServices\\App.UIServices.csproj
-		SccProjectName5 = App.UIServices
-		SccLocalPath5 = App.UIServices
-		SccProjectUniqueName6 = App.Web\\App.Web.csproj
-		SccProjectName6 = App.Web
-		SccLocalPath6 = App.Web
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -76,5 +52,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9ED100C2-26DD-4747-A11B-3D9EF328A2B1}
 	EndGlobalSection
 EndGlobal

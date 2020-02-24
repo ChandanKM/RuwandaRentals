@@ -164,6 +164,7 @@ function InitializepropertyViewModel() {
 
             //  abc = 'dfd'// data[0].Vndr_Cinno
             //  alert(abc)
+            if (data.length > 0) 
             propertyViewModel.Prop_Cin_No = data[0].Vndr_Cinno
             // alert(data[0].Vndr_Cinno)
             //  PCIN = data[0].Vndr_Cinno
@@ -476,6 +477,7 @@ function CreateProperty() {
 }
 
 function CreateBank() {
+    debugger;
     AppCommonScript.ShowWaitBlock();
     var bank = new InitializeBank();
     bank.City_Area = $('#txtLocationBank').val();

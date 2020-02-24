@@ -78,7 +78,7 @@ namespace App.Web.ModelValidation
             RuleFor(x => x.Bank_Branch_Name).NotEmpty().WithMessage("Branch Name  can not be blank");
             RuleFor(x => x.Bank_IFC_code).NotEmpty().WithMessage("IFSC Code  can not be blank");
             RuleFor(x => x.City_Id).NotNull().WithMessage("Please select City!");
-            RuleFor(x => x.City_Id).NotEqual(0).WithMessage("Please enter a city");
+            //RuleFor(x => x.City_Id).NotEqual(0).WithMessage("Please enter a city");
             //RuleFor(x => x.City_Area).Matches(",").WithMessage("City Should have a Comma,Eg.HSR Layout,Bangalore");
             //RuleFor(x => x.City_Area).NotEmpty().WithMessage("Please select Location");
 

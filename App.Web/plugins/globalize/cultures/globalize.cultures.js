@@ -12307,8 +12307,8 @@ Globalize.addCultureInfo( "qut-GT", "default", {
 
 Globalize.addCultureInfo( "rw-RW", "default", {
 	name: "rw-RW",
-	englishName: "Kinyarwanda (Rwanda)",
-	nativeName: "Kinyarwanda (Rwanda)",
+	englishName: "Kinyarwanda (VCNR)",
+	nativeName: "Kinyarwanda (VCNR)",
 	language: "rw",
 	numberFormat: {
 		",": " ",

@@ -12,7 +12,7 @@ namespace App.Web.ModelValidation
             RuleFor(x => x.Facility_Name).NotEmpty().WithMessage("Facility Name cannot be blank");
             //RuleFor(x => x.Facility_Type).NotEmpty().WithMessage("Facility Type cannot be blank");
             RuleFor(x => x.Facility_descr).NotEmpty().WithMessage("Description cannot be blank");
-            RuleFor(x => x.Facility_Image_dir).NotEmpty().WithMessage("Image is Mandatory");
+            //RuleFor(x => x.Facility_Image_dir).NotEmpty().WithMessage("Image is Mandatory");
            
         }
     }

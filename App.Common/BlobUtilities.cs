@@ -14,9 +14,15 @@ namespace App.Common
     public  class BlobUtilities
     {
         // Retrieve storage account from connection string.
-        //Credentials required for cloud blob images storage.
+        // Credentials required for cloud blob images storage.
+
+
+        // private static CloudStorageAccount StorageAccount =
+        // CloudStorageAccount.Parse("DefaultEndpointsProtocol=http;AccountName=lmk;AccountKey=+iJrezRlA5j0l8zfl5cGhYOzo+e9DwMifpULgvmvB183Q8d6j4pG0CBs1/Kc8NjUIpfkD+bbfYv6Z9MxHR8v2Q==;");
+
+
         private static CloudStorageAccount StorageAccount =
-         CloudStorageAccount.Parse("DefaultEndpointsProtocol=http;AccountName=lmk;AccountKey=+iJrezRlA5j0l8zfl5cGhYOzo+e9DwMifpULgvmvB183Q8d6j4pG0CBs1/Kc8NjUIpfkD+bbfYv6Z9MxHR8v2Q==;");
+         CloudStorageAccount.Parse("F:/New Dot net proj Pavan/LMKCloudBlob");
 
         /// <summary>
         /// creates the blob

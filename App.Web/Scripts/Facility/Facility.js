@@ -139,6 +139,7 @@ function InitializefacilityViewModel() {
 }
 
 function CreateFacility() {
+    debugger;
     // AppCommonScript.ShowWaitBlock();
     var facility = new InitializeFacility();
     facility.Facility_Image_dir = facilityimage;

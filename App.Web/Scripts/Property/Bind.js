@@ -1,7 +1,7 @@
 ﻿var urlPath = window.location.pathname;
 
 function NewProperty() {
-
+    debugger;
     $.ajax({
         type: "POST",
         url: "/Vendor/GetLoginVendorId",

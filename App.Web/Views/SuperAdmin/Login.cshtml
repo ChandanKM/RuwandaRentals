@@ -30,32 +30,32 @@
             <div class="login-page-logo super-admin-logo">
                 <a href="#"><img src="../../Content/LoginContent/images/logo.png" title="VCNR EazyRentals " alt="" /> </a>
             </div>
-        <div class="login-fields super-admin-login">
-            <h2>Sign in</h2>
-            @using (Html.BeginForm("Login", "SuperAdmin", FormMethod.Post))
-            {
-                @Html.AntiForgeryToken()
-                @Html.ValidationSummary(true, "", new { @class = "danger" })
-                <div class="login-email-field">
-                    <img src="../../Content/LoginContent/images/user-icon.png" alt="" />
-                    @Html.TextBoxFor(m => m.UserId, new { placeHolder = "Email Id" })
-                </div>
-                @Html.ValidationMessageFor(m => m.UserId, "", new { @class = "danger" })
-                <div class="login-password-field">
-                    <img src="../../Content/LoginContent/images/password-icon.png" alt="" />
-                    @Html.PasswordFor(m => m.Pswd, new { placeHolder = "Password" })
-                </div>
-                @Html.ValidationMessageFor(m => m.Pswd, "", new { @class = "danger" })
-                <div class="login-submit-field">
-                    <input type="submit" value="Sign in">
-                </div>
-            }
+            <div class="login-fields super-admin-login">
+                <h2>Sign in</h2>
+                @using (Html.BeginForm("Login", "SuperAdmin", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "danger" })
+                    <div class="login-email-field">
+                        <img src="../../Content/LoginContent/images/user-icon.png" alt="" />
+                        @Html.TextBoxFor(m => m.UserId, new { placeHolder = "Email Id" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.UserId, "", new { @class = "danger" })
+                    <div class="login-password-field">
+                        <img src="../../Content/LoginContent/images/password-icon.png" alt="" />
+                        @Html.PasswordFor(m => m.Pswd, new { placeHolder = "Password" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Pswd, "", new { @class = "danger" })
+                    <div class="login-submit-field">
+                        <input type="submit" value="Sign in">
+                    </div>
+                }
 
-            <div class="forgot-password">
-                <h3><a href="@Url.Action("SuperAdminForgotPassword", "SuperAdmin")">Forgot password?</a></h3>
+                <div class="forgot-password">
+                    <h3><a href="@Url.Action("SuperAdminForgotPassword", "SuperAdmin")">Forgot password?</a></h3>
+                </div>
             </div>
         </div>
-      </div>
     </div>
     <!-- End Login Page -->
     <div class="footer super-admin-footer">

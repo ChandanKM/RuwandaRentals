@@ -157,7 +157,9 @@ namespace App.Web.ModelValidation
         public SearchHotelsValidation()
         {
             RuleFor(x => x.CityMasterId).NotEmpty().WithMessage("Please Select the City & Location");
-            RuleFor(x => x.No_Of_Rooms).NotEmpty().WithMessage("Please Select the No. of Room");
+
+            
+            //RuleFor(x => x.No_Of_Rooms).NotEmpty().WithMessage("Please Select the No. of Room");
             //RuleFor(x => x.Room_Checkin).Da.WithMessage("Mobile Number Not Valid");
             //RuleFor(x => x.Room_Checkout).NotEmpty().WithMessage("City can't be blank");
         }

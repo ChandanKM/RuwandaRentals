@@ -1381,6 +1381,8 @@ namespace App.Web.Controllers
         {
             var results = new SearchHotelsValidation().Validate(propViewModel);
 
+           
+
             if (!results.IsValid)
             {
                 propViewModel.Errors = GenerateErrorMessage.Built(results.Errors);
@@ -1392,6 +1394,13 @@ namespace App.Web.Controllers
             try
             {
                 var consBo = BuiltPropBo(propViewModel);
+                
+                //Chandan add Rule for Rating o avoid internal server error.
+                //To add the hotel 4 star hotel by default.
+                if (consBo.Rating =="%")
+                {
+                    consBo.Rating = "4";
+                }
 
                 var jsonResultdata = JsonConvert.SerializeObject(_consumerService.PropertyList_Sort(consBo));
                 var responsedata = this.Request.CreateResponse(HttpStatusCode.OK);

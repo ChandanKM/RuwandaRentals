@@ -17,12 +17,12 @@ namespace App.Common
         // Credentials required for cloud blob images storage.
 
 
-        // private static CloudStorageAccount StorageAccount =
-        // CloudStorageAccount.Parse("DefaultEndpointsProtocol=http;AccountName=lmk;AccountKey=+iJrezRlA5j0l8zfl5cGhYOzo+e9DwMifpULgvmvB183Q8d6j4pG0CBs1/Kc8NjUIpfkD+bbfYv6Z9MxHR8v2Q==;");
-
-
         private static CloudStorageAccount StorageAccount =
-         CloudStorageAccount.Parse("F:/New Dot net proj Pavan/LMKCloudBlob");
+        CloudStorageAccount.Parse("DefaultEndpointsProtocol=https;AccountName=rentalsr;AccountKey=Z6lcuohxlhTSd+S2voQ1lyZp8WmQxgnpeQRCjVWKdMshwJ8nQoGURdOs8cLDNpQRqPTdyggzcG+DvEkCTKb3hg==");
+
+
+        //private static CloudStorageAccount StorageAccount =
+        // CloudStorageAccount.Parse("F:/New Dot net proj Pavan/LMKCloudBlob");
 
         /// <summary>
         /// creates the blob

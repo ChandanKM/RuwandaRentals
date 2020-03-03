@@ -114,7 +114,6 @@ function InitializevendorViewModel() {
 
 function CreateVendor() {
     var vendor = new InitializeVendor();
-    debugger;
     vendor.Image_dir = '/img/Vendor/Avtar.jpg';
     vendor.City_Area = $("#txtLocation").val();
     vendor.City_Id = $('#hdnLocationId').val();

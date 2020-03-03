@@ -11,7 +11,6 @@
 //var Check_out = $.localStorage('Checkout') == "" ? "" : $.localStorage('Checkout');
 
 function BookingListVM() {
-    debugger;
     AppCommonScript.ShowWaitBlock();
     var Ven_Id = 0;
     var self = this;
@@ -44,7 +43,6 @@ function BookingListVM() {
                 $('.BookingsDT tbody').empty();
 
                 for (var i = 0; i < data.Table.length; i++) {
-                    debugger;
                     self.Bookings.push(new BookingClass(data.Table[i])); //Put the response in ObservableArray
                 }
                
@@ -71,7 +69,6 @@ function BookingListVM() {
     }
 }
 function getbookingpost() {
-    debugger;
     var self = this;
     self.Bookings = ko.observableArray([]);
     var Ven_Id = 0;
@@ -102,7 +99,6 @@ function getbookingpost() {
                 $('.BookingsDT tbody').empty();
 
                 for (var i = 0; i < data.Table.length; i++) {
-                    debugger;
                     self.Bookings.push(new BookingClass(data.Table[i])); //Put the response in ObservableArray
                 }
 

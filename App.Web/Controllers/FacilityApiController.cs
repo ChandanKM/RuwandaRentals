@@ -69,11 +69,6 @@ namespace App.Web.Controllers
             }
             try{
             var facilityBo = BuiltFacilityBo(facilityViewModel);
-                //Sample Dir added for blob images.
-                //Blob hardcode value.
-                //Start
-                facilityBo.Facility_Image_dir = "F:/New Dot net proj Pavan/LMKCloudBlob";
-                //End
             transactionStatus = _facilityService.CreateFacility(facilityBo);
 
             if (transactionStatus.Status == false)

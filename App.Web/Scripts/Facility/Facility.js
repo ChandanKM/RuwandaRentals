@@ -44,7 +44,6 @@ var uploadModel = new UploadImageModel();
 ko.applyBindings(uploadModel, document.getElementById("modelSelectImage"));
 
 function UploadImageModel() {
-    debugger;
     var self = this;
     self.imageFile = ko.observable();
     self.imageObjectURL = ko.observable();
@@ -70,7 +69,6 @@ function UploadImageModel() {
 
     self.SubmitImage = function () {
 
-        debugger;
         var imgHeight = document.getElementById('imgAdd').naturalHeight;
         var imgWidth = document.getElementById('imgAdd').naturalWidth;
 
@@ -139,7 +137,6 @@ function InitializefacilityViewModel() {
 }
 
 function CreateFacility() {
-    debugger;
     // AppCommonScript.ShowWaitBlock();
     var facility = new InitializeFacility();
     facility.Facility_Image_dir = facilityimage;

@@ -357,7 +357,6 @@ function SearchResultViewModel() {
     }
     self.ModifySearch = function () {
 
-        debugger;
         if ($('#formSearch').valid()) {
             SplitTheLocation($('#txtLocation').val());
             searchVM.CityMasterId = $('#hdnLocationId').val();
@@ -659,7 +658,6 @@ function HotelListModel(data, NoRoomType, rating, Numberreviews, ReviewUrl) {
 
     self.BookNow = function (eRow) {
 
-        debugger;
         if ($('#formSearch').valid()) {
             $.localStorage("Prop_Id", eRow.Prop_Id());
             $.localStorage("City_Id", $("#hdnLocationId").val());

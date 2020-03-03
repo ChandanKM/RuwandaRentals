@@ -45,7 +45,6 @@ function CheckSubscribeEmailLatter(subData) {
 
 $("#txtLocation").autocomplete({
     source: function (request, response) {
-        debugger;
         $('#txtLocation').addClass('loadinggif');
         $.ajax({
             type: "GET",
@@ -157,7 +156,6 @@ function SearchHotelViewModel() {
     self.RoomCount = ko.observable();
 
     self.SearchSubmit = function () {
-        debugger;
         //if ($('#formSearch').valid()) {
 
             //$.localStorage("City_Id", $("#hdnLocationId").val());
@@ -201,7 +199,6 @@ function SearchHotelViewModel() {
 
     self.BindCountries = function ()
     {
-        debugger;
         $.ajax({
             url: "api/Property/GetCountries",
             dataType: "json",
@@ -225,7 +222,6 @@ function SearchHotelViewModel() {
 
     function myfunction()
     {
-        debugger;
         $.ajax({
             type: "POST",
             url: "api/Consumer/SearchHotels",
@@ -244,7 +240,6 @@ function SearchHotelViewModel() {
 
     self.GetResults = function (searchVM)
     {
-        debugger;
         $.ajax({
             type: "Post",
             url: '/api/Consumer/HotelListing_Sort',

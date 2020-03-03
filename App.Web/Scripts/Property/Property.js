@@ -130,7 +130,6 @@ function phonenumber(inputtxt) {
 
 //var abc = '';
 function InitializepropertyViewModel() {
-    debugger;
     propertyViewModel = new PropertyViewModel();
     $.ajax({
         type: "GET",
@@ -141,7 +140,6 @@ function InitializepropertyViewModel() {
         async: false,
         success: function (data)
         {
-            debugger;
             if (data == 2) {
                 alert('You have exceeded you property creation limit')
                 //window.location.href = '/Vendor/PropertyPage'
@@ -213,7 +211,6 @@ function UpdateImageFlag(data) {
     });
 }
 function PropertyViewModel() {
-    debugger;
     this.Facilities = ko.observableArray([]);
     this.Policies = ko.observableArray([]);
     this.Images = ko.observableArray([]);
@@ -276,7 +273,6 @@ function PropertyViewModel() {
     this.Room_Checkouts = ko.observable("12:00pm");
     this.CreateProperty = function (tab)
     {
-        debugger;
         CreateProperty();
     };
 
@@ -387,14 +383,12 @@ function TripAdviser() {
     });
 }
 function CreateProperty() {
-    debugger;
     $.ajax({
         type: "POST",
         url: "/Vendor/GetLoginVendorId",
         dataType: "json",
         success: function (response)
         {
-            debugger;
             $.localStorage("VendId", response)
         },
         error: function (jqxhr) {
@@ -477,7 +471,6 @@ function CreateProperty() {
 }
 
 function CreateBank() {
-    debugger;
     AppCommonScript.ShowWaitBlock();
     var bank = new InitializeBank();
     bank.City_Area = $('#txtLocationBank').val();

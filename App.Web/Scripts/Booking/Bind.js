@@ -77,7 +77,6 @@ function SearchResultViewModel() {
 
                 
                 for (var i = 0; i < data.Table.length; i++) {
-                    debugger;
                     self.Bookings.push(new BookingClass(data.Table[i])); //Put the response in ObservableArray
                 }
               

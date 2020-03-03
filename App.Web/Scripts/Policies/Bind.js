@@ -15,7 +15,6 @@ $(document).ready(function () {
 function InitializepropertyViewModel() {
 
 
-    debugger;
     propertyViewModel = new PropertyViewModel();
     propertyViewModel.getPolicy();
    

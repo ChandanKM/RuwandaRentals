@@ -1,6 +1,5 @@
 ﻿
 
-debugger;
 var Consumer_Id = 0;
 
 var StarCount = 0;
@@ -18,7 +17,6 @@ function OrderViewModel() {
 }
 
 function BookingPaymentViewModel() {
-    debugger;
     var self = this;
     self.Vndr_ID = ko.observable();
     self.PropId = ko.observable();
@@ -91,7 +89,6 @@ function BookingPaymentViewModel() {
 
     self.tax_amnt = ko.computed(function ()
     {
-        debugger;
         return ((self.ServiceTax() + self.LuxuryTax()) * parseInt(self.Room_Count()) * self.Day_Count()).toFixed(2);
     });
    
@@ -314,7 +311,6 @@ function BookingPaymentViewModel() {
     }
 
     self.ContinueToPayment = function (data) {
-        debugger;
         if ($('#fn1').val() == '') {
             var result = { Status: true, ReturnMessage: { ReturnMessage: "Please Enter FirstName" }, ErrorType: "error" };
             Failed(result)

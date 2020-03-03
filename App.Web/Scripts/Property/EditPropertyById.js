@@ -134,7 +134,6 @@ function Failed(response) {
 }
 function PropertyViewModel()
 {
-    debugger
     this.ImagesList = ko.observableArray();
     this.Facilities = ko.observableArray([]);
     this.Images = ko.observableArray([]);
@@ -703,7 +702,9 @@ function UserClass(data) {
  $('#lon').val(arr[1]);
 }
 
-function BankDetailsClass(data) {
+function BankDetailsClass(data)
+{
+    debugger
     var bank = this;
     bank.Prop_Id = propID;
     bank.Bank_Id = data["Bank_Id"] || '';

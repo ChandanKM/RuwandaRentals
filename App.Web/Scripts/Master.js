@@ -8,7 +8,6 @@ function MasterProfile() {
     var self = this;
     self.Vendor_Id = ko.observable();
     self.User_name = ko.observable('Vendor');
-    debugger;
     self.GetUserId = function () {
         AppCommonScript.ShowWaitBlock();
         $.ajax({

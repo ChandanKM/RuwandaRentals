@@ -5,7 +5,6 @@ var systemprofileVM = new SystemProfileViewModel();
 systemprofileVM.GetProfile(UserID);
 
 function SystemProfileModel(data, datafdf) {
-    debugger;
     var self = this;
     //self.AllLoc = GetAllLocation();
     self.Id = ko.observable(data.Id);

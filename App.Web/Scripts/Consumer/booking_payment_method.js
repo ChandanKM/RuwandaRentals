@@ -44,7 +44,7 @@ function BookingPaymentViewModel() {
     orderVM.Room_Checkin = ConverToValidFormate($.localStorage("CheckInDate"));
     orderVM.Room_Checkout = ConverToValidFormate($.localStorage("CheckOutDate"));
 
-    orderVM.No_Of_Rooms = $.localStorage("NoOfRoom"); 
+    orderVM.No_Of_Rooms = $.localStorage("NoOfRoom");
     self.RoomDTList = ko.observableArray();
     self.RoomDTListother = ko.observableArray();
     self.RoomDTListImage = ko.observableArray();
@@ -52,7 +52,7 @@ function BookingPaymentViewModel() {
     self.Trip_Review = ko.observable();
     self.Trip_Review_Url = ko.observable();
     self.StarRatingList = ko.observableArray();
-   
+
     $.ajax({
         type: "Post",
         url: '/api/Consumer/BookingDetails',
@@ -60,7 +60,7 @@ function BookingPaymentViewModel() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         async: false,
-        success: function (data) {            
+        success: function (data) {
 
             $.localStorage("Vndr_ID", data.Table[0].Vndr_Id);
             $.localStorage("camo_room_rate", data.Table[0].camflg_Amnt);
@@ -74,7 +74,7 @@ function BookingPaymentViewModel() {
     var dayCount = GetNightCount(inDate, outDate);//$.localStorage("DayCount");
     self.Day_Count = ko.observable(dayCount);
     self.RoomPrice = ko.observable();
-    
+
     self.camo_room_rate = ko.observable();
     self.ServiceTax = ko.observable();
     self.LuxuryTax = ko.observable();
@@ -82,16 +82,15 @@ function BookingPaymentViewModel() {
     //  self.Discount = ko.observable();
     self.Room_Count = ko.observable($.localStorage("NoOfRoom"));
     self.RoomFacilityList = ko.observableArray();
-    
-    self.total_room_rate = ko.computed(function () {        
-        return  (self.camo_room_rate() * parseInt(self.Room_Count()) * self.Day_Count()).toFixed(2);
+
+    self.total_room_rate = ko.computed(function () {
+        return (self.camo_room_rate() * parseInt(self.Room_Count()) * self.Day_Count()).toFixed(2);
     });
 
-    self.tax_amnt = ko.computed(function ()
-    {
+    self.tax_amnt = ko.computed(function () {
         return ((self.ServiceTax() + self.LuxuryTax()) * parseInt(self.Room_Count()) * self.Day_Count()).toFixed(2);
     });
-   
+
     self.net_amt = ko.computed(function () {
         return parseFloat(self.total_room_rate()) + parseFloat(self.tax_amnt());
     });
@@ -126,14 +125,14 @@ function BookingPaymentViewModel() {
     self.Occupant_lastname5 = ko.observable();
     if ($.localStorage("NoOfRoom") == 1) {
         self.GuestName = ko.computed(function () {
-            return $('#fn1').val() +" "+ $('#ln1').val();
+            return $('#fn1').val() + " " + $('#ln1').val();
         });
     }
 
     else if ($.localStorage("NoOfRoom") == 2) {
-        $('#Guest2').css('display','block')
+        $('#Guest2').css('display', 'block')
         self.GuestName = ko.computed(function () {
-            return $('#fn1').val() +" "+ $('#ln1').val() + ',' + $('#fn2').val() +" "+ $('#ln2').val() ;
+            return $('#fn1').val() + " " + $('#ln1').val() + ',' + $('#fn2').val() + " " + $('#ln2').val();
         });
     }
 
@@ -141,16 +140,16 @@ function BookingPaymentViewModel() {
         $('#Guest2').css('display', 'block')
         $('#Guest3').css('display', 'block')
         self.GuestName = ko.computed(function () {
-            return $('#fn1').val() +" "+ $('#ln1').val() + ',' + $('#fn2').val() +" "+ $('#ln2').val() + ',' + $('#fn3').val() +" "+ $('#ln3').val();
+            return $('#fn1').val() + " " + $('#ln1').val() + ',' + $('#fn2').val() + " " + $('#ln2').val() + ',' + $('#fn3').val() + " " + $('#ln3').val();
         });
     }
     else if ($.localStorage("NoOfRoom") == 4) {
         $('#Guest2').css('display', 'block')
         $('#Guest3').css('display', 'block')
         $('#Guest4').css('display', 'block')
-       
+
         self.GuestName = ko.computed(function () {
-            return $('#fn1').val() +" "+ $('#ln1').val() + ',' + $('#fn2').val() +" "+ $('#ln2').val() + ',' + $('#fn3').val() +" "+ $('#ln3').val() + ',' + $('#fn4').val() +" "+ $('#ln4').val();
+            return $('#fn1').val() + " " + $('#ln1').val() + ',' + $('#fn2').val() + " " + $('#ln2').val() + ',' + $('#fn3').val() + " " + $('#ln3').val() + ',' + $('#fn4').val() + " " + $('#ln4').val();
         });
     }
     else if ($.localStorage("NoOfRoom") == 5) {
@@ -159,15 +158,15 @@ function BookingPaymentViewModel() {
         $('#Guest4').css('display', 'block')
         $('#Guest5').css('display', 'block')
         self.GuestName = ko.computed(function () {
-            return $('#fn1').val() +" "+ $('#ln1').val() + ',' + $('#fn2').val() +" "+ $('#ln2').val() + ',' + $('#fn3').val() +" "+ $('#ln3').val() + ',' + $('#fn4').val() +" "+ $('#ln4').val() + ',' + $('#fn5').val() +" "+ $('#ln5').val();
+            return $('#fn1').val() + " " + $('#ln1').val() + ',' + $('#fn2').val() + " " + $('#ln2').val() + ',' + $('#fn3').val() + " " + $('#ln3').val() + ',' + $('#fn4').val() + " " + $('#ln4').val() + ',' + $('#fn5').val() + " " + $('#ln5').val();
         });
     }
 
     self.BookingOrderDetails = ko.observableArray();
 
     self.GetBookingOrderDetails = function () {
-        
-       // AppCommonScript.ShowWaitBlock();
+
+        // AppCommonScript.ShowWaitBlock();
         var orderVM = new OrderViewModel();
         orderVM.Prop_Id = $.localStorage("Prop_Id");
         orderVM.Room_Id = $.localStorage("Room_Id");
@@ -185,8 +184,8 @@ function BookingPaymentViewModel() {
 
 
                 if (data.Table.length > 0)
-                    
-          var      AjaxUrl = data.Table[0].tripid;
+
+                    var AjaxUrl = data.Table[0].tripid;
                 $.ajax({
 
                     url: AjaxUrl,
@@ -194,14 +193,14 @@ function BookingPaymentViewModel() {
                     dataType: 'json',
                     async: false,
                     success: function (trip) {
-                        
-                        
+
+
                         // data.rating_image_url
                         rating = trip.rating_image_url;
                         Numberreviews = trip.num_reviews + ' reviews';;
                         ReviewUrl = trip.reviews;
                         //   self.HotelsList.push(new HotelListModel(data.Table[i], data.Table2[i].Roomtype, trip.rating_image_url))
-                       
+
                         // WriteResponse(data);
                     },
                     error: function (x, y, z) {
@@ -212,8 +211,8 @@ function BookingPaymentViewModel() {
                         //  alert(x + '\n' + y + '\n' + z);
                     }
                 });
-               
-                OnSuccessGetBookingOrderDetails(data.Table[0], data.Table1,rating,Numberreviews,ReviewUrl);
+
+                OnSuccessGetBookingOrderDetails(data.Table[0], data.Table1, rating, Numberreviews, ReviewUrl);
                 self.Day_Count(data.Table2[0].Column1);
             },
             error: function (err) {
@@ -221,16 +220,16 @@ function BookingPaymentViewModel() {
             }
         }).done(function () {
             ko.applyBindings(bookpaymentVM, document.getElementById("divBookingdetails"));
-           // AppCommonScript.HideWaitBlock();
+            // AppCommonScript.HideWaitBlock();
         });
     }
 
     self.GetLoggedInUserId = function () {
-    //    AppCommonScript.ShowWaitBlock();
+        //    AppCommonScript.ShowWaitBlock();
         $.ajax({
             type: "POST",
             url: "/Consumer/GetLoggedInUserId",
-           // dataType: "json",
+            // dataType: "json",
             success: function (response) {
                 Consumer_Id = response;
 
@@ -241,7 +240,7 @@ function BookingPaymentViewModel() {
         });
     }
     self.GetRoomDetailsId = function (Prop_Id, Room_Id) {
-       // AppCommonScript.ShowWaitBlock();
+        // AppCommonScript.ShowWaitBlock();
         $.ajax({
             type: "Get",
             url: '/api/Consumer/GetRoomDetailsByID',
@@ -250,10 +249,10 @@ function BookingPaymentViewModel() {
             dataType: "json",
             async: false,
             success: function (data) {
-                
+
                 self.RoomDTList.removeAll();
                 self.RoomDTListother.removeAll();
-               
+
                 for (var i = 0; i < data.Table.length; i++) {
 
 
@@ -268,7 +267,7 @@ function BookingPaymentViewModel() {
                     self.RoomDTListother.push(new RoomDTmodelothers(data.Table1[i]));
                 }
 
-              //  AppCommonScript.HideWaitBlock();
+                //  AppCommonScript.HideWaitBlock();
                 $('#roomdt').modal('show');
             },
             error: function (err) {
@@ -297,7 +296,7 @@ function BookingPaymentViewModel() {
                     //self.Occupant_firstname(data.Table[0].Cons_First_Name || '');
                     //self.Occupant_lastname(data.Table[0].Cons_Last_Name || '');
                     $('#fn1').val(data.Table[0].Cons_First_Name)
-                    + $('#ln1').val(data.Table[0].Cons_Last_Name)
+                        + $('#ln1').val(data.Table[0].Cons_Last_Name)
                 }
 
             },
@@ -306,27 +305,28 @@ function BookingPaymentViewModel() {
             }
         }).done(function () {
             ko.applyBindings(bookpaymentVM, document.getElementById("formUserDetails"));
-           // AppCommonScript.HideWaitBlock();
+            // AppCommonScript.HideWaitBlock();
         });
     }
 
     self.ContinueToPayment = function (data) {
+        debugger
         if ($('#fn1').val() == '') {
             var result = { Status: true, ReturnMessage: { ReturnMessage: "Please Enter FirstName" }, ErrorType: "error" };
             Failed(result)
             return false;
         }
-       
+
         data.Vndr_ID = $.localStorage("Vndr_ID");
         data.camo_room_rate = $.localStorage("camo_room_rate");
         if ($.localStorage("NoOfRoom") == 1) {
             self.GuestName = ko.computed(function () {
-                return $('#fn1').val() +" "+ $('#ln1').val();
+                return $('#fn1').val() + " " + $('#ln1').val();
             });
         }
 
         else if ($.localStorage("NoOfRoom") == 2) {
-         
+
             self.GuestName = ko.computed(function () {
                 return $('#fn1').val() + " " + $('#ln1').val() + ',' + $('#fn2').val() + " " + $('#ln2').val();
             });
@@ -351,7 +351,7 @@ function BookingPaymentViewModel() {
                 return $('#fn1').val() + " " + $('#ln1').val() + ',' + $('#fn2').val() + " " + $('#ln2').val() + ',' + $('#fn3').val() + " " + $('#ln3').val() + ',' + $('#fn4').val() + " " + $('#ln4').val() + ',' + $('#fn5').val() + " " + $('#ln5').val();
             });
         }
-        
+
         if ($.localStorage("NoOfRoom") != 1) {
             var str = data.GuestName();
             var match = str.match(/,/g);
@@ -395,7 +395,7 @@ function BookingPaymentViewModel() {
                 }
             }
         }
-      //  AppCommonScript.ShowWaitBlock();
+        //  AppCommonScript.ShowWaitBlock();
         $.ajax({
             type: "Post",
             url: '/api/Consumer/WebPreBooking',
@@ -403,18 +403,19 @@ function BookingPaymentViewModel() {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {
-                
+
                 if (response.Table.length > 0) {
 
-                    
+                    //Payment gateway integration 04-03-2020.
+                    //This page needs to be updated for the actual payment gateway.
                     $.localStorage("Invce_Num", response.Table[0].Invce_Num);
                     if (response.Table[0].Invce_Num != '0' && response.Table[0].net_amt != 0)
-                        window.location.href = '/Request?Invce_Num=' + response.Table[0].Invce_Num + '&Amount=' + response.Table[0].net_amt;
+                        //window.location.href = '/Request?Invce_Num=' + response.Table[0].Invce_Num + '&Amount=' + response.Table[0].net_amt;
                     else {
                         var responseText = "Invoice Number or Amount Not Geting Properly";
                         //var result = { Status: true, ReturnMessage: { ReturnMessage: "Invoice Number or Amount Not Geting Properly" }, ErrorType: "Success" };
                         //  Failed(result);
-                      //  alert(responseText)
+                        //  alert(responseText)
                     }
                 }
                 else {
@@ -425,11 +426,11 @@ function BookingPaymentViewModel() {
                 //AppCommonScript.HideWaitBlock();
             },
             error: function (err) {
-              //  alert(err.responseText)
+                //  alert(err.responseText)
                 Failed(JSON.parse(err.responseText));
             }
         }).done(function () {
-          //  window.location.reload();
+            //  window.location.reload();
 
         });
     }
@@ -440,9 +441,9 @@ function BookingPaymentViewModel() {
             self.MyStarClass('s1');
         }
     }
-    function OnSuccessGetBookingOrderDetails(data, dataFaci,rating,Numberreviews,ReviewUrl) {
-       
-        
+    function OnSuccessGetBookingOrderDetails(data, dataFaci, rating, Numberreviews, ReviewUrl) {
+
+
         var Stax = data.servicetax;
         Stax = Stax.toFixed(2);
         self.Vndr_ID(data.vndr_id);
@@ -452,10 +453,10 @@ function BookingPaymentViewModel() {
         self.Trip_Review_Url = ko.observable(ReviewUrl);
         self.Prop_Image(data.Image_dir || '/img/prop_image/hiddengem.jpg');
         if (data.Image_dir == "img/prop_image/hiddengem.jpg") {
-                            $('#ifhidden').hide();
-                            Numberreviews = '';
+            $('#ifhidden').hide();
+            Numberreviews = '';
 
-                        }
+        }
         self.Prop_Name(data.Prop_Name);
         if (data.Image_dir == 'img/prop_image/hiddengem.jpg') {
             self.Prop_Address(data.City + ', ' + data.state);
@@ -468,7 +469,7 @@ function BookingPaymentViewModel() {
         for (var i = 0; i < 5; i++) {
             self.StarRatingList.push(new RatingModel(StarCount--));
         }
-       
+
         self.Room_Checkin_Time = data.Room_checkin;
         self.Room_Checkout_Time = data.Room_checkout;
         self.Room_Checkin(self.Room_Checkin())
@@ -479,8 +480,8 @@ function BookingPaymentViewModel() {
 
         self.RoomPrice(data.camflg_Amnt);
         self.prop_room_rate(data.Vndr_Amnt);
-        
-        self.camo_room_rate(data.camflg_Amnt+'.00');
+
+        self.camo_room_rate(data.camflg_Amnt + '.00');
         self.ServiceTax(Stax);//.toFixed(2)
         self.LuxuryTax(data.luxurytax);//(data.luxurytax).toFixed(2));
 
@@ -491,13 +492,13 @@ function BookingPaymentViewModel() {
     }
 
     function OnSuccessGetUserId(Id) {
-        
-       var a= self.GetUserProfileDetails(Id);
+
+        var a = self.GetUserProfileDetails(Id);
     }
 }
 
 function RoomDTmodelFacil(data) {
-    
+
     var self = this;
     data = data || {};
     self.Facility_Id = ko.observable(data.Facility_Id);
@@ -506,7 +507,7 @@ function RoomDTmodelFacil(data) {
 
 }
 function RoomDTmodelPropFacil(data) {
-    
+
     var self = this;
     data = data || {};
     self.Facility_Id = ko.observable(data.Facility_Id);
@@ -515,7 +516,7 @@ function RoomDTmodelPropFacil(data) {
 
 }
 function RoomDTmodelothers(data) {
-    
+
     var self = this;
     data = data || {};
 
@@ -554,7 +555,7 @@ function HotelModel() {
 
 
 function HotelRoomDetailsModel(data, dataFaci) {
-    
+
     var self = this;
     data = data || {};
     self.Prop_Id = ko.observable(data.Prop_Id);
@@ -570,7 +571,7 @@ function HotelRoomDetailsModel(data, dataFaci) {
     self.Room_Checkout_Time = ko.observable();
     self.Room_Checkin_Time = ko.observable();
     self.RoomPrice = ko.observable(data.camflg_Amnt);
-    
+
     self.camo_room_rate = ko.observable(data.camflg_Amnt);
     self.ServiceTax = ko.observable(data.camflg_Amnt);
     //  self.VAT = ko.observable(data.camflg_Amnt);
@@ -605,7 +606,7 @@ function GetNightCount(start, end) {
 $(document).ready(function () {
 
     $('#TripReview').click(function () {
-        
+
         $('#TripReviewModal').modal('show');
     })
 

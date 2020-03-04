@@ -410,7 +410,7 @@ function BookingPaymentViewModel() {
                     //This page needs to be updated for the actual payment gateway.
                     $.localStorage("Invce_Num", response.Table[0].Invce_Num);
                     if (response.Table[0].Invce_Num != '0' && response.Table[0].net_amt != 0)
-                        //window.location.href = '/Request?Invce_Num=' + response.Table[0].Invce_Num + '&Amount=' + response.Table[0].net_amt;
+                        window.location.href = '/Request?Invce_Num=' + response.Table[0].Invce_Num + '&Amount=' + response.Table[0].net_amt;
                     else {
                         var responseText = "Invoice Number or Amount Not Geting Properly";
                         //var result = { Status: true, ReturnMessage: { ReturnMessage: "Invoice Number or Amount Not Geting Properly" }, ErrorType: "Success" };

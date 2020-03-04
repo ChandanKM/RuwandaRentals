@@ -665,8 +665,8 @@ namespace App.UIServices
                        new SqlParameter("@Checkout",Listing.Room_Checkout),//6
                         new SqlParameter("@Room_Count",Listing.Room_Count),//7
                          new SqlParameter("@prop_room_rate",Listing.prop_room_rate),//8
-                         new SqlParameter("@camo_room_rate",Listing.camo_room_rate),//9
-                           //new SqlParameter("@camo_room_rate",Listing.camo_room_rate),//9
+                         //new SqlParameter("@camo_room_rate",Listing.camo_room_rate),//9
+                           new SqlParameter("@camo_room_rate",Listing.camo_room_rate),//9
                              new SqlParameter("@tax_amnt",Listing.tax_amnt),//10
                               new SqlParameter("@net_amt",Listing.net_amt),//11
                               new SqlParameter("@Invce_note",Listing.Invce_note),//12
